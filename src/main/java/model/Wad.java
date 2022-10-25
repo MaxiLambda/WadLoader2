@@ -3,7 +3,6 @@ package model;
 import model.tags.*;
 import wads.WadElement;
 
-import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.HashSet;

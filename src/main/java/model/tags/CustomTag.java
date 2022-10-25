@@ -3,6 +3,9 @@ package model.tags;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 /**
@@ -10,9 +13,12 @@ import lombok.NoArgsConstructor;
 */
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "CustomTags")
 public class CustomTag implements Tag{
 
     private static final TagType tagType = TagType.CUSTOM_TAG;
+    @Column
     private String tag;
 
     @Override
