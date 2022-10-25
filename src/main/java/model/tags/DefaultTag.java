@@ -1,23 +1,26 @@
 package model.tags;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import java.nio.file.Path;
 
 /**
  * Tag created based on the Filepath
  */
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class DefaultTag implements Tag {
 
     private final static TagType tagType = TagType.DEFAULT_TAG;
 
-    //Todo: maybe change constructor to only accept file paths/ urls
+    private DefaultTag(){}
+
+    public DefaultTag(Path wadPath){
+        name = wadPath.toAbsolutePath().getParent().toString();
+    }
+
     private String name;
 
     @Override
     public String tagName() {
-        return null;
+        return name;
     }
 
     @Override

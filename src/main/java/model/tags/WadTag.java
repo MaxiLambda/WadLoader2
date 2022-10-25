@@ -1,11 +1,16 @@
 package model.tags;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import utils.PathUtil;
 
-@AllArgsConstructor
-@NoArgsConstructor
+import java.nio.file.Path;
+
 public class WadTag implements Tag{
+
+    private WadTag(){}
+
+    public WadTag(Path wadPath){
+        name = PathUtil.fileNameWithoutExtension(wadPath);
+    }
 
     private final static TagType tagType = TagType.WAD_TAG;
 
