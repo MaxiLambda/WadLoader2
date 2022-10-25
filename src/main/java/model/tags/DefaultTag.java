@@ -1,8 +1,9 @@
 package model.tags;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.nio.file.Path;
 
 /**
@@ -14,13 +15,14 @@ public class DefaultTag implements Tag {
 
     private final static TagType tagType = TagType.DEFAULT_TAG;
 
-    private DefaultTag(){}
+    protected DefaultTag(){}
 
     public DefaultTag(Path wadPath){
         name = wadPath.toAbsolutePath().getParent().toString();
     }
 
     @Column
+    @Id
     private String name;
 
     @Override

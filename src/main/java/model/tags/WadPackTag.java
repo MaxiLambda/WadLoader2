@@ -1,11 +1,12 @@
 package model.tags;
 
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 
 /**
@@ -19,6 +20,7 @@ public class WadPackTag implements Tag{
 
     private static final TagType tagType = TagType.WAD_PACK_TAG;
     @Column
+    @Id
     private String name;
 
     @Override

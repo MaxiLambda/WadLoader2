@@ -1,32 +1,57 @@
 package model;
 
+import jakarta.persistence.*;
+import lombok.Getter;
 import model.tags.*;
 import wads.WadElement;
 
 import java.nio.file.Path;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
+@Entity
+@Table(name = "Wads")
+@Getter
 public class Wad implements WadElement {
-
-    private Wad(){}
+    //Todo: implement boolean isIWad and do a check (in the constructor based on the path)
+    //Todo: if the wad id an IWad or not
+    protected Wad(){}
 
     public Wad(Path wadPath) {
-        this.path = wadPath;
-        wadTag = new WadTag(path);
-        defaultTag = new DefaultTag(path);
+        path = wadPath.toAbsolutePath().toString();
+        wadTag = new WadTag(wadPath);
+        defaultTag = new DefaultTag(wadPath);
     }
 
-    private Path path;
+    @Column
+    @Id
+    private String path;
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "WadTag", referencedColumnName = "name")
     private WadTag wadTag;
-    private HashSet<WadPackTag> wadPackTags;
 
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinTable(
+            name = "Wad_WadPackTag",
+            joinColumns = {@JoinColumn(name = "path")},
+            inverseJoinColumns = {@JoinColumn(name = "name")}
+    )
+    private Set<WadPackTag> wadPackTags;
+
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name = "DefaultTagName", nullable = false)
     private DefaultTag defaultTag;
 
-    private HashSet<CustomTag> customTags;
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinTable(
+            name = "Wad_CustomTags",
+            joinColumns = {@JoinColumn(name = "path")},
+            inverseJoinColumns = {@JoinColumn(name = "name")}
+    )
+    private Set<CustomTag> customTags;
 
     @Override
     public List<Wad> wads() {
@@ -38,7 +63,6 @@ public class Wad implements WadElement {
         return Stream.of(
                 List.of(wadTag,defaultTag),
                 customTags,
-
                 wadPackTags
         ).flatMap(Collection::stream).toList();
     }

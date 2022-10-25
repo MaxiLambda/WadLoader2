@@ -1,29 +1,31 @@
 package model.tags;
 
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 
 /**
  * User Created Tag
 */
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "CustomTags")
 public class CustomTag implements Tag{
 
+    protected CustomTag(){}
+
     private static final TagType tagType = TagType.CUSTOM_TAG;
     @Column
-    private String tag;
+    @Id
+    private String name;
 
     @Override
     public String tagName() {
-        return tag;
+        return name;
     }
 
     @Override
