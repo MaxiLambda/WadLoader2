@@ -1,8 +1,9 @@
-import entities.Human;
+import model.Wad;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utils.HibernateUtil;
 
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,15 +16,15 @@ public class Main {
                 getConnection("jdbc:h2:~/wad-loader", "sa", "sa");
         // add application code here
 
-        Human student = new Human("Ramesh2", "Fadatare", "rameshfadatare@javaguides.com");
-        Human student1 = new Human("John2", "Cena", "john@javaguides.com");
+        Wad wad1 = new Wad(Path.of("wads/monsters/creeper.pk3"));
+        Wad wad2 = new Wad(Path.of("wads/weapons/weapons.pk3"));
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start a transaction
             transaction = session.beginTransaction();
             // save the student objects
-            session.persist(student);
-            session.persist(student1);
+            session.merge(wad1);
+            session.merge(wad2);
             // commit transaction
             transaction.commit();
         } catch (Exception e) {
@@ -34,10 +35,10 @@ public class Main {
         }
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            List<Human> students = session.createQuery("from Human", Human.class).list();
-            students.forEach(s -> System.out.println(s.getFirstName()));
+            List<Wad> students = session.createQuery("from Wad", Wad.class).list();
+            students.forEach(w -> System.out.println(w.getPath()));
         } catch (Exception e) {
-            if (transaction != null) {
+            if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
             e.printStackTrace();
