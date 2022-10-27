@@ -6,6 +6,7 @@ import lombok.Getter;
 import javax.persistence.*;
 import java.nio.file.Path;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -22,6 +23,8 @@ public class Wad implements WadElement {
         path = wadPath.toAbsolutePath().toString();
         wadTag = new WadTag(wadPath);
         defaultTag = new DefaultTag(wadPath);
+        wadPackTags = new HashSet<>();
+        customTags = new HashSet<>();
     }
 
     @Column

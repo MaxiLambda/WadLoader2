@@ -6,6 +6,7 @@ import lincks.maximilian.wadloader2.model.tags.WadPackTag;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -19,6 +20,8 @@ public class WadPack implements WadElement {
     public WadPack(String name){
         this.name = name;
         wadPackTag = new WadPackTag(name);
+        customTags = new HashSet<>();
+        wads = new HashSet<>();
     }
 
     @Id
