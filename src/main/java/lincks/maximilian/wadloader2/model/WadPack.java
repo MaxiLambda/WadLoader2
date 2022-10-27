@@ -1,14 +1,12 @@
-package model;
+package lincks.maximilian.wadloader2.model;
 
-import jakarta.persistence.*;
-import model.tags.CustomTag;
-import model.tags.Tag;
-import model.tags.WadPackTag;
-import wads.WadElement;
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lincks.maximilian.wadloader2.model.tags.CustomTag;
+import lincks.maximilian.wadloader2.model.tags.Tag;
+import lincks.maximilian.wadloader2.model.tags.WadPackTag;
+import lincks.maximilian.wadloader2.wads.WadElement;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -30,9 +28,9 @@ public class WadPack implements WadElement {
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
-            name = "Wad_CustomTags",
-            joinColumns = {@JoinColumn(name = "name")},
-            inverseJoinColumns = {@JoinColumn(name = "name")}
+            name = "WadPack_CustomTags",
+            joinColumns = {@JoinColumn(name = "packName")},
+            inverseJoinColumns = {@JoinColumn(name = "tagName")}
     )
     private Set<CustomTag> customTags;
 

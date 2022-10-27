@@ -1,11 +1,12 @@
-package model.tags;
+package lincks.maximilian.wadloader2.model.tags;
 
-import jakarta.persistence.Id;
-import utils.PathUtil;
+import javax.persistence.Id;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import lincks.maximilian.wadloader2.utils.PathUtil;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.nio.file.Path;
 
 @Entity
