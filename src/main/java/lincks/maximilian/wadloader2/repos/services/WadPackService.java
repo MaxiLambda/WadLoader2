@@ -1,6 +1,6 @@
 package lincks.maximilian.wadloader2.repos.services;
 
-import lincks.maximilian.wadloader2.wads.WadPack;
+import lincks.maximilian.wadloader2.model.wads.WadPack;
 import lincks.maximilian.wadloader2.repos.WadPackRepo;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package lincks.maximilian.wadloader2.wads;
+package lincks.maximilian.wadloader2.model.wads;
 
 import lincks.maximilian.wadloader2.model.tags.Tag;
 
