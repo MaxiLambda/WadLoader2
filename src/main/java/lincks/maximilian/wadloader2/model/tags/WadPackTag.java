@@ -1,12 +1,12 @@
-package model.tags;
+package lincks.maximilian.wadloader2.model.tags;
 
-import jakarta.persistence.Id;
+import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 /**

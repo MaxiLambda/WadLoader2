@@ -1,7 +1,4 @@
-package model.tags;
-
-
-import lombok.AllArgsConstructor;
+package lincks.maximilian.wadloader2.model.tags;
 
 /**
  * A Identifier for Wads or Wad-Packs

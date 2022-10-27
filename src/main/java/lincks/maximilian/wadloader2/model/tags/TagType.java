@@ -1,4 +1,4 @@
-package model.tags;
+package lincks.maximilian.wadloader2.model.tags;
 
 import lombok.Getter;
 

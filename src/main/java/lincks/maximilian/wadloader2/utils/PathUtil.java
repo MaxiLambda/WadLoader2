@@ -1,4 +1,4 @@
-package utils;
+package lincks.maximilian.wadloader2.utils;
 
 import java.nio.file.Path;
 
