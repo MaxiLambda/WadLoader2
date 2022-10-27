@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "WadPackTags")
+@Table(name = "Wad_Pack_Tags")
 public class WadPackTag implements Tag{
 
     private static final TagType tagType = TagType.WAD_PACK_TAG;

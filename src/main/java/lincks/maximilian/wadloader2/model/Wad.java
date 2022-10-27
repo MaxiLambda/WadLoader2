@@ -30,24 +30,24 @@ public class Wad implements WadElement {
     private String path;
 
     @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "WadTag", referencedColumnName = "name")
+    @JoinColumn(name = "Wad_Tag", referencedColumnName = "name")
     private WadTag wadTag;
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
-            name = "Wad_WadPackTag",
+            name = "Wad_Wad_Pack_Tag",
             joinColumns = {@JoinColumn(name = "path")},
             inverseJoinColumns = {@JoinColumn(name = "name")}
     )
     private Set<WadPackTag> wadPackTags;
 
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinColumn(name = "DefaultTagName", nullable = false)
+    @JoinColumn(name = "Default_Tag_Name", nullable = false)
     private DefaultTag defaultTag;
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
-            name = "Wad_CustomTags",
+            name = "Wad_Custom_Tags",
             joinColumns = {@JoinColumn(name = "path")},
             inverseJoinColumns = {@JoinColumn(name = "name")}
     )

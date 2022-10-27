@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import java.nio.file.Path;
 
 @Entity
-@Table(name = "WadTags")
+@Table(name = "Wad_Tags")
 public class WadTag implements Tag{
 
     protected WadTag(){}

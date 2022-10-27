@@ -13,7 +13,7 @@ import javax.persistence.Table;
 */
 @AllArgsConstructor
 @Entity
-@Table(name = "CustomTags")
+@Table(name = "Custom_Tags")
 public class CustomTag implements Tag{
 
     protected CustomTag(){}
