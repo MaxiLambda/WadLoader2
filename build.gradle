@@ -22,11 +22,15 @@ repositories {
 
 dependencies {
 
+
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    implementation group: 'org.apache.deltaspike.modules', name: 'deltaspike-data-module-api', version: '1.9.6'
+    runtimeOnly group: 'org.apache.deltaspike.modules', name: 'deltaspike-data-module-impl', version: '1.9.6'
     implementation group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
     implementation group: 'com.h2database', name: 'h2', version: '2.1.214'
     implementation group: 'org.hibernate', name: 'hibernate-core', version: '6.1.4.Final'
+    implementation group: 'org.jboss.weld.se', name: 'weld-se-core', version: '5.1.0.Final'
 
 }
 

@@ -1,0 +1,7 @@
+<persistence-unit name="primary" transaction-type="JTA">
+    <jta-data-source>java:jboss/datasources/baeldung-jee7-seedDS</jta-data-source>
+    <properties>
+        <property name="hibernate.hbm2ddl.auto" value="update" />
+        <property name="hibernate.show_sql" value="false" />
+    </properties>
+</persistence-unit>

@@ -15,10 +15,12 @@ public class Main {
         Connection conn = DriverManager.
                 getConnection("jdbc:h2:~/wad-loader", "sa", "sa");
         // add application code here
+        Transaction transaction = null;
+
 
         Wad wad1 = new Wad(Path.of("wads/monsters/creeper.pk3"));
         Wad wad2 = new Wad(Path.of("wads/weapons/weapons.pk3"));
-        Transaction transaction = null;
+
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start a transaction
             transaction = session.beginTransaction();
