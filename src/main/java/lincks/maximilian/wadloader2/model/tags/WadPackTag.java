@@ -1,11 +1,11 @@
 package lincks.maximilian.wadloader2.model.tags;
 
-import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 
