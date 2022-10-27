@@ -1,7 +1,6 @@
-package lincks.maximilian.wadloader2.model;
+package lincks.maximilian.wadloader2.wads;
 
 import lincks.maximilian.wadloader2.model.tags.*;
-import lincks.maximilian.wadloader2.wads.WadElement;
 import lombok.Getter;
 
 import javax.persistence.*;

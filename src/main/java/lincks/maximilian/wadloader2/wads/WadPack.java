@@ -1,9 +1,8 @@
-package lincks.maximilian.wadloader2.model;
+package lincks.maximilian.wadloader2.wads;
 
 import lincks.maximilian.wadloader2.model.tags.CustomTag;
 import lincks.maximilian.wadloader2.model.tags.Tag;
 import lincks.maximilian.wadloader2.model.tags.WadPackTag;
-import lincks.maximilian.wadloader2.wads.WadElement;
 
 import javax.persistence.*;
 import java.util.Collection;
