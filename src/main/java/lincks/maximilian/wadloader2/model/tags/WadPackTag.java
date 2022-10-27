@@ -1,11 +1,11 @@
 package lincks.maximilian.wadloader2.model.tags;
 
-import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 
@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "WadPackTags")
+@Table(name = "Wad_Pack_Tags")
 public class WadPackTag implements Tag{
 
     private static final TagType tagType = TagType.WAD_PACK_TAG;

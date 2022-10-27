@@ -1,6 +1,5 @@
-package lincks.maximilian.wadloader2.wads;
+package lincks.maximilian.wadloader2.model.wads;
 
-import lincks.maximilian.wadloader2.model.Wad;
 import lincks.maximilian.wadloader2.model.tags.Tag;
 
 import java.util.List;

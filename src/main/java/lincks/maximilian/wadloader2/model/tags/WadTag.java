@@ -1,16 +1,15 @@
 package lincks.maximilian.wadloader2.model.tags;
 
-import javax.persistence.Id;
-
 import lincks.maximilian.wadloader2.utils.PathUtil;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.nio.file.Path;
 
 @Entity
-@Table(name = "WadTags")
+@Table(name = "Wad_Tags")
 public class WadTag implements Tag{
 
     protected WadTag(){}

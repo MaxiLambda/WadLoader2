@@ -1,18 +1,17 @@
-package lincks.maximilian.wadloader2.model;
-
-import javax.persistence.*;
+package lincks.maximilian.wadloader2.model.wads;
 
 import lincks.maximilian.wadloader2.model.tags.CustomTag;
 import lincks.maximilian.wadloader2.model.tags.Tag;
 import lincks.maximilian.wadloader2.model.tags.WadPackTag;
-import lincks.maximilian.wadloader2.wads.WadElement;
 
+import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
-@Table(name = "WadPacks")
+@Table(name = "Wad_Packs")
 @Entity
 public class WadPack implements WadElement {
     //Todo: make sure each WadPack contains an IWad
@@ -21,6 +20,8 @@ public class WadPack implements WadElement {
     public WadPack(String name){
         this.name = name;
         wadPackTag = new WadPackTag(name);
+        customTags = new HashSet<>();
+        wads = new HashSet<>();
     }
 
     @Id
@@ -28,19 +29,19 @@ public class WadPack implements WadElement {
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
-            name = "WadPack_CustomTags",
-            joinColumns = {@JoinColumn(name = "packName")},
-            inverseJoinColumns = {@JoinColumn(name = "tagName")}
+            name = "Wad_Pack_Custom_Tags",
+            joinColumns = {@JoinColumn(name = "pack_Name")},
+            inverseJoinColumns = {@JoinColumn(name = "tag_Name")}
     )
     private Set<CustomTag> customTags;
 
     @OneToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinColumn(name = "WadPackTag", referencedColumnName = "name")
+    @JoinColumn(name = "Wad_Pack_Tag", referencedColumnName = "name")
     private WadPackTag wadPackTag;
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
-            name = "WadPack_Wad",
+            name = "Wad_Pack_Wad",
             joinColumns = {@JoinColumn(name = "name")},
             inverseJoinColumns = {@JoinColumn(name = "path")}
     )

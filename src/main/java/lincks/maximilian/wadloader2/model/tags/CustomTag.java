@@ -1,10 +1,10 @@
 package lincks.maximilian.wadloader2.model.tags;
 
-import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 
@@ -13,7 +13,7 @@ import javax.persistence.Table;
 */
 @AllArgsConstructor
 @Entity
-@Table(name = "CustomTags")
+@Table(name = "Custom_Tags")
 public class CustomTag implements Tag{
 
     protected CustomTag(){}

@@ -10,7 +10,7 @@ import java.nio.file.Path;
  * Tag created based on the Filepath
  */
 @Entity
-@Table(name = "DefaultTags")
+@Table(name = "Default_Tags")
 public class DefaultTag implements Tag {
 
     private final static TagType tagType = TagType.DEFAULT_TAG;
