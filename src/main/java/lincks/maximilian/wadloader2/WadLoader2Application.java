@@ -1,22 +1,25 @@
 package lincks.maximilian.wadloader2;
 
-import lincks.maximilian.wadloader2.config.WadExtensionConfiguration;
+import lincks.maximilian.wadloader2.domain.WadFileFinder;
+import lincks.maximilian.wadloader2.model.tags.WadTag;
+import lincks.maximilian.wadloader2.model.wads.Wad;
+import lincks.maximilian.wadloader2.repos.services.WadService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.event.EventListener;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.nio.file.Path;
 
 @SpringBootApplication
+@RequiredArgsConstructor
 public class WadLoader2Application extends JFrame{
-	public WadLoader2Application (WadExtensionConfiguration config){
-		initUI();
-		this.config = config;
-	}
 
-	private final WadExtensionConfiguration config;
 	//TODO: build fitting ui
 	private void initUI() {
 
@@ -56,9 +59,21 @@ public class WadLoader2Application extends JFrame{
 				.headless(false).run(args);
 
 		EventQueue.invokeLater(() -> {
-
 			WadLoader2Application ex = ctx.getBean(WadLoader2Application.class);
 			ex.setVisible(true);
 		});
+	}
+
+	final WadFileFinder wadFinder;
+	final WadService wadService;
+
+	@EventListener(ApplicationReadyEvent.class)
+	public void appStartup(){
+		initUI();
+		wadFinder.findWads(Path.of("D:\\GZDoom\\wads"))
+				.stream()
+				.map(wadService::save)
+				.map(Wad::getWadTag).map(WadTag::tagName)
+				.forEach(System.out::println);
 	}
 }
