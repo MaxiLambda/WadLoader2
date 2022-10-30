@@ -5,10 +5,7 @@ import lombok.Getter;
 
 import javax.persistence.*;
 import java.nio.file.Path;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Stream;
 
 @Entity
@@ -18,7 +15,7 @@ public class Wad implements WadElement {
     //Todo: implement boolean isIWad and do a check (in the constructor based on the path)
     //Todo: if the wad id an IWad or not
     protected Wad(){}
-
+    //TODO evaluate if an Exception should be raised in case of a path not Ending with an allowed Extension
     public Wad(Path wadPath) {
         path = wadPath.toAbsolutePath().toString();
         wadTag = new WadTag(wadPath);
@@ -67,5 +64,12 @@ public class Wad implements WadElement {
                 customTags,
                 wadPackTags
         ).flatMap(Collection::stream).toList();
+    }
+
+    //TODO maybe add HashCode
+    @Override
+    public boolean equals(Object obj) {
+        if(Objects.isNull(obj) || !(obj instanceof Wad)) return false;
+        else return path.equals(((Wad) obj).path);
     }
 }
