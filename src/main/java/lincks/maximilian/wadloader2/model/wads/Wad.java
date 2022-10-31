@@ -20,7 +20,6 @@ public class Wad implements WadElement {
         path = wadPath.toAbsolutePath().toString();
         wadTag = new WadTag(wadPath);
         defaultTag = new DefaultTag(wadPath);
-        wadPackTags = new HashSet<>();
         customTags = new HashSet<>();
     }
 
@@ -31,14 +30,6 @@ public class Wad implements WadElement {
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "Wad_Tag", referencedColumnName = "name")
     private WadTag wadTag;
-
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinTable(
-            name = "Wad_Wad_Pack_Tag",
-            joinColumns = {@JoinColumn(name = "path")},
-            inverseJoinColumns = {@JoinColumn(name = "name")}
-    )
-    private Set<WadPackTag> wadPackTags;
 
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "Default_Tag_Name", nullable = false)
@@ -61,8 +52,7 @@ public class Wad implements WadElement {
     public List<? extends Tag> tags() {
         return Stream.of(
                 List.of(wadTag,defaultTag),
-                customTags,
-                wadPackTags
+                customTags
         ).flatMap(Collection::stream).toList();
     }
 
