@@ -18,7 +18,7 @@ public class TestUtil {
     /**
      * Tries to add two Wads to the database
      */
-    public static void addWadsSetup(WadService wadService){
-        wadPaths.stream().map(Wad::new).forEach(wadService::save);
+    public static List<Wad> addWadsSetup(WadService wadService){
+        return wadPaths.stream().map(Wad::new).map(wadService::save).toList();
     }
 }
