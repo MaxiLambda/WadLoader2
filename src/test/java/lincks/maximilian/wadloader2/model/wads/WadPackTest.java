@@ -1,6 +1,7 @@
 package lincks.maximilian.wadloader2.model.wads;
 
 import lincks.maximilian.wadloader2.repos.services.WadPackService;
+import lincks.maximilian.wadloader2.repos.services.WadPackTagService;
 import lincks.maximilian.wadloader2.repos.services.WadService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,9 @@ class WadPackTest {
     WadPackService wadPackService;
 
     @Autowired
+    WadPackTagService wadPackTagService;
+
+    @Autowired
     WadService wadService;
 
     @BeforeEach
@@ -31,7 +35,7 @@ class WadPackTest {
 
     @Test
     void createWadPack(){
-        WadPack pack = new WadPack("BestPackEver <3");
+        WadPack pack = new WadPack("BestPackEver <3", wadPackTagService);
         boolean allAdded = TestUtil.addWadsSetup(wadService)
                 .stream()
                 .map(pack::addWad)

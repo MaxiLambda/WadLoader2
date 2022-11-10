@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 public abstract class AbstractService<T,ID> {
@@ -12,8 +13,8 @@ public abstract class AbstractService<T,ID> {
     public List<T> findAll(){
         return repo.findAll();
     }
-    public T findById(ID id){
-        return repo.findById(id).orElse(null);
+    public Optional<T> findById(ID id){
+        return repo.findById(id);
     }
 
     public void delete(T toDelete){

@@ -4,7 +4,6 @@ import lincks.maximilian.wadloader2.repos.services.WadService;
 import lincks.maximilian.wadloader2.repos.services.WadTagService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -20,8 +19,6 @@ class WadTest {
     @Autowired
     WadTagService wadTagService;
 
-
-
     @BeforeEach
     void beforeAll() {
         wadService.deleteAll();
@@ -36,7 +33,7 @@ class WadTest {
         assertEquals(wadService.findAll().size(),wadPaths.size());
         //check if paths match
         assertEquals(
-                wadService.findById(wadPaths.get(0).toString()).getPath()
+                wadService.findById(wadPaths.get(0).toString()).get().getPath()
                 ,wadPaths.get(0).toString()
         );
         //check if WadTags were created and persisted
@@ -52,5 +49,10 @@ class WadTest {
         assertEquals(wadService.findAll().size(), wadPaths.size());
     }
 
+//    @Test
+//    void addCustomTag(){
+//        addWadsSetup(wadService);
+//        wadService.findById(wadPaths.get(0).toString()).
+//    }
 
 }
