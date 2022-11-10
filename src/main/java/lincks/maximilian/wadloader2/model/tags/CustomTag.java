@@ -17,9 +17,7 @@ public class CustomTag implements Tag{
 
     protected CustomTag(){}
 
-    public CustomTag(String name, CustomTagService customTagService) throws TagException{
-        if(customTagService.exists(TagType.CUSTOM_TAG.getIdForName(name)))
-            throw new TagException("CustomTag name %s already exists".formatted(name));
+    public CustomTag(String name){
         this.name = name;
     }
 

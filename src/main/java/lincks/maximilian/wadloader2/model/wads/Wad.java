@@ -4,8 +4,6 @@ import lincks.maximilian.wadloader2.model.tags.CustomTag;
 import lincks.maximilian.wadloader2.model.tags.DefaultTag;
 import lincks.maximilian.wadloader2.model.tags.Tag;
 import lincks.maximilian.wadloader2.model.tags.WadTag;
-import lincks.maximilian.wadloader2.repos.services.CustomTagService;
-import lincks.maximilian.wadloader2.utils.CustomTagUtil;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -62,9 +60,8 @@ public class Wad implements WadElement {
     }
 
     @Override
-    public boolean addCustomTag(String name, CustomTagService customTagService) {
-        CustomTag customTag = CustomTagUtil.getCustomTagForName(name,customTagService);
-        return customTags.add(customTag);
+    public boolean addCustomTag(String name) {
+        return customTags.add(new CustomTag(name));
     }
 
     //TODO maybe add HashCode
