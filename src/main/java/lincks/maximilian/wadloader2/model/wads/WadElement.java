@@ -19,5 +19,5 @@ public interface WadElement {
      *
      * @return true if the tag was added, false otherwise
      */
-    boolean addCustomTag(String name, CustomTagService customTagService) ;
+    boolean addCustomTag(String name) ;
 }

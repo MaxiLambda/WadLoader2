@@ -1,9 +1,10 @@
 package lincks.maximilian.wadloader2.model.wads;
 
-import lincks.maximilian.wadloader2.model.tags.*;
-import lincks.maximilian.wadloader2.repos.services.CustomTagService;
+import lincks.maximilian.wadloader2.model.tags.CustomTag;
+import lincks.maximilian.wadloader2.model.tags.Tag;
+import lincks.maximilian.wadloader2.model.tags.TagException;
+import lincks.maximilian.wadloader2.model.tags.WadPackTag;
 import lincks.maximilian.wadloader2.repos.services.WadPackTagService;
-import lincks.maximilian.wadloader2.utils.CustomTagUtil;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -25,7 +26,7 @@ public class WadPack implements WadElement {
         wads = new HashSet<>();
 
         //validate
-        if (wadPackTagService.exists(TagType.WAD_PACK_TAG.getIdForName(name)))
+        if (wadPackTagService.exists(name))
             throw new TagException("A WadPack with the name %s already exists!".formatted(name));
     }
 
@@ -65,9 +66,8 @@ public class WadPack implements WadElement {
         ).flatMap(Collection::stream).toList();
     }
 
-    public boolean addCustomTag(String name, CustomTagService customTagService) {
-        CustomTag customTag = CustomTagUtil.getCustomTagForName(name,customTagService);
-        return customTags.add(customTag);
+    public boolean addCustomTag(String name) {
+        return customTags.add(new CustomTag(name));
     }
 
     public boolean addWad(Wad wad){
