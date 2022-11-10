@@ -1,7 +1,5 @@
 package lincks.maximilian.wadloader2.ui;
 
-import org.springframework.stereotype.Component;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
@@ -11,9 +9,7 @@ public class UIBase extends JFrame {
 
         var quitButton = new JButton("Quit");
 
-        quitButton.addActionListener((ActionEvent event) -> {
-            System.exit(0);
-        });
+        quitButton.addActionListener((ActionEvent event) -> System.exit(0));
 
         createLayout(quitButton);
 
