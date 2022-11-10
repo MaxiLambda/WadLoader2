@@ -36,4 +36,8 @@ public abstract class AbstractService<T,ID> {
     public List<T> saveAll(Iterable<T> toSave){
         return repo.saveAll(toSave);
     }
+
+    public boolean exists(ID id){
+        return repo.existsById(id);
+    }
 }

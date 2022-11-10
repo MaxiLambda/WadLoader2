@@ -1,7 +1,6 @@
 package lincks.maximilian.wadloader2.model.tags;
 
 import lincks.maximilian.wadloader2.repos.services.CustomTagService;
-import lincks.maximilian.wadloader2.utils.TagUtil;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +18,7 @@ public class CustomTag implements Tag{
     protected CustomTag(){}
 
     public CustomTag(String name, CustomTagService customTagService) throws TagException{
-        if(TagUtil.existsTagName(customTagService,name))
+        if(customTagService.exists(TagType.CUSTOM_TAG.getIdForName(name)))
             throw new TagException("CustomTag name %s already exists".formatted(name));
         this.name = name;
     }
