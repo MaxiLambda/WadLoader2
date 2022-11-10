@@ -10,7 +10,7 @@ public interface Tag {
      TagType tagType();
 
      default String tagId(){
-          return tagType().getPrefix()+tagName();
+          return tagType().getIdForName(tagName());
      }
 }
 

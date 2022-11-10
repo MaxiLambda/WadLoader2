@@ -15,4 +15,9 @@ public enum TagType {
     TagType(String prefix) {
         this.prefix = prefix+":";
     }
+
+    public String getIdForName(String name){
+        return getPrefix()+name;
+    }
+
 }

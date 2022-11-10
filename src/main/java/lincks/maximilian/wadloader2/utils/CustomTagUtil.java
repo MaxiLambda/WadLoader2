@@ -13,7 +13,7 @@ public class CustomTagUtil {
             return new CustomTag(name,customTagService);
         }catch(TagException e){
             //find the existing CustomTag
-            String tagId = TagType.CUSTOM_TAG.getPrefix()+name;
+            String tagId = TagType.CUSTOM_TAG.getIdForName(name);
             //if the Tag already exists, it can be found by id
             return customTagService.findById(tagId).get();
         }
