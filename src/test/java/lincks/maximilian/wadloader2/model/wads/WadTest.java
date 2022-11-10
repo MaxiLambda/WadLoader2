@@ -1,5 +1,6 @@
 package lincks.maximilian.wadloader2.model.wads;
 
+import lincks.maximilian.wadloader2.repos.services.CustomTagService;
 import lincks.maximilian.wadloader2.repos.services.WadService;
 import lincks.maximilian.wadloader2.repos.services.WadTagService;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static lincks.maximilian.wadloader2.model.wads.TestUtil.addWadsSetup;
 import static lincks.maximilian.wadloader2.model.wads.TestUtil.wadPaths;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class WadTest {
@@ -18,6 +19,9 @@ class WadTest {
     WadService wadService;
     @Autowired
     WadTagService wadTagService;
+
+    @Autowired
+    CustomTagService customTagService;
 
     @BeforeEach
     void beforeAll() {
@@ -42,17 +46,10 @@ class WadTest {
 
     @Test
     void addWadsTwice(){
-        //checks if wads are just added once
+        //checks if wads are just added once to the DB
         addWadsSetup(wadService);
         addWadsSetup(wadService);
 
         assertEquals(wadService.findAll().size(), wadPaths.size());
     }
-
-//    @Test
-//    void addCustomTag(){
-//        addWadsSetup(wadService);
-//        wadService.findById(wadPaths.get(0).toString()).
-//    }
-
 }
