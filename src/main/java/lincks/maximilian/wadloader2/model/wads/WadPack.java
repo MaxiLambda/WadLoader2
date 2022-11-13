@@ -70,6 +70,11 @@ public class WadPack implements WadElement {
         return customTags.add(new CustomTag(name));
     }
 
+    @Override
+    public boolean removeCustomTag(String name) {
+        return customTags.removeIf((tag) -> tag.tagName().equals(name));
+    }
+
     public boolean addWad(Wad wad){
         return wads.add(wad);
     }

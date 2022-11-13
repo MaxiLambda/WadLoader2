@@ -1,7 +1,6 @@
 package lincks.maximilian.wadloader2.model.wads;
 
 import lincks.maximilian.wadloader2.model.tags.Tag;
-import lincks.maximilian.wadloader2.repos.services.CustomTagService;
 
 import java.util.List;
 
@@ -20,4 +19,6 @@ public interface WadElement {
      * @return true if the tag was added, false otherwise
      */
     boolean addCustomTag(String name) ;
+
+    boolean removeCustomTag(String name) ;
 }
