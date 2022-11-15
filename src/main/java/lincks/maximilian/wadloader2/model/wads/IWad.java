@@ -1,6 +1,9 @@
 package lincks.maximilian.wadloader2.model.wads;
 
-import lincks.maximilian.wadloader2.model.tags.*;
+import lincks.maximilian.wadloader2.model.tags.CustomTag;
+import lincks.maximilian.wadloader2.model.tags.DefaultTag;
+import lincks.maximilian.wadloader2.model.tags.IWadTag;
+import lincks.maximilian.wadloader2.model.tags.Tag;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -46,7 +49,7 @@ public class IWad implements SingleWad {
     private Set<CustomTag> customTags;
 
     @Override
-    public List<SingleWad> wads() {
+    public List<SingleWad> allWads() {
         return List.of(this);
     }
 
