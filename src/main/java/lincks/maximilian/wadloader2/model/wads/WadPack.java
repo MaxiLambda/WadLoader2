@@ -58,6 +58,14 @@ public class WadPack implements WadConfig {
     )
     private Set<Wad> wads;
 
+    public boolean addWad(Wad wad){
+        return wads.add(wad);
+    }
+
+    public boolean removeWad(Wad wad){
+        return wads.remove(wad);
+    }
+
     @Override
     public List<? extends SingleWad> allWads() {
         return Stream.concat(wads.stream(),Stream.of(iwad)).toList();
@@ -71,6 +79,7 @@ public class WadPack implements WadConfig {
         ).flatMap(Collection::stream).toList();
     }
 
+    @Override
     public boolean addCustomTag(String name) {
         return customTags.add(new CustomTag(name));
     }
@@ -78,10 +87,6 @@ public class WadPack implements WadConfig {
     @Override
     public boolean removeCustomTag(String name) {
         return customTags.removeIf(tag -> tag.tagName().equals(name));
-    }
-
-    public boolean addWad(Wad wad){
-        return wads.add(wad);
     }
 
     @Override
