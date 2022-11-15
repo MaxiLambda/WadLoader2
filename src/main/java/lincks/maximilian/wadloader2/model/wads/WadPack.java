@@ -19,8 +19,9 @@ public class WadPack implements WadConfig {
 
     protected WadPack(){}
 
-    public WadPack(String name, WadPackTagService wadPackTagService) throws TagException {
+    public WadPack(String name, IWad iwad,WadPackTagService wadPackTagService) throws TagException {
         this.name = name;
+        this.iwad = iwad;
         wadPackTag = new WadPackTag(name);
         customTags = new HashSet<>();
         wads = new HashSet<>();
@@ -32,6 +33,10 @@ public class WadPack implements WadConfig {
 
     @Id
     private String name;
+
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name = "i_wad")
+    private IWad iwad;
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
@@ -54,8 +59,8 @@ public class WadPack implements WadConfig {
     private Set<Wad> wads;
 
     @Override
-    public List<? extends SingleWad> wads() {
-        return wads.stream().toList();
+    public List<? extends SingleWad> allWads() {
+        return Stream.concat(wads.stream(),Stream.of(iwad)).toList();
     }
 
     @Override
