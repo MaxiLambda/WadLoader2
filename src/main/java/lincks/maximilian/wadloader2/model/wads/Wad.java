@@ -64,6 +64,11 @@ public class Wad implements WadElement {
         return customTags.add(new CustomTag(name));
     }
 
+    @Override
+    public boolean removeCustomTag(String name) {
+        return customTags.removeIf((tag) -> tag.tagName().equals(name));
+    }
+
     //TODO maybe add HashCode
     @Override
     public boolean equals(Object obj) {
