@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 @Table(name = "Wad_Packs")
 @Entity
 @Getter
-public class WadPack implements WadElement {
+public class WadPack implements WadConfig {
     //Todo: make sure each WadPack contains an IWad
 
     protected WadPack(){}
@@ -54,7 +54,7 @@ public class WadPack implements WadElement {
     private Set<Wad> wads;
 
     @Override
-    public List<Wad> wads() {
+    public List<? extends SingleWad> wads() {
         return wads.stream().toList();
     }
 
@@ -72,7 +72,7 @@ public class WadPack implements WadElement {
 
     @Override
     public boolean removeCustomTag(String name) {
-        return customTags.removeIf((tag) -> tag.tagName().equals(name));
+        return customTags.removeIf(tag -> tag.tagName().equals(name));
     }
 
     public boolean addWad(Wad wad){

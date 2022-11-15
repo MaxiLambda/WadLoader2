@@ -9,8 +9,8 @@ import java.util.List;
  * Everything that consists of Wad(s).
  * Has its unique Tag.
 */
-public interface WadElement {
-    List<Wad> wads();
+public interface WadConfig {
+    List<? extends SingleWad> wads();
 
     List<? extends Tag> tags();
 

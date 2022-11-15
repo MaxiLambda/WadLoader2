@@ -1,25 +1,26 @@
 package lincks.maximilian.wadloader2.model.wads;
 
-import lincks.maximilian.wadloader2.model.tags.CustomTag;
-import lincks.maximilian.wadloader2.model.tags.DefaultTag;
-import lincks.maximilian.wadloader2.model.tags.Tag;
-import lincks.maximilian.wadloader2.model.tags.WadTag;
+import lincks.maximilian.wadloader2.model.tags.*;
 import lombok.Getter;
 
 import javax.persistence.*;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 @Entity
-@Table(name = "Wads")
+@Table(name = "I_Wads")
 @Getter
-public class Wad implements SingleWad {
-    protected Wad(){}
-    //TODO evaluate if an Exception should be raised in case of a path not Ending with an allowed Extension
-    public Wad(Path wadPath) {
+public class IWad implements SingleWad {
+
+    protected IWad(){}
+
+    public IWad(Path wadPath){
         path = wadPath.toAbsolutePath().toString();
-        wadTag = new WadTag(wadPath);
+        wadTag = new IWadTag(wadPath);
         defaultTag = new DefaultTag(wadPath);
         customTags = new HashSet<>();
     }
@@ -29,8 +30,8 @@ public class Wad implements SingleWad {
     private String path;
 
     @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "Wad_Tag", referencedColumnName = "name")
-    private WadTag wadTag;
+    @JoinColumn(name = "I_Wad_Tag", referencedColumnName = "name")
+    private IWadTag wadTag;
 
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "Default_Tag_Name", nullable = false)
@@ -38,7 +39,7 @@ public class Wad implements SingleWad {
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
-            name = "Wad_Custom_Tags",
+            name = "I_Wad_Custom_Tags",
             joinColumns = {@JoinColumn(name = "path")},
             inverseJoinColumns = {@JoinColumn(name = "name")}
     )
@@ -65,12 +66,5 @@ public class Wad implements SingleWad {
     @Override
     public boolean removeCustomTag(String name) {
         return customTags.removeIf(tag -> tag.tagName().equals(name));
-    }
-
-    //TODO maybe add HashCode
-    @Override
-    public boolean equals(Object obj) {
-        if(Objects.isNull(obj) || !(obj instanceof Wad)) return false;
-        else return path.equals(((Wad) obj).path);
     }
 }
