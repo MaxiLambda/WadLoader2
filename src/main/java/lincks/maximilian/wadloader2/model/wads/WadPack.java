@@ -14,13 +14,14 @@ import java.util.stream.Stream;
 @Table(name = "Wad_Packs")
 @Entity
 @Getter
-public class WadPack implements WadElement {
+public class WadPack implements WadConfig {
     //Todo: make sure each WadPack contains an IWad
 
     protected WadPack(){}
 
-    public WadPack(String name, WadPackTagService wadPackTagService) throws TagException {
+    public WadPack(String name, IWad iwad,WadPackTagService wadPackTagService) throws TagException {
         this.name = name;
+        this.iwad = iwad;
         wadPackTag = new WadPackTag(name);
         customTags = new HashSet<>();
         wads = new HashSet<>();
@@ -32,6 +33,10 @@ public class WadPack implements WadElement {
 
     @Id
     private String name;
+
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name = "i_wad")
+    private IWad iwad;
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
@@ -54,8 +59,8 @@ public class WadPack implements WadElement {
     private Set<Wad> wads;
 
     @Override
-    public List<Wad> wads() {
-        return wads.stream().toList();
+    public List<? extends SingleWad> allWads() {
+        return Stream.concat(wads.stream(),Stream.of(iwad)).toList();
     }
 
     @Override
@@ -72,7 +77,7 @@ public class WadPack implements WadElement {
 
     @Override
     public boolean removeCustomTag(String name) {
-        return customTags.removeIf((tag) -> tag.tagName().equals(name));
+        return customTags.removeIf(tag -> tag.tagName().equals(name));
     }
 
     public boolean addWad(Wad wad){

@@ -3,6 +3,7 @@ package lincks.maximilian.wadloader2.model.wads;
 import lincks.maximilian.wadloader2.repos.services.CustomTagService;
 import lincks.maximilian.wadloader2.repos.services.WadService;
 import lincks.maximilian.wadloader2.repos.services.WadTagService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static lincks.maximilian.wadloader2.model.wads.TestUtil.addWadsSetup;
 import static lincks.maximilian.wadloader2.model.wads.TestUtil.wadPaths;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class WadTest {
@@ -23,8 +24,9 @@ class WadTest {
     @Autowired
     CustomTagService customTagService;
 
+    @AfterEach
     @BeforeEach
-    void beforeAll() {
+    void cleanUp() {
         wadService.deleteAll();
         wadTagService.deleteAll();
     }

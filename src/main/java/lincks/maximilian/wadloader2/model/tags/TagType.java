@@ -8,7 +8,8 @@ public enum TagType {
     WAD_PACK_TAG("p"),
     WAD_TAG("w"),
     DEFAULT_TAG("d"),
-    CUSTOM_TAG("c");
+    CUSTOM_TAG("c"),
+    I_WAD_TAG("i");
 
     private final String prefix;
 

@@ -1,5 +1,6 @@
 package lincks.maximilian.wadloader2.model.wads;
 
+import lincks.maximilian.wadloader2.repos.services.IWadService;
 import lincks.maximilian.wadloader2.repos.services.WadService;
 
 import java.nio.file.Path;
@@ -15,10 +16,16 @@ public class TestUtil {
             .map(Path::toAbsolutePath)
             .toList();
 
+    public final static Path iWadPath = Path.of("D:\\Doom\\iwads\\doom666.wad");
+
     /**
      * Tries to add two Wads to the database
      */
     public static List<Wad> addWadsSetup(WadService wadService){
         return wadPaths.stream().map(Wad::new).map(wadService::save).toList();
+    }
+
+    public static IWad addIWadSetup(IWadService iWadService){
+        return iWadService.save(new IWad(iWadPath));
     }
 }
