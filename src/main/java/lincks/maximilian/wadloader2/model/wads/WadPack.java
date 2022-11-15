@@ -15,7 +15,6 @@ import java.util.stream.Stream;
 @Entity
 @Getter
 public class WadPack implements WadConfig {
-    //Todo: make sure each WadPack contains an IWad
 
     protected WadPack(){}
 
