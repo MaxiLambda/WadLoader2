@@ -15,6 +15,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 
+import java.awt.*;
 import java.nio.file.Path;
 
 @SpringBootApplication
@@ -38,9 +39,11 @@ public class WadLoader2Application{
     @EventListener(ApplicationReadyEvent.class)
     public void appStartup(){
 
-        UIBase ui = new UIBase();
-        ui.initUI();
-        ui.setVisible(true);
+        EventQueue.invokeLater(() -> {
+            UIBase ui = new UIBase();
+            ui.initUI();
+            ui.setVisible(true);
+        });
 
 		wadFinder.findWads(Path.of("D:\\GZDoom\\wads"))
 				.stream()
