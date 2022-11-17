@@ -28,7 +28,6 @@ public class IWad implements SingleWad {
         customTags = new HashSet<>();
     }
 
-    @Column
     @Id
     private String path;
 

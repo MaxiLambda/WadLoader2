@@ -2,7 +2,6 @@ package lincks.maximilian.wadloader2.model.tags;
 
 import org.hibernate.Hibernate;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -24,7 +23,6 @@ public class DefaultTag implements Tag {
         name = wadPath.toAbsolutePath().getParent().toString();
     }
 
-    @Column
     @Id
     private String name;
 

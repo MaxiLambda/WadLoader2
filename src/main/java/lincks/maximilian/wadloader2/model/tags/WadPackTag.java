@@ -3,7 +3,6 @@ package lincks.maximilian.wadloader2.model.tags;
 import lombok.AllArgsConstructor;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -23,7 +22,7 @@ public class WadPackTag implements Tag{
     }
 
     private static final TagType tagType = TagType.WAD_PACK_TAG;
-    @Column
+
     @Id
     private String name;
 

@@ -24,7 +24,6 @@ public class Wad implements SingleWad {
         customTags = new HashSet<>();
     }
 
-    @Column
     @Id
     private String path;
 
