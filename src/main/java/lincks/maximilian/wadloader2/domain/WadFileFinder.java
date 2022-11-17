@@ -1,9 +1,9 @@
 package lincks.maximilian.wadloader2.domain;
 
 import lincks.maximilian.wadloader2.config.WadExtensionConfiguration;
-import lincks.maximilian.wadloader2.model.wads.IWad;
-import lincks.maximilian.wadloader2.model.wads.SingleWad;
-import lincks.maximilian.wadloader2.model.wads.Wad;
+import lincks.maximilian.wadloader2.domain.wads.IWad;
+import lincks.maximilian.wadloader2.domain.wads.SingleWad;
+import lincks.maximilian.wadloader2.domain.wads.Wad;
 import lincks.maximilian.wadloader2.utils.PathUtil;
 import lincks.maximilian.wadloader2.utils.StreamUtil;
 import lombok.RequiredArgsConstructor;

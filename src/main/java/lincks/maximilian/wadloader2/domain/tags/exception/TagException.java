@@ -1,4 +1,4 @@
-package lincks.maximilian.wadloader2.model.tags;
+package lincks.maximilian.wadloader2.domain.tags.exception;
 
 public class TagException extends RuntimeException{
 

@@ -1,6 +1,6 @@
 package lincks.maximilian.wadloader2.model.tags;
 
-import lincks.maximilian.wadloader2.model.wads.Wad;
+import lincks.maximilian.wadloader2.domain.wads.Wad;
 import lincks.maximilian.wadloader2.repos.services.CustomTagService;
 import lincks.maximilian.wadloader2.repos.services.WadService;
 import org.junit.jupiter.api.Test;

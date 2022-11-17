@@ -1,9 +1,9 @@
-package lincks.maximilian.wadloader2.model.wads;
+package lincks.maximilian.wadloader2.domain.wads;
 
-import lincks.maximilian.wadloader2.model.tags.CustomTag;
-import lincks.maximilian.wadloader2.model.tags.Tag;
-import lincks.maximilian.wadloader2.model.tags.TagException;
-import lincks.maximilian.wadloader2.model.tags.WadPackTag;
+import lincks.maximilian.wadloader2.domain.tags.CustomTag;
+import lincks.maximilian.wadloader2.domain.tags.Tag;
+import lincks.maximilian.wadloader2.domain.tags.exception.TagException;
+import lincks.maximilian.wadloader2.domain.tags.WadPackTag;
 import lincks.maximilian.wadloader2.repos.services.WadPackTagService;
 import lombok.Getter;
 

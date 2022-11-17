@@ -1,4 +1,4 @@
-package lincks.maximilian.wadloader2.model.tags;
+package lincks.maximilian.wadloader2.domain.tags;
 
 /**
  * A Identifier for Wads or Wad-Packs

@@ -1,6 +1,8 @@
 package lincks.maximilian.wadloader2.model.wads;
 
-import lincks.maximilian.wadloader2.model.tags.TagException;
+import lincks.maximilian.wadloader2.domain.tags.exception.TagException;
+import lincks.maximilian.wadloader2.domain.wads.IWad;
+import lincks.maximilian.wadloader2.domain.wads.WadPack;
 import lincks.maximilian.wadloader2.repos.services.IWadService;
 import lincks.maximilian.wadloader2.repos.services.WadPackService;
 import lincks.maximilian.wadloader2.repos.services.WadPackTagService;

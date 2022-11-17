@@ -1,7 +1,7 @@
 package lincks.maximilian.wadloader2.domain;
 
 import lincks.maximilian.wadloader2.config.WadExtensionConfiguration;
-import lincks.maximilian.wadloader2.model.wads.Wad;
+import lincks.maximilian.wadloader2.domain.wads.Wad;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

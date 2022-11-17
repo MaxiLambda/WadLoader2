@@ -1,6 +1,6 @@
 package lincks.maximilian.wadloader2.repos.services;
 
-import lincks.maximilian.wadloader2.model.tags.IWadTag;
+import lincks.maximilian.wadloader2.domain.tags.IWadTag;
 import lincks.maximilian.wadloader2.repos.IWadTagRepo;
 import org.springframework.stereotype.Service;
 

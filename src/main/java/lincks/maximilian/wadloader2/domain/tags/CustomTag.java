@@ -1,25 +1,27 @@
-package lincks.maximilian.wadloader2.model.tags;
+package lincks.maximilian.wadloader2.domain.tags;
 
-import lincks.maximilian.wadloader2.utils.PathUtil;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.nio.file.Path;
 import java.util.Objects;
 
+
+/**
+ * User Created Tag
+*/
 @Entity
-@Table(name = "Wad_Tags")
-public class WadTag implements Tag{
+@Table(name = "Custom_Tags")
+public class CustomTag implements Tag{
 
-    protected WadTag(){}
+    protected CustomTag(){}
 
-    public WadTag(Path wadPath){
-        name = PathUtil.fileNameWithoutExtension(wadPath);
+    public CustomTag(String name){
+        this.name = name;
     }
 
-    private final static TagType tagType = TagType.WAD_TAG;
+    private static final TagType tagType = TagType.CUSTOM_TAG;
 
     @Id
     private String name;
@@ -38,8 +40,8 @@ public class WadTag implements Tag{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        WadTag wadTag = (WadTag) o;
-        return name != null && Objects.equals(name, wadTag.name);
+        CustomTag customTag = (CustomTag) o;
+        return name != null && Objects.equals(name, customTag.name);
     }
 
     @Override

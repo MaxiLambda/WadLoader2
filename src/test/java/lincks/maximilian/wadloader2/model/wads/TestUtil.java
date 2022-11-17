@@ -1,5 +1,7 @@
 package lincks.maximilian.wadloader2.model.wads;
 
+import lincks.maximilian.wadloader2.domain.wads.IWad;
+import lincks.maximilian.wadloader2.domain.wads.Wad;
 import lincks.maximilian.wadloader2.repos.services.IWadService;
 import lincks.maximilian.wadloader2.repos.services.WadService;
 

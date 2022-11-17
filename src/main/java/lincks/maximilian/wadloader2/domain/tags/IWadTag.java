@@ -1,27 +1,25 @@
-package lincks.maximilian.wadloader2.model.tags;
+package lincks.maximilian.wadloader2.domain.tags;
 
-import lombok.AllArgsConstructor;
+import lincks.maximilian.wadloader2.utils.PathUtil;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.nio.file.Path;
 import java.util.Objects;
 
-
-/**
- * Tag which groups Elements of a Wad-Pack
-*/
-@AllArgsConstructor
 @Entity
-@Table(name = "Wad_Pack_Tags")
-public class WadPackTag implements Tag{
+@Table(name = "I_Wad_Tags")
+public class IWadTag implements Tag{
 
-    protected WadPackTag() {
+    protected IWadTag(){}
 
+    public IWadTag(Path wadPath){
+        name = PathUtil.fileNameWithoutExtension(wadPath);
     }
 
-    private static final TagType tagType = TagType.WAD_PACK_TAG;
+    private static final TagType tagType = TagType.I_WAD_TAG;
 
     @Id
     private String name;
@@ -40,8 +38,8 @@ public class WadPackTag implements Tag{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        WadPackTag that = (WadPackTag) o;
-        return name != null && Objects.equals(name, that.name);
+        IWadTag wadTag = (IWadTag) o;
+        return name != null && Objects.equals(name, wadTag.name);
     }
 
     @Override

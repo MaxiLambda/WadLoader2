@@ -1,4 +1,4 @@
-package lincks.maximilian.wadloader2.model.tags;
+package lincks.maximilian.wadloader2.domain.tags;
 
 import lincks.maximilian.wadloader2.utils.PathUtil;
 import org.hibernate.Hibernate;
@@ -10,16 +10,16 @@ import java.nio.file.Path;
 import java.util.Objects;
 
 @Entity
-@Table(name = "I_Wad_Tags")
-public class IWadTag implements Tag{
+@Table(name = "Wad_Tags")
+public class WadTag implements Tag{
 
-    protected IWadTag(){}
+    protected WadTag(){}
 
-    public IWadTag(Path wadPath){
+    public WadTag(Path wadPath){
         name = PathUtil.fileNameWithoutExtension(wadPath);
     }
 
-    private static final TagType tagType = TagType.I_WAD_TAG;
+    private final static TagType tagType = TagType.WAD_TAG;
 
     @Id
     private String name;
@@ -38,7 +38,7 @@ public class IWadTag implements Tag{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        IWadTag wadTag = (IWadTag) o;
+        WadTag wadTag = (WadTag) o;
         return name != null && Objects.equals(name, wadTag.name);
     }
 
