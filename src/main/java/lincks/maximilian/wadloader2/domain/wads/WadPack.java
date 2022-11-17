@@ -2,9 +2,9 @@ package lincks.maximilian.wadloader2.domain.wads;
 
 import lincks.maximilian.wadloader2.domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.domain.tags.Tag;
-import lincks.maximilian.wadloader2.domain.tags.exception.TagException;
 import lincks.maximilian.wadloader2.domain.tags.WadPackTag;
-import lincks.maximilian.wadloader2.repos.services.WadPackTagService;
+import lincks.maximilian.wadloader2.domain.tags.exception.TagException;
+import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.WadPackTagBridge;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -18,7 +18,7 @@ public class WadPack implements WadConfig {
 
     protected WadPack(){}
 
-    public WadPack(String name, IWad iwad,WadPackTagService wadPackTagService) throws TagException {
+    public WadPack(String name, IWad iwad, WadPackTagBridge wadPackTagService) throws TagException {
         this.name = name;
         this.iwad = iwad;
         wadPackTag = new WadPackTag(name);

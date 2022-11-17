@@ -1,11 +1,11 @@
 package lincks.maximilian.wadloader2.domain;
 
+import lincks.maximilian.wadloader2.abstraction.PathUtil;
+import lincks.maximilian.wadloader2.abstraction.StreamUtil;
 import lincks.maximilian.wadloader2.config.WadExtensionConfiguration;
 import lincks.maximilian.wadloader2.domain.wads.IWad;
 import lincks.maximilian.wadloader2.domain.wads.SingleWad;
 import lincks.maximilian.wadloader2.domain.wads.Wad;
-import lincks.maximilian.wadloader2.utils.PathUtil;
-import lincks.maximilian.wadloader2.utils.StreamUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;

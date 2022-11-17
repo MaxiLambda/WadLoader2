@@ -3,10 +3,10 @@ package lincks.maximilian.wadloader2.model.wads;
 import lincks.maximilian.wadloader2.domain.tags.exception.TagException;
 import lincks.maximilian.wadloader2.domain.wads.IWad;
 import lincks.maximilian.wadloader2.domain.wads.WadPack;
-import lincks.maximilian.wadloader2.repos.services.IWadService;
-import lincks.maximilian.wadloader2.repos.services.WadPackService;
-import lincks.maximilian.wadloader2.repos.services.WadPackTagService;
-import lincks.maximilian.wadloader2.repos.services.WadService;
+import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.IWadBridge;
+import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.WadBridge;
+import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.WadPackBridge;
+import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.WadPackTagBridge;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,16 +20,16 @@ class WadPackTest {
     //TODO write Test to check custom rule enforcement
 
     @Autowired
-    WadPackService wadPackService;
+    WadPackBridge wadPackService;
 
     @Autowired
-    WadPackTagService wadPackTagService;
+    WadPackTagBridge wadPackTagService;
 
     @Autowired
-    WadService wadService;
+    WadBridge wadService;
 
     @Autowired
-    IWadService iWadService;
+    IWadBridge iWadService;
 
     @AfterEach
     @BeforeEach

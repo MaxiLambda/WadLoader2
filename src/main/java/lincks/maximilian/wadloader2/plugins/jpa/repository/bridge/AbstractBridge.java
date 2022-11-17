@@ -1,4 +1,4 @@
-package lincks.maximilian.wadloader2.repos.services;
+package lincks.maximilian.wadloader2.plugins.jpa.repository.bridge;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public abstract class AbstractService<T,ID> {
+public abstract class AbstractBridge<T,ID> {
     protected final JpaRepository<T,ID> repo;
 
     public List<T> findAll(){

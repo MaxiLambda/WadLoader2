@@ -1,4 +1,4 @@
-package lincks.maximilian.wadloader2.utils;
+package lincks.maximilian.wadloader2.abstraction;
 
 import java.nio.file.Path;
 

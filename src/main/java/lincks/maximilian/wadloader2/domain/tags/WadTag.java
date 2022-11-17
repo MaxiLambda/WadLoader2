@@ -1,6 +1,6 @@
 package lincks.maximilian.wadloader2.domain.tags;
 
-import lincks.maximilian.wadloader2.utils.PathUtil;
+import lincks.maximilian.wadloader2.abstraction.PathUtil;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;

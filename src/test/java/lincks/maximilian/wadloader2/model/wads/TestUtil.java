@@ -2,8 +2,8 @@ package lincks.maximilian.wadloader2.model.wads;
 
 import lincks.maximilian.wadloader2.domain.wads.IWad;
 import lincks.maximilian.wadloader2.domain.wads.Wad;
-import lincks.maximilian.wadloader2.repos.services.IWadService;
-import lincks.maximilian.wadloader2.repos.services.WadService;
+import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.IWadBridge;
+import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.WadBridge;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -23,11 +23,11 @@ public class TestUtil {
     /**
      * Tries to add two Wads to the database
      */
-    public static List<Wad> addWadsSetup(WadService wadService){
+    public static List<Wad> addWadsSetup(WadBridge wadService){
         return wadPaths.stream().map(Wad::new).map(wadService::save).toList();
     }
 
-    public static IWad addIWadSetup(IWadService iWadService){
+    public static IWad addIWadSetup(IWadBridge iWadService){
         return iWadService.save(new IWad(iWadPath));
     }
 }

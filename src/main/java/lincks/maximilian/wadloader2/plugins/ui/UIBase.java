@@ -1,4 +1,4 @@
-package lincks.maximilian.wadloader2.ui;
+package lincks.maximilian.wadloader2.plugins.ui;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

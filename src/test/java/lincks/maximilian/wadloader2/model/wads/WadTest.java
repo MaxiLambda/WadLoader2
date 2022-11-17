@@ -1,8 +1,8 @@
 package lincks.maximilian.wadloader2.model.wads;
 
-import lincks.maximilian.wadloader2.repos.services.CustomTagService;
-import lincks.maximilian.wadloader2.repos.services.WadService;
-import lincks.maximilian.wadloader2.repos.services.WadTagService;
+import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.CustomTagBridge;
+import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.WadBridge;
+import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.WadTagBridge;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,12 +17,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class WadTest {
 
     @Autowired
-    WadService wadService;
+    WadBridge wadService;
     @Autowired
-    WadTagService wadTagService;
+    WadTagBridge wadTagService;
 
     @Autowired
-    CustomTagService customTagService;
+    CustomTagBridge customTagService;
 
     @AfterEach
     @BeforeEach
