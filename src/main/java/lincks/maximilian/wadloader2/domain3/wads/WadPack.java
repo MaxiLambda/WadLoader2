@@ -1,10 +1,10 @@
 package lincks.maximilian.wadloader2.domain3.wads;
 
+import lincks.maximilian.wadloader2.domain3.repos.WadPackTagRepo;
 import lincks.maximilian.wadloader2.domain3.tags.CustomTag;
 import lincks.maximilian.wadloader2.domain3.tags.Tag;
 import lincks.maximilian.wadloader2.domain3.tags.WadPackTag;
 import lincks.maximilian.wadloader2.domain3.tags.exception.TagException;
-import lincks.maximilian.wadloader2.plugins0.jpa.repository.bridge.WadPackTagBridge;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,9 +19,9 @@ public class WadPack implements WadConfig {
 
     protected WadPack(){}
 
-    public WadPack(String name, IWad iwad, WadPackTagBridge wadPackTagService) throws TagException {
+    public WadPack(String name, IWad iwad, WadPackTagRepo wadPackTagService) throws TagException {
         this.name = name;
-        this.iwad = iwad;
+        this.iwad = iwad.getPath();
         wadPackTag = new WadPackTag(name);
         customTags = new HashSet<>();
         wads = new HashMap<>();
@@ -34,9 +34,8 @@ public class WadPack implements WadConfig {
     @Id
     private String name;
 
-    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinColumn(name = "i_wad")
-    private IWad iwad;
+    @Column(name = "i_wad")
+    private String iwad;
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
@@ -51,13 +50,12 @@ public class WadPack implements WadConfig {
     private WadPackTag wadPackTag;
 
     @Setter
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinTable(
-            name = "Wad_Pack_Wad",
-            joinColumns = {@JoinColumn(name = "name")},
-            inverseJoinColumns = {@JoinColumn(name = "path")}
-    )
-    private Map<Integer,Wad> wads;
+    @ElementCollection
+    @CollectionTable(name = "Loadorder_Wad_Id_Mapping",
+            joinColumns = {@JoinColumn(name = "Wad_Pack_Name", referencedColumnName = "Name")})
+    @MapKeyColumn(name = "load_order")
+    @Column(name = "Wad_Id")
+    private Map<Integer,String> wads;
 
     public void addWad(Wad wad){
         int maxPosition = wads.keySet()
@@ -66,14 +64,20 @@ public class WadPack implements WadConfig {
                 //if the map is empty return -1 so when 1 is added we input at 0
                         .max().orElse(-1);
         if(maxPosition == Integer.MAX_VALUE) throw new WadPackAddException();
-        Map<Integer, Wad> newWads = new HashMap<>(wads);
-        newWads.put(maxPosition,wad);
+        //increase to write to new max position
+        maxPosition++;
+        Map<Integer, String> newWads = new HashMap<>(wads);
+        newWads.put(maxPosition,wad.getPath());
         wads = newWads;
     }
 
     @Override
-    public List<? extends SingleWad> allWads() {
-        return Stream.concat(wads.values().stream(),Stream.of(iwad)).toList();
+    public List<String> allWadIds() {
+        return Stream.concat(
+                wads.values()
+                        .stream(),
+                Stream.of(iwad)
+        ).toList();
     }
 
     @Override

@@ -1,15 +1,14 @@
 package lincks.maximilian.wadloader2.model.wads;
 
+import lincks.maximilian.wadloader2.domain3.repos.IWadRepo;
+import lincks.maximilian.wadloader2.domain3.repos.WadPackRepo;
+import lincks.maximilian.wadloader2.domain3.repos.WadPackTagRepo;
+import lincks.maximilian.wadloader2.domain3.repos.WadRepo;
 import lincks.maximilian.wadloader2.domain3.tags.exception.TagException;
 import lincks.maximilian.wadloader2.domain3.wads.IWad;
 import lincks.maximilian.wadloader2.domain3.wads.Wad;
 import lincks.maximilian.wadloader2.domain3.wads.WadPack;
 import lincks.maximilian.wadloader2.domain3.wads.WadPackAddException;
-import lincks.maximilian.wadloader2.plugins0.jpa.repository.bridge.IWadBridge;
-import lincks.maximilian.wadloader2.plugins0.jpa.repository.bridge.WadBridge;
-import lincks.maximilian.wadloader2.plugins0.jpa.repository.bridge.WadPackBridge;
-import lincks.maximilian.wadloader2.plugins0.jpa.repository.bridge.WadPackTagBridge;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,25 +17,26 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 class WadPackTest {
     //TODO write Test to check custom rule enforcement
 
     @Autowired
-    WadPackBridge wadPackService;
+    WadPackRepo wadPackService;
 
     @Autowired
-    WadPackTagBridge wadPackTagService;
+    WadPackTagRepo wadPackTagService;
 
     @Autowired
-    WadBridge wadService;
+    WadRepo wadService;
 
     @Autowired
-    IWadBridge iWadService;
+    IWadRepo iWadService;
 
-    @AfterEach
+//    @AfterEach
     @BeforeEach
     void clean(){
         wadPackService.deleteAll();
@@ -57,11 +57,10 @@ class WadPackTest {
 
         wadPackService.save(pack);
 
-        System.out.println(wadService.findAll().size());
-        System.out.println(pack.allWads().size());
+        wadPackService.save(pack);
 
         //+1 is due to the IWAD
-        assertEquals(TestUtil.wadPaths.size()+1,pack.allWads().size());
+        assertEquals(TestUtil.wadPaths.size()+1,pack.allWadIds().size());
         assertEquals(1,wadPackService.findAll().size());
     }
 
@@ -78,11 +77,9 @@ class WadPackTest {
         List<Wad> wads = TestUtil.addWadsSetup(wadService);
 
 
-        pack.setWads(Map.of(Integer.MAX_VALUE, wads.get(0)));
+        pack.setWads(Map.of(Integer.MAX_VALUE, wads.get(0).getPath()));
 
         assertThrows(WadPackAddException.class,() -> pack.addWad(wads.get(1)));
-
-        pack.getWads().forEach((i,w) -> System.out.println(i));
     }
 
     @Test
@@ -91,11 +88,9 @@ class WadPackTest {
         WadPack pack = new WadPack(wadPackName,iWad, wadPackTagService);
         List<Wad> wads = TestUtil.addWadsSetup(wadService);
 
+        pack.setWads(Map.of(1, wads.get(0).getPath()));
+        pack.addWad(wads.get(1));
 
-        pack.setWads(Map.of(1, wads.get(0)));
-
-        assertEquals(3, pack.allWads().size());
-
-        pack.getWads().forEach((i,w) -> System.out.println(i));
+        assertEquals(3, pack.allWadIds().size());
     }
 }

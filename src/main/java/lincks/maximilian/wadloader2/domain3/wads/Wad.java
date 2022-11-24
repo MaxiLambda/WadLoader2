@@ -44,7 +44,12 @@ public class Wad implements SingleWad {
     private Set<CustomTag> customTags;
 
     @Override
-    public List<SingleWad> allWads() {
+    public List<String> allWadIds() {
+        return List.of(path);
+    }
+
+    @Override
+    public List<? extends SingleWad> allWads() {
         return List.of(this);
     }
 
