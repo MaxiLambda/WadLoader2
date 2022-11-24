@@ -1,8 +1,8 @@
 package lincks.maximilian.wadloader2.model.wads;
 
-import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.CustomTagBridge;
-import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.WadBridge;
-import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.WadTagBridge;
+import lincks.maximilian.wadloader2.plugins0.jpa.repository.bridge.CustomTagBridge;
+import lincks.maximilian.wadloader2.plugins0.jpa.repository.bridge.WadBridge;
+import lincks.maximilian.wadloader2.plugins0.jpa.repository.bridge.WadTagBridge;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
