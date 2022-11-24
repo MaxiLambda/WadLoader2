@@ -2,6 +2,7 @@ package lincks.maximilian.wadloader2.domain3.wads;
 
 import lincks.maximilian.wadloader2.domain3.repos.WadPackTagRepo;
 import lincks.maximilian.wadloader2.domain3.tags.CustomTag;
+import lincks.maximilian.wadloader2.domain3.tags.ImmutableTag;
 import lincks.maximilian.wadloader2.domain3.tags.Tag;
 import lincks.maximilian.wadloader2.domain3.tags.WadPackTag;
 import lincks.maximilian.wadloader2.domain3.tags.exception.TagException;
@@ -85,7 +86,10 @@ public class WadPack implements WadConfig {
         return Stream.of(
                 List.of(wadPackTag),
                 customTags
-        ).flatMap(Collection::stream).toList();
+        )
+                .flatMap(Collection::stream)
+                .map(ImmutableTag::new)
+                .toList();
     }
 
     @Override

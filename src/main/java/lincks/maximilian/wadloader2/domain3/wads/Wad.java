@@ -1,9 +1,6 @@
 package lincks.maximilian.wadloader2.domain3.wads;
 
-import lincks.maximilian.wadloader2.domain3.tags.CustomTag;
-import lincks.maximilian.wadloader2.domain3.tags.DefaultTag;
-import lincks.maximilian.wadloader2.domain3.tags.Tag;
-import lincks.maximilian.wadloader2.domain3.tags.WadTag;
+import lincks.maximilian.wadloader2.domain3.tags.*;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -58,7 +55,10 @@ public class Wad implements SingleWad {
         return Stream.of(
                 List.of(wadTag,defaultTag),
                 customTags
-        ).flatMap(Collection::stream).toList();
+        )
+                .flatMap(Collection::stream)
+                .map(ImmutableTag::new)
+                .toList();
     }
 
     @Override
