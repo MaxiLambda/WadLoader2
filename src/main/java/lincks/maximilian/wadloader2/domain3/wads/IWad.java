@@ -48,10 +48,14 @@ public class IWad implements SingleWad {
     private Set<CustomTag> customTags;
 
     @Override
-    public List<SingleWad> allWads() {
-        return List.of(this);
+    public List<String> allWadIds() {
+        return List.of(path);
     }
 
+    @Override
+    public List<? extends SingleWad> allWads() {
+        return List.of(this);
+    }
     @Override
     public List<? extends Tag> tags() {
         return Stream.of(

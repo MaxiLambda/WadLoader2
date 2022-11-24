@@ -10,7 +10,7 @@ import java.util.List;
  * Has its unique Tag.
 */
 public interface WadConfig {
-    List<? extends SingleWad> allWads();
+    List<String> allWadIds();
 
     List<? extends Tag> tags();
 

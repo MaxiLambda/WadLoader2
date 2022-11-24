@@ -1,8 +1,8 @@
 package lincks.maximilian.wadloader2.model.tags;
 
+import lincks.maximilian.wadloader2.domain3.repos.CustomTagRepo;
+import lincks.maximilian.wadloader2.domain3.repos.WadRepo;
 import lincks.maximilian.wadloader2.domain3.wads.Wad;
-import lincks.maximilian.wadloader2.plugins0.jpa.repository.bridge.CustomTagBridge;
-import lincks.maximilian.wadloader2.plugins0.jpa.repository.bridge.WadBridge;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,9 +14,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class CustomTagTest {
 
     @Autowired
-    WadBridge wadService;
+    WadRepo wadService;
     @Autowired
-    CustomTagBridge customTagService;
+    CustomTagRepo customTagService;
 
     String customTagName = "R2D2";
     @Test
