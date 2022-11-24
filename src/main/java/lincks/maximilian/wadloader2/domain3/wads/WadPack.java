@@ -6,6 +6,7 @@ import lincks.maximilian.wadloader2.domain3.tags.WadPackTag;
 import lincks.maximilian.wadloader2.domain3.tags.exception.TagException;
 import lincks.maximilian.wadloader2.plugins0.jpa.repository.bridge.WadPackTagBridge;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.*;
@@ -23,7 +24,7 @@ public class WadPack implements WadConfig {
         this.iwad = iwad;
         wadPackTag = new WadPackTag(name);
         customTags = new HashSet<>();
-        wads = new HashSet<>();
+        wads = new HashMap<>();
 
         //validate
         if (wadPackTagService.exists(name))
@@ -49,25 +50,30 @@ public class WadPack implements WadConfig {
     @JoinColumn(name = "Wad_Pack_Tag", referencedColumnName = "name")
     private WadPackTag wadPackTag;
 
+    @Setter
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
             name = "Wad_Pack_Wad",
             joinColumns = {@JoinColumn(name = "name")},
             inverseJoinColumns = {@JoinColumn(name = "path")}
     )
-    private Set<Wad> wads;
+    private Map<Integer,Wad> wads;
 
-    public boolean addWad(Wad wad){
-        return wads.add(wad);
-    }
-
-    public boolean removeWad(Wad wad){
-        return wads.remove(wad);
+    public void addWad(Wad wad){
+        int maxPosition = wads.keySet()
+                .stream()
+                .mapToInt(i -> i)
+                //if the map is empty return -1 so when 1 is added we input at 0
+                        .max().orElse(-1);
+        if(maxPosition == Integer.MAX_VALUE) throw new WadPackAddException();
+        Map<Integer, Wad> newWads = new HashMap<>(wads);
+        newWads.put(maxPosition,wad);
+        wads = newWads;
     }
 
     @Override
     public List<? extends SingleWad> allWads() {
-        return Stream.concat(wads.stream(),Stream.of(iwad)).toList();
+        return Stream.concat(wads.values().stream(),Stream.of(iwad)).toList();
     }
 
     @Override
