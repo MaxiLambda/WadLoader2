@@ -1,12 +1,12 @@
 package lincks.maximilian.wadloader2;
 
-import lincks.maximilian.wadloader2.domain.WadFileFinder;
-import lincks.maximilian.wadloader2.domain.tags.Tag;
-import lincks.maximilian.wadloader2.domain.wads.IWad;
-import lincks.maximilian.wadloader2.domain.wads.Wad;
-import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.IWadBridge;
-import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.WadBridge;
-import lincks.maximilian.wadloader2.plugins.ui.UIBase;
+import lincks.maximilian.wadloader2.domain3.WadFileFinder;
+import lincks.maximilian.wadloader2.domain3.tags.Tag;
+import lincks.maximilian.wadloader2.domain3.wads.IWad;
+import lincks.maximilian.wadloader2.domain3.wads.Wad;
+import lincks.maximilian.wadloader2.plugins0.jpa.repository.bridge.IWadBridge;
+import lincks.maximilian.wadloader2.plugins0.jpa.repository.bridge.WadBridge;
+import lincks.maximilian.wadloader2.plugins0.ui.UIBase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.Banner;
 import org.springframework.boot.WebApplicationType;

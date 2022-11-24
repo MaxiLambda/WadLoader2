@@ -1,12 +1,12 @@
 package lincks.maximilian.wadloader2.model.wads;
 
-import lincks.maximilian.wadloader2.domain.tags.exception.TagException;
-import lincks.maximilian.wadloader2.domain.wads.IWad;
-import lincks.maximilian.wadloader2.domain.wads.WadPack;
-import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.IWadBridge;
-import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.WadBridge;
-import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.WadPackBridge;
-import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.WadPackTagBridge;
+import lincks.maximilian.wadloader2.domain3.tags.exception.TagException;
+import lincks.maximilian.wadloader2.domain3.wads.IWad;
+import lincks.maximilian.wadloader2.domain3.wads.WadPack;
+import lincks.maximilian.wadloader2.plugins0.jpa.repository.bridge.IWadBridge;
+import lincks.maximilian.wadloader2.plugins0.jpa.repository.bridge.WadBridge;
+import lincks.maximilian.wadloader2.plugins0.jpa.repository.bridge.WadPackBridge;
+import lincks.maximilian.wadloader2.plugins0.jpa.repository.bridge.WadPackTagBridge;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

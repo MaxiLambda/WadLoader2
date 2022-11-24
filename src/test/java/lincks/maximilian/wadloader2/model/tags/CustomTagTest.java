@@ -1,8 +1,8 @@
 package lincks.maximilian.wadloader2.model.tags;
 
-import lincks.maximilian.wadloader2.domain.wads.Wad;
-import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.CustomTagBridge;
-import lincks.maximilian.wadloader2.plugins.jpa.repository.bridge.WadBridge;
+import lincks.maximilian.wadloader2.domain3.wads.Wad;
+import lincks.maximilian.wadloader2.plugins0.jpa.repository.bridge.CustomTagBridge;
+import lincks.maximilian.wadloader2.plugins0.jpa.repository.bridge.WadBridge;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
