@@ -1,6 +1,7 @@
 package lincks.maximilian.wadloader2.domain.tags;
 
 import org.hibernate.Hibernate;
+import org.springframework.data.annotation.Immutable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,6 +14,7 @@ import java.util.Objects;
 */
 @Entity
 @Table(name = "Custom_Tags")
+@Immutable
 public class CustomTag implements Tag{
 
     protected CustomTag(){}

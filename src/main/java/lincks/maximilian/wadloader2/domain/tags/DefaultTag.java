@@ -1,6 +1,7 @@
 package lincks.maximilian.wadloader2.domain.tags;
 
 import org.hibernate.Hibernate;
+import org.springframework.data.annotation.Immutable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,6 +14,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "Default_Tags")
+@Immutable
 public class DefaultTag implements Tag {
 
     private final static TagType tagType = TagType.DEFAULT_TAG;

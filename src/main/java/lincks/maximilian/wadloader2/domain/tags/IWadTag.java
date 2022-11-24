@@ -2,6 +2,7 @@ package lincks.maximilian.wadloader2.domain.tags;
 
 import lincks.maximilian.wadloader2.abstraction.PathUtil;
 import org.hibernate.Hibernate;
+import org.springframework.data.annotation.Immutable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -11,6 +12,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "I_Wad_Tags")
+@Immutable
 public class IWadTag implements Tag{
 
     protected IWadTag(){}

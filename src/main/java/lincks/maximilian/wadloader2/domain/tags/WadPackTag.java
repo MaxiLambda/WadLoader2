@@ -2,6 +2,7 @@ package lincks.maximilian.wadloader2.domain.tags;
 
 import lombok.AllArgsConstructor;
 import org.hibernate.Hibernate;
+import org.springframework.data.annotation.Immutable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,6 +16,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 @Table(name = "Wad_Pack_Tags")
+@Immutable
 public class WadPackTag implements Tag{
 
     protected WadPackTag() {
