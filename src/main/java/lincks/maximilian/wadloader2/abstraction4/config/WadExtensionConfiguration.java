@@ -1,4 +1,4 @@
-package lincks.maximilian.wadloader2.config;
+package lincks.maximilian.wadloader2.abstraction4.config;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

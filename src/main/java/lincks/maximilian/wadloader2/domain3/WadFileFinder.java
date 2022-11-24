@@ -2,7 +2,7 @@ package lincks.maximilian.wadloader2.domain3;
 
 import lincks.maximilian.wadloader2.abstraction4.PathUtil;
 import lincks.maximilian.wadloader2.abstraction4.StreamUtil;
-import lincks.maximilian.wadloader2.config.WadExtensionConfiguration;
+import lincks.maximilian.wadloader2.abstraction4.config.WadExtensionConfiguration;
 import lincks.maximilian.wadloader2.domain3.wads.IWad;
 import lincks.maximilian.wadloader2.domain3.wads.SingleWad;
 import lincks.maximilian.wadloader2.domain3.wads.Wad;
