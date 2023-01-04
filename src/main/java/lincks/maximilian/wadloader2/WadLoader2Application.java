@@ -2,8 +2,6 @@ package lincks.maximilian.wadloader2;
 
 import lincks.maximilian.wadloader2.domain3.WadFileFinder;
 import lincks.maximilian.wadloader2.domain3.repos.IWadRepo;
-import lincks.maximilian.wadloader2.domain3.repos.WadPackRepo;
-import lincks.maximilian.wadloader2.domain3.repos.WadPackTagRepo;
 import lincks.maximilian.wadloader2.domain3.repos.WadRepo;
 import lincks.maximilian.wadloader2.domain3.tags.Tag;
 import lincks.maximilian.wadloader2.domain3.wads.IWad;
@@ -37,10 +35,6 @@ public class WadLoader2Application{
     final WadFileFinder wadFinder;
     final WadRepo wadService;
     final IWadRepo iWadService;
-
-    final WadPackRepo wadPackService;
-
-    final WadPackTagRepo wadPackTagService;
 
     @EventListener(ApplicationReadyEvent.class)
     public void appStartup(){
