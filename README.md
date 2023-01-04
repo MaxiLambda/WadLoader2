@@ -3,6 +3,8 @@ A Doom/ Doom2 GZDoom WadLoader which can manage your Wad Collection.
 
 You can manage your Wads with Tags and custom Wad-Packs.
 
+## Layers
+
 * 0 Plugins
   * Database
   * GUI
@@ -21,3 +23,14 @@ You can manage your Wads with Tags and custom Wad-Packs.
 * 4 Abstraction Code
   * Utility, concepts, generic functions 
 
+## Aggregates
+
+* WadPack
+  * WadPackTag
+* Wad
+  * WadTag 
+  * DefaultTag
+* IWad
+  * IWadTag 
+  * DefaultTag
+* CustomTag
