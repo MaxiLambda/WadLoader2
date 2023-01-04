@@ -2,7 +2,6 @@ package lincks.maximilian.wadloader2.model.wads;
 
 import lincks.maximilian.wadloader2.domain3.repos.IWadRepo;
 import lincks.maximilian.wadloader2.domain3.repos.WadPackRepo;
-import lincks.maximilian.wadloader2.domain3.repos.WadPackTagRepo;
 import lincks.maximilian.wadloader2.domain3.repos.WadRepo;
 import lincks.maximilian.wadloader2.domain3.tags.exception.TagException;
 import lincks.maximilian.wadloader2.domain3.wads.IWad;
@@ -28,9 +27,6 @@ class WadPackTest {
     WadPackRepo wadPackService;
 
     @Autowired
-    WadPackTagRepo wadPackTagService;
-
-    @Autowired
     WadRepo wadService;
 
     @Autowired
@@ -42,7 +38,6 @@ class WadPackTest {
         wadPackService.deleteAll();
         wadService.deleteAll();
         iWadService.deleteAll();
-        wadPackTagService.deleteAll();
     }
 
     String wadPackName = "BestPackEver <3";
@@ -50,7 +45,7 @@ class WadPackTest {
     @Test
     void createWadPack(){
         IWad iWad = TestUtil.addIWadSetup(iWadService);
-        WadPack pack = new WadPack(wadPackName,iWad, wadPackTagService);
+        WadPack pack = new WadPack(wadPackName,iWad, wadPackService);
 
         TestUtil.addWadsSetup(wadService)
                 .forEach(pack::addWad);
@@ -73,7 +68,7 @@ class WadPackTest {
     @Test
     void addWadToPackWithMaxInt(){
         IWad iWad = TestUtil.addIWadSetup(iWadService);
-        WadPack pack = new WadPack(wadPackName,iWad, wadPackTagService);
+        WadPack pack = new WadPack(wadPackName,iWad, wadPackService);
         List<Wad> wads = TestUtil.addWadsSetup(wadService);
 
 
@@ -85,7 +80,7 @@ class WadPackTest {
     @Test
     void addWadToPack(){
         IWad iWad = TestUtil.addIWadSetup(iWadService);
-        WadPack pack = new WadPack(wadPackName,iWad, wadPackTagService);
+        WadPack pack = new WadPack(wadPackName,iWad, wadPackService);
         List<Wad> wads = TestUtil.addWadsSetup(wadService);
 
         pack.setWads(Map.of(1, wads.get(0).getPath()));
