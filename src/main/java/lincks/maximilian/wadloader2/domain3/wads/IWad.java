@@ -1,8 +1,6 @@
 package lincks.maximilian.wadloader2.domain3.wads;
 
-import lincks.maximilian.wadloader2.domain3.tags.CustomTag;
-import lincks.maximilian.wadloader2.domain3.tags.DefaultTag;
-import lincks.maximilian.wadloader2.domain3.tags.IWadTag;
+import lincks.maximilian.wadloader2.domain3.tags.ImmutableTag;
 import lincks.maximilian.wadloader2.domain3.tags.Tag;
 import lombok.Getter;
 
@@ -23,8 +21,8 @@ public class IWad implements SingleWad {
 
     public IWad(Path wadPath){
         path = wadPath.toAbsolutePath().toString();
-        wadTag = new IWadTag(wadPath);
-        defaultTag = new DefaultTag(wadPath);
+        iWadTag = Tag.iWadTag(wadPath);
+        defaultTag = Tag.defaultTag(wadPath);
         customTags = new HashSet<>();
     }
 
@@ -33,11 +31,11 @@ public class IWad implements SingleWad {
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "I_Wad_Tag", referencedColumnName = "name")
-    private IWadTag wadTag;
+    private Tag iWadTag;
 
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "Default_Tag_Name", nullable = false)
-    private DefaultTag defaultTag;
+    private Tag defaultTag;
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
@@ -45,7 +43,7 @@ public class IWad implements SingleWad {
             joinColumns = {@JoinColumn(name = "path")},
             inverseJoinColumns = {@JoinColumn(name = "name")}
     )
-    private Set<CustomTag> customTags;
+    private Set<Tag> customTags;
 
     @Override
     public List<String> allWadIds() {
@@ -57,20 +55,23 @@ public class IWad implements SingleWad {
         return List.of(this);
     }
     @Override
-    public List<? extends Tag> tags() {
+    public List<ImmutableTag> tags() {
         return Stream.of(
-                List.of(wadTag,defaultTag),
+                List.of(iWadTag,defaultTag),
                 customTags
-        ).flatMap(Collection::stream).toList();
+        )
+                .flatMap(Collection::stream)
+                .map(ImmutableTag::new)
+                .toList();
     }
 
     @Override
     public boolean addCustomTag(String name) {
-        return customTags.add(new CustomTag(name));
+        return customTags.add(Tag.customTag(name));
     }
 
     @Override
     public boolean removeCustomTag(String name) {
-        return customTags.removeIf(tag -> tag.tagName().equals(name));
+        return customTags.removeIf(tag -> tag.getName().equals(name));
     }
 }

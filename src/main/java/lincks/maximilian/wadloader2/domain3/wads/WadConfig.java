@@ -1,5 +1,6 @@
 package lincks.maximilian.wadloader2.domain3.wads;
 
+import lincks.maximilian.wadloader2.domain3.tags.ImmutableTag;
 import lincks.maximilian.wadloader2.domain3.tags.Tag;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 public interface WadConfig {
     List<String> allWadIds();
 
-    List<? extends Tag> tags();
+    List<ImmutableTag> tags();
 
     /**
      *

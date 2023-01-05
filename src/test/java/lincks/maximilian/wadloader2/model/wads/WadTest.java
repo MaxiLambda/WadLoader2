@@ -1,6 +1,5 @@
 package lincks.maximilian.wadloader2.model.wads;
 
-import lincks.maximilian.wadloader2.domain3.repos.CustomTagRepo;
 import lincks.maximilian.wadloader2.domain3.repos.WadRepo;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
