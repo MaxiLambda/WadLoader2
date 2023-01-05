@@ -1,10 +1,8 @@
 package lincks.maximilian.wadloader2.domain3.wads;
 
 import lincks.maximilian.wadloader2.domain3.repos.WadPackRepo;
-import lincks.maximilian.wadloader2.domain3.tags.CustomTag;
 import lincks.maximilian.wadloader2.domain3.tags.ImmutableTag;
 import lincks.maximilian.wadloader2.domain3.tags.Tag;
-import lincks.maximilian.wadloader2.domain3.tags.WadPackTag;
 import lincks.maximilian.wadloader2.domain3.tags.exception.TagException;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +21,7 @@ public class WadPack implements WadConfig {
     public WadPack(String name, IWad iwad, WadPackRepo wadPackService) throws TagException {
         this.name = name;
         this.iwad = iwad.getPath();
-        wadPackTag = new WadPackTag(name);
+        wadPackTag = Tag.wadPackTag(name);
         customTags = new HashSet<>();
         wads = new HashMap<>();
 
@@ -31,7 +29,7 @@ public class WadPack implements WadConfig {
         boolean isValidName = wadPackService.findAll()
                 .stream()
                 .map(WadPack::getWadPackTag)
-                .map(WadPackTag::tagName)
+                .map(Tag::getName)
                 .anyMatch(tagName -> tagName.equals(name));
         if (isValidName)
             throw new TagException("A WadPack with the name %s already exists!".formatted(name));
@@ -49,11 +47,11 @@ public class WadPack implements WadConfig {
             joinColumns = {@JoinColumn(name = "pack_Name")},
             inverseJoinColumns = {@JoinColumn(name = "tag_Name")}
     )
-    private Set<CustomTag> customTags;
+    private Set<Tag> customTags;
 
     @OneToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "Wad_Pack_Tag", referencedColumnName = "name")
-    private WadPackTag wadPackTag;
+    private Tag wadPackTag;
 
     @Setter
     @ElementCollection
@@ -87,7 +85,7 @@ public class WadPack implements WadConfig {
     }
 
     @Override
-    public List<? extends Tag> tags() {
+    public List<ImmutableTag> tags() {
         return Stream.of(
                 List.of(wadPackTag),
                 customTags
@@ -99,12 +97,12 @@ public class WadPack implements WadConfig {
 
     @Override
     public boolean addCustomTag(String name) {
-        return customTags.add(new CustomTag(name));
+        return customTags.add(Tag.customTag(name));
     }
 
     @Override
     public boolean removeCustomTag(String name) {
-        return customTags.removeIf(tag -> tag.tagName().equals(name));
+        return customTags.removeIf(tag -> tag.getName().equals(name));
     }
 
     @Override

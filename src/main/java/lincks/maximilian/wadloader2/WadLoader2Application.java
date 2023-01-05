@@ -55,7 +55,7 @@ public class WadLoader2Application{
 		wadFinder.findIWads(Path.of("D:\\GZDoom\\wads\\iwads"))
 				.stream()
 				.map(iWadService::save)
-				.map(IWad::getWadTag)
+				.map(IWad::getiWadTag)
 				.map(Tag::tagName)
 				.forEach(System.out::println);
     }

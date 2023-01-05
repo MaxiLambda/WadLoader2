@@ -16,8 +16,8 @@ public class Wad implements SingleWad {
     //TODO evaluate if an Exception should be raised in case of a path not Ending with an allowed Extension
     public Wad(Path wadPath) {
         path = wadPath.toAbsolutePath().toString();
-        wadTag = new WadTag(wadPath);
-        defaultTag = new DefaultTag(wadPath);
+        wadTag = Tag.wadTag(wadPath);
+        defaultTag = Tag.defaultTag(wadPath);
         customTags = new HashSet<>();
     }
 
@@ -25,12 +25,12 @@ public class Wad implements SingleWad {
     private String path;
 
     @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "Wad_Tag", referencedColumnName = "name")
-    private WadTag wadTag;
+    @JoinColumn(name = "Wad_Tag", nullable = false)
+    private Tag wadTag;
 
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "Default_Tag_Name", nullable = false)
-    private DefaultTag defaultTag;
+    private Tag defaultTag;
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
@@ -38,7 +38,7 @@ public class Wad implements SingleWad {
             joinColumns = {@JoinColumn(name = "path")},
             inverseJoinColumns = {@JoinColumn(name = "name")}
     )
-    private Set<CustomTag> customTags;
+    private Set<Tag> customTags;
 
     @Override
     public List<String> allWadIds() {
@@ -51,7 +51,7 @@ public class Wad implements SingleWad {
     }
 
     @Override
-    public List<? extends Tag> tags() {
+    public List<ImmutableTag> tags() {
         return Stream.of(
                 List.of(wadTag,defaultTag),
                 customTags
@@ -63,7 +63,7 @@ public class Wad implements SingleWad {
 
     @Override
     public boolean addCustomTag(String name) {
-        return customTags.add(new CustomTag(name));
+        return customTags.add(Tag.customTag(name));
     }
 
     @Override

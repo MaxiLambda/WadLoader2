@@ -34,3 +34,12 @@ You can manage your Wads with Tags and custom Wad-Packs.
   * IWadTag 
   * DefaultTag
 * CustomTag
+
+## UseCases
+* load Wads from a set dir into the WadLoader
+* create WadPacks
+* add Tags to Wads and WadPacks
+* add rules for WadPacks
+  * templates for the rules 
+* generate a List of all Wads
+  *  group the list in sublists via a given criteria (tag)
