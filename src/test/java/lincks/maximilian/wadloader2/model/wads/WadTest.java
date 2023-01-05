@@ -2,7 +2,6 @@ package lincks.maximilian.wadloader2.model.wads;
 
 import lincks.maximilian.wadloader2.domain3.repos.CustomTagRepo;
 import lincks.maximilian.wadloader2.domain3.repos.WadRepo;
-import lincks.maximilian.wadloader2.domain3.repos.WadTagRepo;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,8 +17,6 @@ class WadTest {
 
     @Autowired
     WadRepo wadService;
-    @Autowired
-    WadTagRepo wadTagService;
 
     @Autowired
     CustomTagRepo customTagService;
@@ -28,7 +25,6 @@ class WadTest {
     @BeforeEach
     void cleanUp() {
         wadService.deleteAll();
-        wadTagService.deleteAll();
     }
 
     @Test
@@ -42,8 +38,6 @@ class WadTest {
                 wadService.findById(wadPaths.get(0).toString()).get().getPath()
                 ,wadPaths.get(0).toString()
         );
-        //check if WadTags were created and persisted
-        assertEquals(wadTagService.findAll().size(),wadPaths.size());
     }
 
     @Test

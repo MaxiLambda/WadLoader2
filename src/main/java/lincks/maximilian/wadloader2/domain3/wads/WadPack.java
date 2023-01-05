@@ -1,6 +1,6 @@
 package lincks.maximilian.wadloader2.domain3.wads;
 
-import lincks.maximilian.wadloader2.domain3.repos.WadPackTagRepo;
+import lincks.maximilian.wadloader2.domain3.repos.WadPackRepo;
 import lincks.maximilian.wadloader2.domain3.tags.CustomTag;
 import lincks.maximilian.wadloader2.domain3.tags.ImmutableTag;
 import lincks.maximilian.wadloader2.domain3.tags.Tag;
@@ -20,7 +20,7 @@ public class WadPack implements WadConfig {
 
     protected WadPack(){}
 
-    public WadPack(String name, IWad iwad, WadPackTagRepo wadPackTagService) throws TagException {
+    public WadPack(String name, IWad iwad, WadPackRepo wadPackService) throws TagException {
         this.name = name;
         this.iwad = iwad.getPath();
         wadPackTag = new WadPackTag(name);
@@ -28,7 +28,12 @@ public class WadPack implements WadConfig {
         wads = new HashMap<>();
 
         //validate
-        if (wadPackTagService.exists(name))
+        boolean isValidName = wadPackService.findAll()
+                .stream()
+                .map(WadPack::getWadPackTag)
+                .map(WadPackTag::tagName)
+                .anyMatch(tagName -> tagName.equals(name));
+        if (isValidName)
             throw new TagException("A WadPack with the name %s already exists!".formatted(name));
     }
 
