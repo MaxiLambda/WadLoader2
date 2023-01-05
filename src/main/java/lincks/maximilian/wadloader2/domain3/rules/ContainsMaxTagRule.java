@@ -4,7 +4,6 @@ import lincks.maximilian.wadloader2.domain3.tags.Tag;
 import lincks.maximilian.wadloader2.domain3.wads.WadPack;
 
 import javax.persistence.*;
-import java.util.function.Predicate;
 
 @Table(name = "Contains_Max_Tag_Rule")
 @Entity
@@ -40,4 +39,8 @@ public class ContainsMaxTagRule implements WadPackRule {
         return countFilteredWads <= maxCount;
     }
 
+    @Override
+    public String toString() {
+        return "ContainsMaxTagRule{\n filterTagId = \"%s\"\n maxCount = \"%s\"}".formatted(filterTagId,maxCount);
+    }
 }

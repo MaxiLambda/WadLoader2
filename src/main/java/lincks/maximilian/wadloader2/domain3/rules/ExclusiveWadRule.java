@@ -38,4 +38,9 @@ public class ExclusiveWadRule implements WadPackRule {
                         .map(Tag::tagId)
                         .noneMatch(forbiddenPredicate.get());
     }
+
+    @Override
+    public String toString(){
+        return "ExclusiveWadRule{\n wadId = \"%s\"\n forbiddenTagIds = %s}".formatted(wadId,forbiddenTagIds);
+    }
 }

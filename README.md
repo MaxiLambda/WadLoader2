@@ -34,3 +34,7 @@ You can manage your Wads with Tags and custom Wad-Packs.
   * IWadTag 
   * DefaultTag
 * CustomTag
+* ContainsMinTag
+* ContainsMaxTag
+* ExclusiveTagRule
+* ExclusiveWadRule
