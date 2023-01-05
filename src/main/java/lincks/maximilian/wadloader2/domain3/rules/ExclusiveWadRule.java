@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 
 @Table
 @Entity
-public class ExclusiveWadRule implements Predicate<WadPack> {
+public class ExclusiveWadRule implements WadPackRule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

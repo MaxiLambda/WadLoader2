@@ -9,7 +9,7 @@ import java.util.function.Predicate;
 @Table(name = "Contains_Max_Tag_Rule")
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class ContainsMaxTagRule implements Predicate<WadPack> {
+public class ContainsMaxTagRule implements WadPackRule {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)

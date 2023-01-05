@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 
 @Table(name = "Contains_Min_Tag_Rule")
 @Entity
-public class ContainsMinTagRule implements Predicate<WadPack> {
+public class ContainsMinTagRule implements WadPackRule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

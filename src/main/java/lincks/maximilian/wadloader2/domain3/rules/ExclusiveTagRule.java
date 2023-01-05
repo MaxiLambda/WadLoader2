@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Table(name = "Exclusive_Tag_Rule")
 @Entity
-public class ExclusiveTagRule implements Predicate<WadPack> {
+public class ExclusiveTagRule implements WadPackRule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
