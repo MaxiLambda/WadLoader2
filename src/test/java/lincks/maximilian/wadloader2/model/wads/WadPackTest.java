@@ -3,7 +3,7 @@ package lincks.maximilian.wadloader2.model.wads;
 import lincks.maximilian.wadloader2.domain3.repos.IWadRepo;
 import lincks.maximilian.wadloader2.domain3.repos.WadPackRepo;
 import lincks.maximilian.wadloader2.domain3.repos.WadRepo;
-import lincks.maximilian.wadloader2.domain3.tags.exception.TagException;
+import lincks.maximilian.wadloader2.domain3.tags.exception.WadPackTagException;
 import lincks.maximilian.wadloader2.domain3.wads.IWad;
 import lincks.maximilian.wadloader2.domain3.wads.Wad;
 import lincks.maximilian.wadloader2.domain3.wads.WadPack;
@@ -62,7 +62,7 @@ class WadPackTest {
     @Test
     void createWadPackTwice(){
         createWadPack();
-        assertThrows(TagException.class,this::createWadPack);
+        assertThrows(WadPackTagException.class,this::createWadPack);
     }
 
     @Test
