@@ -38,3 +38,12 @@ You can manage your Wads with Tags and custom Wad-Packs.
 * ContainsMaxTag
 * ExclusiveTagRule
 * ExclusiveWadRule
+
+## UseCases
+* load Wads from a set dir into the WadLoader
+* create WadPacks (x)
+* add Tags to Wads and WadPacks
+* add rules for WadPacks (x)
+  * templates for the rules (x)
+* generate a List of all Wads
+  *  group the list in sublists via a given criteria (tag)
