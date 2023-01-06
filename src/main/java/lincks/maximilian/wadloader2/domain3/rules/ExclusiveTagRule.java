@@ -1,5 +1,6 @@
 package lincks.maximilian.wadloader2.domain3.rules;
 
+import lincks.maximilian.wadloader2.domain3.repos.WadRepo;
 import lincks.maximilian.wadloader2.domain3.tags.Tag;
 import lincks.maximilian.wadloader2.domain3.wads.WadPack;
 
@@ -31,8 +32,14 @@ public class ExclusiveTagRule implements WadPackRule {
     protected ExclusiveTagRule() {}
 
     @Override
-    public boolean test(WadPack wadPack) {
-        Optional<Predicate<String>> containsTagPredicate = firstSet.stream()
+    public String toString() {
+        return "ExclusiveTagRule{\n firstSet = %s\n secondSet = %s}".formatted(firstSet,secondSet);
+    }
+
+    @Override
+    public Predicate<WadPack> getPredicate(WadRepo wadRepo) {
+        return (WadPack wadPack) -> {
+            Optional<Predicate<String>> containsTagPredicate = firstSet.stream()
                 .<Predicate<String>>map(tagId -> tagId::equals)
                 .reduce(Predicate::or);
 
@@ -44,24 +51,18 @@ public class ExclusiveTagRule implements WadPackRule {
                 //returns true if either one of the Sets is empty which implies that the optional is empty
                 forbiddenTagsPredicate.isEmpty() ||
                 //returns true if the WadPack does not contain tags from the firstSet
-                wadPack.tags()
+                TagRuleDomainService.getWadTagIds(wadPack,wadRepo)
                         .stream()
-                        .map(Tag::tagId)
                         .noneMatch(containsTagPredicate.get()) ||
                 //return true if none of the forbidden tags are contained
-                wadPack.tags()
+                TagRuleDomainService.getWadTagIds(wadPack,wadRepo)
                         .stream()
-                        .map(Tag::tagId)
                         .noneMatch(forbiddenTagsPredicate.get());
 
         //can only return false if:
         // neither one of the Optionals is empty
         // the WadPack contains Tags from firstSet
         // the WadPack contains Tags from secondSet
-    }
-
-    @Override
-    public String toString() {
-        return "ExclusiveTagRule{\n firstSet = %s\n secondSet = %s}".formatted(firstSet,secondSet);
+        };
     }
 }

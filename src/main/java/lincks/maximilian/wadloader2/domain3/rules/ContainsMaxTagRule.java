@@ -1,9 +1,11 @@
 package lincks.maximilian.wadloader2.domain3.rules;
 
+import lincks.maximilian.wadloader2.domain3.repos.WadRepo;
 import lincks.maximilian.wadloader2.domain3.tags.Tag;
 import lincks.maximilian.wadloader2.domain3.wads.WadPack;
 
 import javax.persistence.*;
+import java.util.function.Predicate;
 
 @Table(name = "Contains_Max_Tag_Rule")
 @Entity
@@ -30,13 +32,14 @@ public class ContainsMaxTagRule implements WadPackRule {
     }
 
     @Override
-    public boolean test(WadPack wadPack) {
-        long countFilteredWads = wadPack.tags()
-                .stream()
-                .map(Tag::tagId)
-                .filter(filterTagId::equals)
-                .count();
-        return countFilteredWads <= maxCount;
+    public Predicate<WadPack> getPredicate(WadRepo wadRepo) {
+        return (WadPack wadPack) -> {
+            long countFilteredWads = TagRuleDomainService.getWadTagIds(wadPack,wadRepo)
+                    .stream()
+                    .filter(filterTagId::equals)
+                    .count();
+            return countFilteredWads <= maxCount;
+        };
     }
 
     @Override

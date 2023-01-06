@@ -1,4 +1,4 @@
-package lincks.maximilian.wadloader2.application2.wadpack.tags;
+package lincks.maximilian.wadloader2.application2.tags;
 
 import lincks.maximilian.wadloader2.abstraction4.StreamUtil;
 import lincks.maximilian.wadloader2.application2.wadpack.InvalidWadPackConfigurationException;

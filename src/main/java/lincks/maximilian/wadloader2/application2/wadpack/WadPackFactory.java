@@ -23,7 +23,7 @@ public class WadPackFactory {
     private final ExclusiveWadRuleRepo exclusiveWadRuleRepo;
 
     private final WadPackRepo wadPackRepo;
-
+    private final WadRepo wadRepo;
     public void persistWadPack(WadPack wadPack) throws InvalidWadPackConfigurationException {
         List<WadPackRule> brokenRules = Stream.of(
                 minTagRuleRepo,
@@ -33,8 +33,10 @@ public class WadPackFactory {
                 .map(AbstractRepo::findAll)
                 .<WadPackRule>flatMap(List::stream)
                 .filter(StreamUtil.filter(
+                        tagRule -> tagRule.getPredicate(wadRepo),
                         Predicate::not,
-                        rule -> rule.test(wadPack)))
+                        rulePredicate -> rulePredicate.test(wadPack)
+                ))
                 .toList();
 
         if(brokenRules.isEmpty())
@@ -43,7 +45,7 @@ public class WadPackFactory {
             throw InvalidWadPackConfigurationException.withBrokenRules(brokenRules);
     }
 
-    private void deleteWadPack(WadPack wadPack) {
+    public void deleteWadPack(WadPack wadPack) {
         wadPackRepo.delete(wadPack);
     }
 }
