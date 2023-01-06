@@ -5,7 +5,7 @@ import lincks.maximilian.wadloader2.domain3.tags.CustomTag;
 import lincks.maximilian.wadloader2.domain3.tags.ImmutableTag;
 import lincks.maximilian.wadloader2.domain3.tags.Tag;
 import lincks.maximilian.wadloader2.domain3.tags.WadPackTag;
-import lincks.maximilian.wadloader2.domain3.tags.exception.TagException;
+import lincks.maximilian.wadloader2.domain3.tags.exception.WadPackTagException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +20,7 @@ public class WadPack implements WadConfig {
 
     protected WadPack(){}
 
-    public WadPack(String name, IWad iwad, WadPackRepo wadPackService) throws TagException {
+    public WadPack(String name, IWad iwad, WadPackRepo wadPackService) throws WadPackTagException {
         this.name = name;
         this.iwad = iwad.getPath();
         wadPackTag = new WadPackTag(name);
@@ -34,7 +34,7 @@ public class WadPack implements WadConfig {
                 .map(WadPackTag::tagName)
                 .anyMatch(tagName -> tagName.equals(name));
         if (isValidName)
-            throw new TagException("A WadPack with the name %s already exists!".formatted(name));
+            throw new WadPackTagException("A WadPack with the name %s already exists!".formatted(name));
     }
 
     @Id

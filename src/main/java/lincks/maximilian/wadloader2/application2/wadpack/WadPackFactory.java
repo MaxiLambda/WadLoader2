@@ -15,6 +15,8 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class WadPackFactory {
 
+    //Todo write Test for WadPack-creation with rules
+    //Positive and negative case, test where Pack is created, deleted, a rule is added and the building process fails
     private final ContainsMinTagRuleRepo minTagRuleRepo;
     private final ContainsMaxTagRuleRepo maxTagRuleRepo;
     private final ExclusiveTagRuleRepo exclusiveTagRuleRepo;
