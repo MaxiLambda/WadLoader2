@@ -40,7 +40,8 @@ public class WadPackFactory {
         else
             throw InvalidWadPackConfigurationException.withBrokenRules(brokenRules);
     }
-   // TODO add method to create and verify Validity according to the rules of a wadpack
-   // TODO if a wadpack satisfies the rules, it should be persisted
-   // TODO create DTO of the WadPack
+
+    private void deleteWadPack(WadPack wadPack) {
+        wadPackRepo.delete(wadPack);
+    }
 }
