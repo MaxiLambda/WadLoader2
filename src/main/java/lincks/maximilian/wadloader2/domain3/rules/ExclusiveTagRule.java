@@ -59,4 +59,9 @@ public class ExclusiveTagRule implements WadPackRule {
         // the WadPack contains Tags from firstSet
         // the WadPack contains Tags from secondSet
     }
+
+    @Override
+    public String toString() {
+        return "ExclusiveTagRule{\n firstSet = %s\n secondSet = %s}".formatted(firstSet,secondSet);
+    }
 }
