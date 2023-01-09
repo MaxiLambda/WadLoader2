@@ -1,11 +1,11 @@
 package lincks.maximilian.wadloader2.domain3.tags;
 
-import org.hibernate.Hibernate;
-import org.springframework.data.annotation.Immutable;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.hibernate.Hibernate;
+import org.springframework.data.annotation.Immutable;
+
 import java.nio.file.Path;
 import java.util.Objects;
 
@@ -17,7 +17,7 @@ import java.util.Objects;
 @Immutable
 public class DefaultTag implements Tag {
 
-    private final static TagType tagType = TagType.DEFAULT_TAG;
+    private static final TagType tagType = TagType.DEFAULT_TAG;
 
     protected DefaultTag(){}
 

@@ -1,6 +1,7 @@
 package lincks.maximilian.wadloader2.domain3.rules;
 
 import jakarta.persistence.*;
+import lincks.maximilian.wadloader2.domain3.repos.WadRepo;
 import lincks.maximilian.wadloader2.domain3.tags.Tag;
 import lincks.maximilian.wadloader2.domain3.wads.WadPack;
 
@@ -32,7 +33,7 @@ public class ExclusiveTagRule implements WadPackRule {
 
     @Override
     public String toString() {
-        return "ExclusiveTagRule{\n firstSet = %s\n secondSet = %s}".formatted(firstSet,secondSet);
+        return "ExclusiveTagRule{%n firstSet = %s%n secondSet = %s}".formatted(firstSet,secondSet);
     }
 
     @Override
