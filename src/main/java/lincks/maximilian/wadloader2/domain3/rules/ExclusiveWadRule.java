@@ -1,9 +1,9 @@
 package lincks.maximilian.wadloader2.domain3.rules;
 
+import jakarta.persistence.*;
 import lincks.maximilian.wadloader2.domain3.tags.Tag;
 import lincks.maximilian.wadloader2.domain3.wads.WadPack;
 
-import javax.persistence.*;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;

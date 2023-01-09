@@ -1,9 +1,9 @@
 package lincks.maximilian.wadloader2.domain3.rules;
 
+import jakarta.persistence.*;
 import lincks.maximilian.wadloader2.domain3.tags.Tag;
 import lincks.maximilian.wadloader2.domain3.wads.WadPack;
 
-import javax.persistence.*;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -25,7 +25,7 @@ public class ExclusiveTagRule implements WadPackRule {
 
     public ExclusiveTagRule(Set<Tag> firstSet, Set<Tag> secondSet) {
         this.firstSet = firstSet.stream().map(Tag::tagId).collect(Collectors.toSet());
-        this.secondSet = firstSet.stream().map(Tag::tagId).collect(Collectors.toSet());
+        this.secondSet = secondSet.stream().map(Tag::tagId).collect(Collectors.toSet());
     }
 
     protected ExclusiveTagRule() {}

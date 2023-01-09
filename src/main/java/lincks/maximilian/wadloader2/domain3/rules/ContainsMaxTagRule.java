@@ -1,9 +1,8 @@
 package lincks.maximilian.wadloader2.domain3.rules;
 
+import jakarta.persistence.*;
 import lincks.maximilian.wadloader2.domain3.tags.Tag;
 import lincks.maximilian.wadloader2.domain3.wads.WadPack;
-
-import javax.persistence.*;
 
 @Table(name = "Contains_Max_Tag_Rule")
 @Entity

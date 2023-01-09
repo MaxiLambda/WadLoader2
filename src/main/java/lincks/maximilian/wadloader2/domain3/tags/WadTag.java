@@ -4,9 +4,9 @@ import lincks.maximilian.wadloader2.abstraction4.PathUtil;
 import org.hibernate.Hibernate;
 import org.springframework.data.annotation.Immutable;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.nio.file.Path;
 import java.util.Objects;
 
@@ -21,7 +21,7 @@ public class WadTag implements Tag{
         name = PathUtil.fileNameWithoutExtension(wadPath);
     }
 
-    private final static TagType tagType = TagType.WAD_TAG;
+    private static final TagType tagType = TagType.WAD_TAG;
 
     @Id
     private String name;
