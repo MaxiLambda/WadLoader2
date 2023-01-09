@@ -1,6 +1,6 @@
 package lincks.maximilian.wadloader2.domain3.rules;
 
-import lincks.maximilian.wadloader2.domain3.tags.Tag;
+import lincks.maximilian.wadloader2.domain3.repos.WadRepo;
 import lincks.maximilian.wadloader2.domain3.wads.WadPack;
 
 import javax.persistence.*;
@@ -23,24 +23,25 @@ public class ExclusiveWadRule implements WadPackRule {
     private Set<String> forbiddenTagIds;
 
     @Override
-    public boolean test(WadPack wadPack) {
-        Optional<Predicate<String>> forbiddenPredicate = forbiddenTagIds.stream()
-                .<Predicate<String>>map(tagId -> tagId::equals)
-                .reduce(Predicate::or);
-
-        //returns true if the predicate is empty
-        return forbiddenPredicate.isEmpty() ||
-                //if the WadPack does not contain a Wad with the given Id
-                !wadPack.allWadIds().contains(wadId) ||
-                //if the WadPack contains none of the forbidden Tags
-                wadPack.tags()
-                        .stream()
-                        .map(Tag::tagId)
-                        .noneMatch(forbiddenPredicate.get());
+    public String toString(){
+        return "ExclusiveWadRule{\n wadId = \"%s\"\n forbiddenTagIds = %s}".formatted(wadId,forbiddenTagIds);
     }
 
     @Override
-    public String toString(){
-        return "ExclusiveWadRule{\n wadId = \"%s\"\n forbiddenTagIds = %s}".formatted(wadId,forbiddenTagIds);
+    public Predicate<WadPack> getPredicate(WadRepo wadRepo) {
+        return (WadPack wadPack) -> {
+            Optional<Predicate<String>> forbiddenPredicate = forbiddenTagIds.stream()
+                    .<Predicate<String>>map(tagId -> tagId::equals)
+                    .reduce(Predicate::or);
+
+            //returns true if the predicate is empty
+            return forbiddenPredicate.isEmpty() ||
+                    //if the WadPack does not contain a Wad with the given Id
+                    !wadPack.allWadIds().contains(wadId) ||
+                    //if the WadPack contains none of the forbidden Tags
+                    TagRuleDomainService.getWadTagIds(wadPack,wadRepo)
+                            .stream()
+                            .noneMatch(forbiddenPredicate.get());
+        };
     }
 }

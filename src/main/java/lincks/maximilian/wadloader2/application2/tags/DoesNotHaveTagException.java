@@ -1,4 +1,4 @@
-package lincks.maximilian.wadloader2.application2.wadpack.tags;
+package lincks.maximilian.wadloader2.application2.tags;
 
 public class DoesNotHaveTagException extends RuntimeException{
     public DoesNotHaveTagException(String message) {
