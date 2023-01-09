@@ -1,5 +1,6 @@
 package lincks.maximilian.wadloader2.domain3.wads;
 
+import jakarta.persistence.*;
 import lincks.maximilian.wadloader2.domain3.repos.WadPackRepo;
 import lincks.maximilian.wadloader2.domain3.tags.CustomTag;
 import lincks.maximilian.wadloader2.domain3.tags.ImmutableTag;
@@ -9,7 +10,6 @@ import lincks.maximilian.wadloader2.domain3.tags.exception.WadPackTagException;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.*;
 import java.util.stream.Stream;
 

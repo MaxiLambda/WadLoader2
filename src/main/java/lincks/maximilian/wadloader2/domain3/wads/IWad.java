@@ -1,12 +1,12 @@
 package lincks.maximilian.wadloader2.domain3.wads;
 
+import jakarta.persistence.*;
 import lincks.maximilian.wadloader2.domain3.tags.CustomTag;
 import lincks.maximilian.wadloader2.domain3.tags.DefaultTag;
 import lincks.maximilian.wadloader2.domain3.tags.IWadTag;
 import lincks.maximilian.wadloader2.domain3.tags.Tag;
 import lombok.Getter;
 
-import javax.persistence.*;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.HashSet;
