@@ -1,10 +1,10 @@
 package lincks.maximilian.wadloader2.domain3.rules;
 
+import jakarta.persistence.*;
 import lincks.maximilian.wadloader2.domain3.repos.WadRepo;
 import lincks.maximilian.wadloader2.domain3.tags.Tag;
 import lincks.maximilian.wadloader2.domain3.wads.WadPack;
 
-import javax.persistence.*;
 import java.util.function.Predicate;
 
 @Table(name = "Contains_Min_Tag_Rule")
@@ -38,6 +38,7 @@ public class ContainsMinTagRule implements WadPackRule {
             return countFilteredWads >= minCount;
         };
     }
+
     @Override
     public String toString() {
         return "ContainsMaxTagRule{\n filterTagId = \"%s\"\n minCount = \"%s\"}".formatted(filterTagId,minCount);

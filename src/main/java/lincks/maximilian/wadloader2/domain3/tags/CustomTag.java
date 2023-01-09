@@ -1,11 +1,11 @@
 package lincks.maximilian.wadloader2.domain3.tags;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import org.hibernate.Hibernate;
 import org.springframework.data.annotation.Immutable;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Objects;
 
 

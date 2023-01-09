@@ -1,9 +1,9 @@
 package lincks.maximilian.wadloader2.domain3.wads;
 
+import jakarta.persistence.*;
 import lincks.maximilian.wadloader2.domain3.tags.*;
 import lombok.Getter;
 
-import javax.persistence.*;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Stream;

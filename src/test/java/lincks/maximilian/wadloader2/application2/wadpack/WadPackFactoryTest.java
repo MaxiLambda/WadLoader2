@@ -7,8 +7,6 @@ import lincks.maximilian.wadloader2.domain3.tags.CustomTag;
 import lincks.maximilian.wadloader2.domain3.wads.Wad;
 import lincks.maximilian.wadloader2.domain3.wads.WadPack;
 import lincks.maximilian.wadloader2.model.wads.TestUtil;
-
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +18,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -81,7 +80,8 @@ class WadPackFactoryTest {
         wad1.addCustomTag(customTagName);
         wad2.addCustomTag(customTagName);
 
-        wadPackFactory.persistWadPack(wadPack);
+        assertDoesNotThrow(() -> wadPackFactory.persistWadPack(wadPack));
+
     }
 
     @Test
@@ -113,7 +113,7 @@ class WadPackFactoryTest {
 
         wad1.addCustomTag(customTagName);
 
-        wadPackFactory.persistWadPack(wadPack);
+        assertDoesNotThrow(() -> wadPackFactory.persistWadPack(wadPack));
     }
 
     @Test
