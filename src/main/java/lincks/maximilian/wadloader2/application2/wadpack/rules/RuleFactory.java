@@ -6,10 +6,12 @@ import lincks.maximilian.wadloader2.domain3.repos.ExclusiveTagRuleRepo;
 import lincks.maximilian.wadloader2.domain3.repos.ExclusiveWadRuleRepo;
 import lincks.maximilian.wadloader2.domain3.rules.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Log
 public class RuleFactory {
     //Todo write Test for each Rule Type where the WadPack creation fails
     private final ContainsMinTagRuleRepo minTagRuleRepo;
@@ -18,24 +20,22 @@ public class RuleFactory {
     private final ExclusiveWadRuleRepo exclusiveWadRuleRepo;
 
     public void deleteRule(WadPackRule rule){
-        if (rule instanceof ContainsMinTagRule minRule)
-            minTagRuleRepo.delete(minRule);
-        else if (rule instanceof ContainsMaxTagRule maxRule)
-            maxTagRuleRepo.delete(maxRule);
-        else if (rule instanceof ExclusiveTagRule exclusiveTagRule)
-            exclusiveTagRuleRepo.delete(exclusiveTagRule);
-        else if (rule instanceof ExclusiveWadRule exclusiveWadRule)
-            exclusiveWadRuleRepo.delete(exclusiveWadRule);
+        switch (rule) {
+            case ContainsMinTagRule minRule -> minTagRuleRepo.delete(minRule);
+            case ContainsMaxTagRule maxRule -> maxTagRuleRepo.delete(maxRule);
+            case ExclusiveTagRule exclusiveTagRule -> exclusiveTagRuleRepo.delete(exclusiveTagRule);
+            case ExclusiveWadRule exclusiveWadRule -> exclusiveWadRuleRepo.delete(exclusiveWadRule);
+            default -> log.warning("Implement Handling for %s".formatted(rule.getClass().getName()));
+        }
     }
 
     public void persistRule(WadPackRule rule){
-        if (rule instanceof ContainsMinTagRule minRule)
-            minTagRuleRepo.save(minRule);
-        else if (rule instanceof ContainsMaxTagRule maxRule)
-            maxTagRuleRepo.save(maxRule);
-        else if (rule instanceof ExclusiveTagRule exclusiveTagRule)
-            exclusiveTagRuleRepo.save(exclusiveTagRule);
-        else if (rule instanceof ExclusiveWadRule exclusiveWadRule)
-            exclusiveWadRuleRepo.save(exclusiveWadRule);
+        switch (rule) {
+            case ContainsMinTagRule minRule -> minTagRuleRepo.save(minRule);
+            case ContainsMaxTagRule maxRule -> maxTagRuleRepo.save(maxRule);
+            case ExclusiveTagRule exclusiveTagRule -> exclusiveTagRuleRepo.save(exclusiveTagRule);
+            case ExclusiveWadRule exclusiveWadRule -> exclusiveWadRuleRepo.save(exclusiveWadRule);
+            default -> log.warning("Implement Handling for %s".formatted(rule.getClass().getName()));
+        }
     }
 }
