@@ -26,30 +26,16 @@ public class WadQuery {
         return wadRepo.findAll().stream().collect(Collectors.groupingBy(wad -> wad.getDefaultTag().tagName()));
     }
 
-    public Map<String, Set<Wad>> getAllWadsGroupedByCustomTag() {
-        return wadRepo.findAll().stream().reduce(
-                new HashMap<>(),
-                (acc, wad) -> {
-                        wad.customTags()
-                                .stream()
-                                .map(CustomTag::tagName)
-                                .forEach(name -> {
-                                    if (acc.containsKey(name))
-                                        acc.get(name).add(wad);
-                                    else acc.put(name, new HashSet<>(Set.of(wad)));
-                                });
-                        return acc;
-                },
-                (acc1, acc2) -> {
-                    acc2.forEach((key, value) -> {
-                        if (acc1.containsKey(key))
-                            acc1.get(key).addAll(acc2.get(key));
-                        else acc1.put(key, acc2.get(key));
-                    });
-                    return acc1;
-                }
-                );
-
-
+    public Map<String, List<Wad>> getAllWadsGroupedByCustomTag() {
+        HashMap<String,List<Wad>> groupedList = new HashMap<>();
+                wadRepo.findAll().forEach(wad -> wad.customTags()
+                .stream()
+                .map(CustomTag::tagName)
+                .forEach(name -> {
+                    if (groupedList.containsKey(name))
+                        groupedList.get(name).add(wad);
+                    else groupedList.put(name, new ArrayList<>(List.of(wad)));
+                }));
+        return groupedList;
     }
 }
