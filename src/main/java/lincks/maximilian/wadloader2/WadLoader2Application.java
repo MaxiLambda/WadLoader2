@@ -1,13 +1,12 @@
 package lincks.maximilian.wadloader2;
 
-import lincks.maximilian.wadloader2.domain3.WadFileFinder;
-import lincks.maximilian.wadloader2.domain3.repos.IWadRepo;
-import lincks.maximilian.wadloader2.domain3.repos.WadRepo;
+import lincks.maximilian.wadloader2.application2.wadsearch.WadLoader;
 import lincks.maximilian.wadloader2.domain3.tags.Tag;
 import lincks.maximilian.wadloader2.domain3.wads.IWad;
 import lincks.maximilian.wadloader2.domain3.wads.Wad;
 import lincks.maximilian.wadloader2.plugins0.ui.UIBase;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.boot.Banner;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,11 +14,14 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 
+
 import java.awt.*;
 import java.nio.file.Path;
+import java.util.List;
 
 @SpringBootApplication
 @RequiredArgsConstructor
+@Log
 public class WadLoader2Application{
 
     //TODO: build fitting ui
@@ -32,9 +34,7 @@ public class WadLoader2Application{
                 .run(args);
     }
 
-    final WadFileFinder wadFinder;
-    final WadRepo wadService;
-    final IWadRepo iWadService;
+    final WadLoader wadLoader;
 
     @EventListener(ApplicationReadyEvent.class)
     public void appStartup(){
@@ -45,18 +45,16 @@ public class WadLoader2Application{
             ui.setVisible(true);
         });
 
-		wadFinder.findWads(Path.of("D:\\GZDoom\\wads"))
-				.stream()
-				.map(wadService::save)
+		wadLoader.loadWads(List.of(Path.of("D:\\GZDoom\\wads")))
+                .stream()
 				.map(Wad::getWadTag)
 				.map(Tag::tagName)
-				.forEach(System.out::println);
+				.forEach(log::info);
 
-		wadFinder.findIWads(Path.of("D:\\GZDoom\\wads\\iwads"))
+		wadLoader.loadIWads(List.of(Path.of("D:\\GZDoom\\wads\\iwads")))
 				.stream()
-				.map(iWadService::save)
 				.map(IWad::getWadTag)
 				.map(Tag::tagName)
-				.forEach(System.out::println);
+				.forEach(log::info);
     }
 }

@@ -1,6 +1,7 @@
 package lincks.maximilian.wadloader2.domain3;
 
 import lincks.maximilian.wadloader2.abstraction4.config.WadExtensionConfiguration;
+import lincks.maximilian.wadloader2.application2.wadsearch.WadFileFinder;
 import lincks.maximilian.wadloader2.domain3.wads.Wad;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

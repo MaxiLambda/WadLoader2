@@ -40,9 +40,9 @@ You can manage your Wads with Tags and custom Wad-Packs.
 * ExclusiveWadRule
 
 ## UseCases
-* load Wads from a set dir into the WadLoader
+* load Wads from a set dir into the WadLoader (x)
 * create WadPacks (x)
-* add Tags to Wads and WadPacks
+* add Tags to Wads and WadPacks (x)
 * add rules for WadPacks (x)
   * templates for the rules (x)
 * generate a List of all Wads

@@ -1,4 +1,4 @@
-package lincks.maximilian.wadloader2.domain3;
+package lincks.maximilian.wadloader2.application2.wadsearch;
 
 import lincks.maximilian.wadloader2.abstraction4.PathUtil;
 import lincks.maximilian.wadloader2.abstraction4.StreamUtil;
