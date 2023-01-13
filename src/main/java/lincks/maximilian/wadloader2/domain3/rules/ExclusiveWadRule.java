@@ -2,11 +2,13 @@ package lincks.maximilian.wadloader2.domain3.rules;
 
 import jakarta.persistence.*;
 import lincks.maximilian.wadloader2.domain3.repos.WadRepo;
+import lincks.maximilian.wadloader2.domain3.tags.Tag;
 import lincks.maximilian.wadloader2.domain3.wads.WadPack;
 
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Table
 @Entity
@@ -22,6 +24,12 @@ public class ExclusiveWadRule implements WadPackRule {
     @ElementCollection
     private Set<String> forbiddenTagIds;
 
+    public ExclusiveWadRule(String wadId, Set<? extends Tag> forbiddenTags) {
+        this.wadId = wadId;
+        this.forbiddenTagIds = forbiddenTags.stream().map(Tag::tagId).collect(Collectors.toSet());
+    }
+
+    protected ExclusiveWadRule(){}
     @Override
     public String toString(){
         return "ExclusiveWadRule{%n wadId = \"%s\"%n forbiddenTagIds = %s}".formatted(wadId,forbiddenTagIds);
