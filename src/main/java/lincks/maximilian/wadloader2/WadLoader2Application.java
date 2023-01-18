@@ -1,6 +1,7 @@
 package lincks.maximilian.wadloader2;
 
 
+import com.formdev.flatlaf.FlatDarculaLaf;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.UIBase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -18,6 +19,7 @@ import java.awt.*;
 @Log
 public class WadLoader2Application{
     public static void main(String[] args) {
+        FlatDarculaLaf.setup();
         new SpringApplicationBuilder(WadLoader2Application.class)
                 .web(WebApplicationType.NONE)
                 .headless(false)

@@ -5,5 +5,5 @@ import org.springframework.stereotype.Component;
 import javax.swing.*;
 
 @Component
-public class StartWadsTab extends JFrame {
+public class StartWadsTab extends JPanel {
 }

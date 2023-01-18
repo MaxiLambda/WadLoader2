@@ -32,7 +32,9 @@ public class UIBase extends JFrame {
 
         add(pane);
 
-        //setSize(600,600)
+        setSize(600,600);
+        //put the panel in the center of the screen
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 }

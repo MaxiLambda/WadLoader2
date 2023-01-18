@@ -28,7 +28,14 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation 'com.formdev:flatlaf:2.6'
+}
 
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += '--enable-preview'
+}
+tasks.withType(Test).configureEach {
+    jvmArgs += "--enable-preview"
 }
 
 tasks.named('test') {

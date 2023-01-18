@@ -5,5 +5,5 @@ import org.springframework.stereotype.Component;
 import javax.swing.*;
 
 @Component
-public class RuleConfigTab extends JFrame {
+public class RuleConfigTab extends JPanel {
 }
