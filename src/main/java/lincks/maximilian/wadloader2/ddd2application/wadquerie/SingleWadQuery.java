@@ -2,7 +2,6 @@ package lincks.maximilian.wadloader2.ddd2application.wadquerie;
 
 import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
 import lincks.maximilian.wadloader2.ddd3domain.wads.SingleWad;
-import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
 
 import java.util.List;
 import java.util.Map;

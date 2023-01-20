@@ -1,6 +1,5 @@
 package lincks.maximilian.wadloader2.ddd2application.tags;
 
-import lincks.maximilian.wadloader2.ddd4abstraction.StreamUtil;
 import lincks.maximilian.wadloader2.ddd2application.wadpack.InvalidWadPackConfigurationException;
 import lincks.maximilian.wadloader2.ddd2application.wadpack.WadPackFactory;
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadRepo;
@@ -9,6 +8,7 @@ import lincks.maximilian.wadloader2.ddd3domain.tags.Tag;
 import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadConfig;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
+import lincks.maximilian.wadloader2.ddd4abstraction.StreamUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,8 @@
 package lincks.maximilian.wadloader2.ddd0plugins.jpa.repository.bridge;
 
+import lincks.maximilian.wadloader2.ddd0plugins.jpa.repository.ExclusiveTagRuleSpringRepo;
 import lincks.maximilian.wadloader2.ddd3domain.repos.ExclusiveTagRuleRepo;
 import lincks.maximilian.wadloader2.ddd3domain.rules.ExclusiveTagRule;
-import lincks.maximilian.wadloader2.ddd0plugins.jpa.repository.ExclusiveTagRuleSpringRepo;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -1,8 +1,8 @@
 package lincks.maximilian.wadloader2.ddd0plugins.jpa.repository.bridge;
 
+import lincks.maximilian.wadloader2.ddd0plugins.jpa.repository.WadPackSpringRepo;
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackRepo;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
-import lincks.maximilian.wadloader2.ddd0plugins.jpa.repository.WadPackSpringRepo;
 import org.springframework.stereotype.Repository;
 
 @Repository

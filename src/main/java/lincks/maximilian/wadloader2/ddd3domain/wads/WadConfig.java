@@ -1,9 +1,9 @@
 package lincks.maximilian.wadloader2.ddd3domain.wads;
 
-import lincks.maximilian.wadloader2.ddd4abstraction.StreamUtil;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.Tag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.TagType;
+import lincks.maximilian.wadloader2.ddd4abstraction.StreamUtil;
 
 import java.util.List;
 
