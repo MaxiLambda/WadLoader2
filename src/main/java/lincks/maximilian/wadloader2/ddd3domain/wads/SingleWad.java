@@ -5,7 +5,7 @@ import lincks.maximilian.wadloader2.ddd3domain.tags.DefaultTag;
 import java.util.List;
 
 public interface SingleWad extends WadConfig {
-    List<? extends SingleWad> allWads();
+    List<SingleWad> allWads();
 
     DefaultTag getDefaultTag();
 }

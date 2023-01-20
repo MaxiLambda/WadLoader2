@@ -1,6 +1,7 @@
 package lincks.maximilian.wadloader2.ddd3domain.wads;
 
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
+import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.Tag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.TagType;
 import lincks.maximilian.wadloader2.ddd4abstraction.StreamUtil;
@@ -15,7 +16,7 @@ import java.util.List;
 public interface WadConfig {
     List<String> allWadIds();
 
-    List<? extends Tag> tags();
+    List<ImmutableTag> tags();
 
     /**
      *
@@ -26,9 +27,10 @@ public interface WadConfig {
     boolean removeCustomTag(String name) ;
 
     default List<CustomTag> customTags(){
-        return (List<CustomTag>) tags()
+        return tags()
                 .stream()
                 .filter(StreamUtil.filter(Tag::tagType, TagType.CUSTOM_TAG::equals))
+                .map(CustomTag.class::cast)
                 .toList();
     }
 
