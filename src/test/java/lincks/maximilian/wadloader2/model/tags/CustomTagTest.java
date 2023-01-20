@@ -1,8 +1,8 @@
 package lincks.maximilian.wadloader2.model.tags;
 
-import lincks.maximilian.wadloader2.domain3.repos.CustomTagRepo;
-import lincks.maximilian.wadloader2.domain3.repos.WadRepo;
-import lincks.maximilian.wadloader2.domain3.wads.Wad;
+import lincks.maximilian.wadloader2.ddd3domain.repos.CustomTagRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.WadRepo;
+import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

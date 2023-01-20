@@ -45,5 +45,7 @@ You can manage your Wads with Tags and custom Wad-Packs.
 * add Tags to Wads and WadPacks (x)
 * add rules for WadPacks (x)
   * templates for the rules (x)
-* generate a List of all Wads
-  *  group the list in sublists via a given criteria (tag)
+* generate a List of all Wads (x)
+  *  group the list in sublists via a given criteria (tag) (x)
+* set Environment variable for the GZDoom launcher
+* Start GZDoom with selected Wad/ WadPack

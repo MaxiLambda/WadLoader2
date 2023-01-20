@@ -1,11 +1,11 @@
 package lincks.maximilian.wadloader2.model.wads;
 
-import lincks.maximilian.wadloader2.domain3.repos.IWadRepo;
-import lincks.maximilian.wadloader2.domain3.repos.WadPackRepo;
-import lincks.maximilian.wadloader2.domain3.repos.WadRepo;
-import lincks.maximilian.wadloader2.domain3.wads.IWad;
-import lincks.maximilian.wadloader2.domain3.wads.Wad;
-import lincks.maximilian.wadloader2.domain3.wads.WadPack;
+import lincks.maximilian.wadloader2.ddd3domain.repos.IWadRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.WadRepo;
+import lincks.maximilian.wadloader2.ddd3domain.wads.IWad;
+import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
+import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
 
 import java.nio.file.Path;
 import java.util.List;

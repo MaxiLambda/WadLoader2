@@ -7,7 +7,7 @@ plugins {
 
 group = 'lincks.maximilian'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+sourceCompatibility = '19'
 
 configurations {
     compileOnly {
@@ -24,15 +24,22 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 //	can change to runtimeOnly depending on configuration?
-    runtimeOnly group: 'com.h2database', name: 'h2'
+    runtimeOnly 'com.h2database:h2'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation 'com.formdev:flatlaf:2.6'
+}
 
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += '--enable-preview'
+}
+tasks.withType(Test).configureEach {
+    jvmArgs += "--enable-preview"
 }
 
 tasks.named('test') {
-    useJUnitPlatform()
+//    useJUnitPlatform()
 }
 
 hibernate {
