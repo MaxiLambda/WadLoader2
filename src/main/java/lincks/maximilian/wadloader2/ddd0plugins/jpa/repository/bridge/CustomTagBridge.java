@@ -1,8 +1,8 @@
 package lincks.maximilian.wadloader2.ddd0plugins.jpa.repository.bridge;
 
+import lincks.maximilian.wadloader2.ddd0plugins.jpa.repository.CustomTagSpringRepo;
 import lincks.maximilian.wadloader2.ddd3domain.repos.CustomTagRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
-import lincks.maximilian.wadloader2.ddd0plugins.jpa.repository.CustomTagSpringRepo;
 import org.springframework.stereotype.Repository;
 
 @Repository

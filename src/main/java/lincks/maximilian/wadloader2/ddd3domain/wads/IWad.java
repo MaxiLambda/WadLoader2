@@ -1,10 +1,7 @@
 package lincks.maximilian.wadloader2.ddd3domain.wads;
 
 import jakarta.persistence.*;
-import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
-import lincks.maximilian.wadloader2.ddd3domain.tags.DefaultTag;
-import lincks.maximilian.wadloader2.ddd3domain.tags.IWadTag;
-import lincks.maximilian.wadloader2.ddd3domain.tags.Tag;
+import lincks.maximilian.wadloader2.ddd3domain.tags.*;
 import lombok.Getter;
 
 import java.nio.file.Path;
@@ -53,15 +50,17 @@ public class IWad implements SingleWad {
     }
 
     @Override
-    public List<? extends SingleWad> allWads() {
+    public List<SingleWad> allWads() {
         return List.of(this);
     }
     @Override
-    public List<? extends Tag> tags() {
+    public List<ImmutableTag> tags() {
         return Stream.of(
-                List.of(wadTag,defaultTag),
-                customTags
-        ).flatMap(Collection::stream).toList();
+                    List.of(wadTag,defaultTag),
+                    customTags
+                ).flatMap(Collection::stream)
+                .map(ImmutableTag::new)
+                .toList();
     }
 
     @Override

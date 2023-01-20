@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
-import lincks.maximilian.wadloader2.ddd3domain.tags.Tag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.WadPackTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.exception.WadPackTagException;
 import lombok.Getter;
@@ -87,7 +86,7 @@ public class WadPack implements WadConfig {
     }
 
     @Override
-    public List<? extends Tag> tags() {
+    public List<ImmutableTag> tags() {
         return Stream.of(
                 List.of(wadPackTag),
                 customTags
