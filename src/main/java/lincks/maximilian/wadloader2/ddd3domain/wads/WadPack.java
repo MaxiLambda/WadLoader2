@@ -6,6 +6,7 @@ import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.WadPackTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.exception.WadPackTagException;
+import lincks.maximilian.wadloader2.ddd4abstraction.PathUtil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -110,5 +111,10 @@ public class WadPack implements WadConfig {
     public boolean equals(Object o){
         if (Objects.isNull(o) || !(o instanceof WadPack)) return false;
         else return name.equals(((WadPack) o).name);
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

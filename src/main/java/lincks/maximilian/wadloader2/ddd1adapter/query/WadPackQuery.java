@@ -1,4 +1,4 @@
-package lincks.maximilian.wadloader2.ddd2application.wadquerie;
+package lincks.maximilian.wadloader2.ddd1adapter.query;
 
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackRepo;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;

@@ -1,7 +1,10 @@
 package lincks.maximilian.wadloader2.ddd4abstraction;
 
+import lombok.RequiredArgsConstructor;
+
 import java.nio.file.Path;
 
+@RequiredArgsConstructor
 public class PathUtil {
     public static String fileNameWithoutExtension(Path path){
         String fileName = path.getFileName().toString();
@@ -15,5 +18,9 @@ public class PathUtil {
         //-1 if '.' is not part of the fileName
         int lastIndex = fileName.lastIndexOf('.');
         return lastIndex < 0 ? "" : fileName.substring(lastIndex);
+    }
+
+    public static String getFileName(String path){
+        return fileNameWithoutExtension(Path.of(path).getFileName());
     }
 }

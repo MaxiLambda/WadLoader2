@@ -2,6 +2,7 @@ package lincks.maximilian.wadloader2.ddd3domain.wads;
 
 import jakarta.persistence.*;
 import lincks.maximilian.wadloader2.ddd3domain.tags.*;
+import lincks.maximilian.wadloader2.ddd4abstraction.PathUtil;
 import lombok.Getter;
 
 import java.nio.file.Path;
@@ -76,5 +77,10 @@ public class Wad implements SingleWad {
     public boolean equals(Object obj) {
         if(Objects.isNull(obj) || !(obj instanceof Wad)) return false;
         else return path.equals(((Wad) obj).path);
+    }
+
+    @Override
+    public String toString() {
+        return PathUtil.getFileName(path);
     }
 }

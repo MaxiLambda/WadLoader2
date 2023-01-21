@@ -16,4 +16,15 @@ public class UIConstants {
     public static final String WAD_PACKS_TAB_TIP = "Manage your Wad-Packs";
     public static final String RULE_TAB_TIPS = "Write rules for your Wad-Packs";
 
+    public static final String WADS = "Wads";
+    public static final String I_WADS = "IWads";
+    public static final String WAD_PACKS = "Wad-Packs";
+
+    public static final String START_CONFIG = "Start selected";
+
+    public static final String NO_I_WAD_SELECTED = "Please select an IWad";
+
+    public static final String NO_WAD_PACK_SELECTED = "Please select a WadPack";
+
+
 }
