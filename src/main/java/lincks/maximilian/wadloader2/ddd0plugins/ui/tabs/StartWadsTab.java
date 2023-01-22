@@ -1,7 +1,7 @@
 package lincks.maximilian.wadloader2.ddd0plugins.ui.tabs;
 
-import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.exceptions.TooManyIWadsException;
-import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.exceptions.TooManyWadPacksException;
+import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.startwads.exceptions.TooManyIWadsException;
+import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.startwads.exceptions.TooManyWadPacksException;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.CheckboxList;
 import lincks.maximilian.wadloader2.ddd1adapter.query.IWadQuery;
 import lincks.maximilian.wadloader2.ddd1adapter.query.WadPackQuery;
