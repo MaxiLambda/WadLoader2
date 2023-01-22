@@ -51,10 +51,6 @@ public class IWad implements SingleWad {
     }
 
     @Override
-    public List<SingleWad> allWads() {
-        return List.of(this);
-    }
-    @Override
     public List<ImmutableTag> tags() {
         return Stream.of(
                     List.of(wadTag,defaultTag),
