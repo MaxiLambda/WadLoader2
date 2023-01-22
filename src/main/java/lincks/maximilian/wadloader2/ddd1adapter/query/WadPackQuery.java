@@ -12,6 +12,10 @@ import java.util.List;
 public class WadPackQuery implements WadConfigQuery<WadPack> {
     private final WadPackRepo wadPackRepo;
 
+    public void delete(WadPack wadPack){
+        wadPackRepo.delete(wadPack);
+    }
+
     public List<WadPack> getAll() {
         return wadPackRepo.findAll();
     }

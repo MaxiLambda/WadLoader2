@@ -9,6 +9,7 @@ import java.util.*;
 
 public interface WadConfigQuery<T extends WadConfig> {
     List<T> getAll();
+    void delete(T item);
 
     default Map<ImmutableTag, List<T>> getAllGroupedByCustomTag() {
         HashMap<ImmutableTag,List<T>> groupedList = new HashMap<>();

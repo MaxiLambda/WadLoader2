@@ -2,6 +2,7 @@ package lincks.maximilian.wadloader2.ddd1adapter.query;
 
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadRepo;
 import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
+import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,5 +16,13 @@ public class WadQuery implements SingleWadQuery<Wad> {
 
     public List<Wad> getAll() {
         return wadRepo.findAll();
+    }
+
+    public void delete(Wad wad){
+        wadRepo.delete(wad);
+    }
+
+    public List<Wad> getAllByWadPack(WadPack pack){
+        return getById(pack.allWadIds());
     }
 }

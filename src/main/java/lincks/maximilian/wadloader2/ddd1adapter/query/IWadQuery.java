@@ -12,6 +12,10 @@ import java.util.List;
 public class IWadQuery implements SingleWadQuery<IWad> {
     private final IWadRepo iWadRepo;
 
+    public void delete(IWad iWad){
+        delete(iWad);
+    }
+
     public List<IWad> getAll() {
         return iWadRepo.findAll();
     }
