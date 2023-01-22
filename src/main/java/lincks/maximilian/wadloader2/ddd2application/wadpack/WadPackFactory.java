@@ -48,4 +48,8 @@ public class WadPackFactory {
     public void deleteWadPack(WadPack wadPack) {
         wadPackRepo.delete(wadPack);
     }
+
+    public WadPack newPack(WadPackBase base){
+        return new WadPack(base.name(),base.iWad(),wadPackRepo);
+    }
 }
