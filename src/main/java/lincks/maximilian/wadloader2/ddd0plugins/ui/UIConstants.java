@@ -26,5 +26,11 @@ public class UIConstants {
 
     public static final String NO_WAD_PACK_SELECTED = "Please select a WadPack";
 
+    public static final String WADS_IN_PACK = "Wads in Wad-Pack";
 
+    public static final String CREATE_NEW_WAD_PACK = "Create new Wad-Pack";
+
+    public static final String ADD_WAD = "Add Wad";
+
+    public static final String SAVE_BTN = "Save";
 }

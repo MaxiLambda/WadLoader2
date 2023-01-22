@@ -4,6 +4,7 @@ import lincks.maximilian.wadloader2.ddd4abstraction.StreamUtil;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -13,8 +14,11 @@ import java.util.stream.Collectors;
 public class CheckboxList<T> extends JPanel {
 
     private final transient Map<T, JCheckBox> itemsToCheckbox;
+    private final JLabel nameLbl = new JLabel();
 
     public CheckboxList(List<T> items, String name, Map<String,Consumer<List<T>>> callbacks, boolean allowMultiselection){
+        nameLbl.setText(name);
+
 
         List<JButton> btns = callbacks.entrySet()
                 .stream()
@@ -45,7 +49,7 @@ public class CheckboxList<T> extends JPanel {
 
 
         setLayout(new BorderLayout());
-        add(new JLabel(name),BorderLayout.NORTH);
+        add(nameLbl,BorderLayout.NORTH);
         add(new JScrollPane(checkBoxPanel), BorderLayout.CENTER);
         add(btnPanel, BorderLayout.SOUTH);
     }
@@ -63,5 +67,25 @@ public class CheckboxList<T> extends JPanel {
                 ))
                 .map(Map.Entry::getKey)
                 .toList();
+    }
+
+    public void put(T item){
+        itemsToCheckbox.put(item, new JCheckBox(item.toString()));
+    }
+
+    public void remove(T key){
+        itemsToCheckbox.remove(key);
+    }
+
+    public void clear(){
+        itemsToCheckbox.clear();
+    }
+
+    public void addAll(Collection<T> items){
+        items.forEach(this::put);
+    }
+
+    public void setListName(String name){
+        nameLbl.setText(name);
     }
 }

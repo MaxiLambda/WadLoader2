@@ -5,10 +5,7 @@ import lincks.maximilian.wadloader2.ddd3domain.tags.Tag;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadConfig;
 import lincks.maximilian.wadloader2.ddd4abstraction.StreamUtil;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public interface WadConfigQuery<T extends WadConfig> {
     List<T> getAll();
@@ -32,4 +29,5 @@ public interface WadConfigQuery<T extends WadConfig> {
                         tags -> tags.contains(tag)))
                 .toList();
     }
+
 }
