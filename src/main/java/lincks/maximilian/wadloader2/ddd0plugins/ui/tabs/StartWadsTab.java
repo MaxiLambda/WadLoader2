@@ -1,5 +1,7 @@
 package lincks.maximilian.wadloader2.ddd0plugins.ui.tabs;
 
+import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.exceptions.TooManyIWadsException;
+import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.exceptions.TooManyWadPacksException;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.CheckboxList;
 import lincks.maximilian.wadloader2.ddd1adapter.query.IWadQuery;
 import lincks.maximilian.wadloader2.ddd1adapter.query.WadPackQuery;
@@ -15,6 +17,7 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.*;
@@ -24,9 +27,9 @@ public class StartWadsTab extends JPanel {
 
     public StartWadsTab(WadQuery wadQuery, IWadQuery iWadQuery, WadPackQuery wadPackQuery, Game game) {
         setLayout(new GridLayout(0,3));
-        CheckboxList<IWad> iWads = new CheckboxList<>(iWadQuery.getAll(), I_WADS, START_CONFIG, iWadsSelectedHandler(game));
-        CheckboxList<Wad> wads = new CheckboxList<>(wadQuery.getAll(), WADS, START_CONFIG, wadSelectedHandler(game, iWads),true);
-        CheckboxList<WadPack> wadPacks = new CheckboxList<>(wadPackQuery.getAll(), WAD_PACKS, START_CONFIG, wadPackSelectedHandler(game));
+        CheckboxList<IWad> iWads = new CheckboxList<>(iWadQuery.getAll(), I_WADS, Map.of( START_CONFIG, iWadsSelectedHandler(game)));
+        CheckboxList<Wad> wads = new CheckboxList<>(wadQuery.getAll(), WADS, Map.of(START_CONFIG, wadSelectedHandler(game, iWads)),true);
+        CheckboxList<WadPack> wadPacks = new CheckboxList<>(wadPackQuery.getAll(), WAD_PACKS, Map.of(START_CONFIG, wadPackSelectedHandler(game)));
 
         add(iWads);
         add(wads);

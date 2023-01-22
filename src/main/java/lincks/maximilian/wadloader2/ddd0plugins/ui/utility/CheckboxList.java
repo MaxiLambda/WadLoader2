@@ -14,11 +14,19 @@ public class CheckboxList<T> extends JPanel {
 
     private final transient Map<T, JCheckBox> itemsToCheckbox;
 
-    public CheckboxList(List<T> items, String name, String btnText, Consumer<List<T>> callback, boolean allowMultiselection){
+    public CheckboxList(List<T> items, String name, Map<String,Consumer<List<T>>> callbacks, boolean allowMultiselection){
 
-        JButton btn = new JButton(btnText);
+        List<JButton> btns = callbacks.entrySet()
+                .stream()
+                .map(entry -> {
+                    JButton btn = new JButton(entry.getKey());
+                    btn.addActionListener(e -> entry.getValue().accept(getSelected()));
+                    return btn;
+                }).toList();
+        JPanel btnPanel = new JPanel();
+        btns.forEach(btnPanel::add);
         JPanel checkBoxPanel = new JPanel(new GridLayout(0,1));
-        btn.addActionListener(e -> callback.accept(getSelected()));
+
 
         itemsToCheckbox = items.stream().collect(Collectors.toMap(
             Function.identity(),
@@ -39,11 +47,11 @@ public class CheckboxList<T> extends JPanel {
         setLayout(new BorderLayout());
         add(new JLabel(name),BorderLayout.NORTH);
         add(new JScrollPane(checkBoxPanel), BorderLayout.CENTER);
-        add(btn, BorderLayout.SOUTH);
+        add(btnPanel, BorderLayout.SOUTH);
     }
 
-    public CheckboxList(List<T> items, String name, String btnText, Consumer<List<T>> callback){
-       this(items,name,btnText,callback,false);
+    public CheckboxList(List<T> items, String name, Map<String,Consumer<List<T>>> callbacks){
+       this(items,name,callbacks,false);
     }
 
     public List<T> getSelected(){
