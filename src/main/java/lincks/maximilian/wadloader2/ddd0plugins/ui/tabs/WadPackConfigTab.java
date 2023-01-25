@@ -31,39 +31,35 @@ public class WadPackConfigTab extends JPanel {
     private final transient WadPackFactory wadPackFactory;
     private final transient WadPackQuery wadPackQuery;
     private final transient WadQuery wadQuery;
-    private final transient IWadQuery iWadQuery;
 
     private final CheckboxList<Wad> currentWads;
     private final CheckboxList<Wad> allWads;
     private final CheckboxList<WadPack> wadPacks;
 
     @Getter(value = AccessLevel.PRIVATE)
-    private Optional<WadPack> currentPack = Optional.empty();
+    private transient Optional<WadPack> currentPack = Optional.empty();
 
     public WadPackConfigTab(WadPackFactory wadPackFactory, WadPackQuery wadPackQuery, WadQuery wadQuery, IWadQuery iWadQuery) {
         this.wadPackFactory = wadPackFactory;
         this.wadPackQuery = wadPackQuery;
         this.wadQuery = wadQuery;
-        this.iWadQuery = iWadQuery;
 
         setLayout(new BorderLayout());
 
         JPanel panel = new JPanel(new GridLayout(0,3));
         JButton createNewWadPackBtn = new JButton(CREATE_NEW_WAD_PACK);
 
-        //TODO add ActionListener/Button to Mutate currentWads according to the selected WadPack
-
         allWads = new CheckboxList<>(wadQuery.getAll(), WADS, Map.of(ADD_WAD, addWad()),true);
         currentWads = new CheckboxList<>(List.of(), WADS_IN_PACK, Map.of( REMOVE_WAD, removeWad(), REMOVE_ALL_WADS, removeALlWads(),PERSIST_WAD_PACK, persistWadPack()),true);
         wadPacks = new CheckboxList<>(wadPackQuery.getAll(), WAD_PACKS, Map.of(EDIT, editWadPack(),DELETE_WAD_PACK, deleteWadPack()));
 
-        createNewWadPackBtn.addActionListener(e -> {CreateWadPackDialog
+        createNewWadPackBtn.addActionListener(e -> CreateWadPackDialog
                 .of(iWadQuery.getAll())
                 .thenApply(base -> {
                     currentWads.setListName(base.name());
                     return wadPackFactory.newPack(base);})
-                .thenAccept(pack -> currentPack = Optional.of(pack));
-        });
+                .thenAccept(pack -> currentPack = Optional.of(pack))
+        );
 
         panel.add(allWads);
         panel.add(currentWads);
