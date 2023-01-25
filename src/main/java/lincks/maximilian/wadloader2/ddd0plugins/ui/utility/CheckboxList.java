@@ -15,11 +15,14 @@ public class CheckboxList<T> extends JPanel {
 
     private final transient Map<T, JCheckBox> itemsToCheckbox;
     private final JLabel nameLbl = new JLabel();
+    private final JPanel checkBoxPanel;
+    private final boolean allowMultiSelection;
 
-    public CheckboxList(List<T> items, String name, Map<String,Consumer<List<T>>> callbacks, boolean allowMultiselection){
+    public CheckboxList(List<T> items, String name, Map<String,Consumer<List<T>>> callbacks, boolean allowMultiSelection){
+        this.allowMultiSelection = allowMultiSelection;
         nameLbl.setText(name);
 
-
+        checkBoxPanel = new JPanel(new GridLayout(0,1));
         List<JButton> btns = callbacks.entrySet()
                 .stream()
                 .map(entry -> {
@@ -27,10 +30,8 @@ public class CheckboxList<T> extends JPanel {
                     btn.addActionListener(e -> entry.getValue().accept(getSelected()));
                     return btn;
                 }).toList();
-        JPanel btnPanel = new JPanel();
+        JPanel btnPanel = new JPanel(new GridLayout( callbacks.size(),0));
         btns.forEach(btnPanel::add);
-        JPanel checkBoxPanel = new JPanel(new GridLayout(0,1));
-
 
         itemsToCheckbox = items.stream().collect(Collectors.toMap(
             Function.identity(),
@@ -38,7 +39,7 @@ public class CheckboxList<T> extends JPanel {
 
         itemsToCheckbox.values().forEach(checkBoxPanel::add);
 
-        if (!allowMultiselection)
+        if (!allowMultiSelection)
             itemsToCheckbox.values()
                     .forEach(item -> item.addActionListener(e ->
                             itemsToCheckbox.values()
@@ -58,6 +59,10 @@ public class CheckboxList<T> extends JPanel {
        this(items,name,callbacks,false);
     }
 
+    public List<T> getAll(){
+        return itemsToCheckbox.keySet().stream().toList();
+    }
+
     public List<T> getSelected(){
         return itemsToCheckbox.entrySet()
                 .stream()
@@ -70,19 +75,41 @@ public class CheckboxList<T> extends JPanel {
     }
 
     public void put(T item){
-        itemsToCheckbox.put(item, new JCheckBox(item.toString()));
+        putInternal(item);
+        checkBoxPanel.repaint();
+    }
+
+    private void putInternal(T item){
+        itemsToCheckbox.computeIfAbsent(item, i ->{
+            JCheckBox checkBox = new JCheckBox(item.toString());
+            if(!allowMultiSelection) checkBox.addActionListener(e ->
+                    itemsToCheckbox.values()
+                            .stream()
+                            .filter(JCheckBox::isSelected)
+                            .filter(jCheckBox -> !jCheckBox.equals(item))
+                            .forEach(jCheckBox -> jCheckBox.setSelected(false)));
+            checkBoxPanel.add(checkBox);
+            return checkBox;
+        });
     }
 
     public void remove(T key){
+        checkBoxPanel.remove(itemsToCheckbox.get(key));
         itemsToCheckbox.remove(key);
+        checkBoxPanel.repaint();
     }
 
+
+
     public void clear(){
+        itemsToCheckbox.values().forEach(checkBoxPanel::remove);
         itemsToCheckbox.clear();
+        checkBoxPanel.repaint();
     }
 
     public void addAll(Collection<T> items){
-        items.forEach(this::put);
+        items.forEach(this::putInternal);
+        checkBoxPanel.repaint();
     }
 
     public void setListName(String name){

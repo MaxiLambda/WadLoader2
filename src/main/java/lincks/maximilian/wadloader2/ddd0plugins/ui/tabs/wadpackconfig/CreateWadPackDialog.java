@@ -10,7 +10,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Future;
 
 import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.CREATE_NEW_WAD_PACK;
 import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.SAVE_BTN;
@@ -23,9 +22,9 @@ public class CreateWadPackDialog extends JDialog {
 
         setTitle(CREATE_NEW_WAD_PACK);
         setLayout(new GridLayout(0,1));
-        wadPackFuture = new CompletableFuture<>();
         setModal(true);
 
+        wadPackFuture = new CompletableFuture<>();
         JTextField wadNameFieled = new JTextField();
         JComboBox<IWad> iWadJComboBox = new JComboBox<>(iWadList.toArray(new IWad[0]));
         JButton saveBtn = new JButton(SAVE_BTN);
@@ -47,14 +46,17 @@ public class CreateWadPackDialog extends JDialog {
             }
         });
 
+        add(wadNameFieled);
+        add(iWadJComboBox);
+        add(saveBtn);
+
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        pack();
+        setSize(300,150);
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     public static CompletableFuture<WadPackBase> of(List<IWad> iWadList){
         return new CreateWadPackDialog(iWadList).wadPackFuture;
     }
-
-
-
 }

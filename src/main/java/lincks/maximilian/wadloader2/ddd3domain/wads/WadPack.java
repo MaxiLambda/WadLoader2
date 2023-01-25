@@ -6,7 +6,6 @@ import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.WadPackTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.exception.WadPackTagException;
-import lincks.maximilian.wadloader2.ddd4abstraction.PathUtil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -56,7 +55,7 @@ public class WadPack implements WadConfig {
     private WadPackTag wadPackTag;
 
     @Setter
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "Loadorder_Wad_Id_Mapping",
             joinColumns = {@JoinColumn(name = "Wad_Pack_Name", referencedColumnName = "Name")})
     @MapKeyColumn(name = "load_order")
