@@ -145,8 +145,6 @@ public class WadPackConfigTab extends JPanel {
                     .map(Optional::get)
                     .toList());
             currentWads.repaint();
-            //TODO find out why all wads are loaded and why the wads take for ever to show
-            System.err.println("duisdhfhosdgfosdfgdfg");
         };
     }
 }

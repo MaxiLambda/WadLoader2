@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Log
 public class RuleFactory {
-    //Todo write Test for each Rule Type where the WadPack creation fails
     private final ContainsMinTagRuleRepo minTagRuleRepo;
     private final ContainsMaxTagRuleRepo maxTagRuleRepo;
     private final ExclusiveTagRuleRepo exclusiveTagRuleRepo;
