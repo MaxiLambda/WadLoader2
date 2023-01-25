@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +17,11 @@ public class WadQuery implements SingleWadQuery<Wad> {
 
     public List<Wad> getAll() {
         return wadRepo.findAll();
+    }
+
+    @Override
+    public Optional<Wad> getById(String id) {
+        return wadRepo.findById(id);
     }
 
     public void delete(Wad wad){
