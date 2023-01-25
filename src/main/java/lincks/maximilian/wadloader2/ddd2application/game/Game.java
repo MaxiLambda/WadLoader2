@@ -45,11 +45,12 @@ public class Game {
         IWad iWad = iWadRepo.findById(wadPack.getIwad()).get();
 
         List<Map.Entry<Integer,String>> wadLoadorder = new ArrayList<>(wadPack.getWads().entrySet());
-        Wad[] wads = (Wad[]) wadLoadorder.stream()
+        Wad[] wads = wadLoadorder.stream()
                 .map(Map.Entry::getValue)
                 .map(wadRepo::findById)
                 .map(Optional::get)
-                .toArray();
+                .toList()
+                .toArray(new Wad[]{});
         start(iWad, wads);
     }
 }
