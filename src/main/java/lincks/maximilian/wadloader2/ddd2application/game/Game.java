@@ -1,6 +1,5 @@
 package lincks.maximilian.wadloader2.ddd2application.game;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lincks.maximilian.wadloader2.ddd3domain.repos.IWadRepo;
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadRepo;
 import lincks.maximilian.wadloader2.ddd3domain.wads.IWad;

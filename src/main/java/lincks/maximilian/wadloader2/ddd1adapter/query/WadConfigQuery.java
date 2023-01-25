@@ -5,7 +5,10 @@ import lincks.maximilian.wadloader2.ddd3domain.tags.Tag;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadConfig;
 import lincks.maximilian.wadloader2.ddd4abstraction.StreamUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public interface WadConfigQuery<T extends WadConfig> {
     List<T> getAll();

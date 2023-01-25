@@ -13,8 +13,6 @@ import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
-
-
 import java.awt.*;
 import java.util.List;
 import java.util.Map;
