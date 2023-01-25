@@ -6,4 +6,7 @@ import javax.swing.*;
 
 @Component
 public class SettingConfigTab extends JPanel {
+    //TODO UI
+    // * Load IWads from Directory
+    // * Load Wads from Directory
 }

@@ -6,4 +6,7 @@ import javax.swing.*;
 
 @Component
 public class RuleConfigTab extends JPanel {
+    //TODO UI
+    // * Add Rules
+    // * Remove Rules
 }
