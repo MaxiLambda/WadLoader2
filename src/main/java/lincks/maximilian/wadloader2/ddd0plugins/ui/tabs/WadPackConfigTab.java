@@ -48,7 +48,7 @@ public class WadPackConfigTab extends JPanel {
 
         JPanel panel = new JPanel(new GridLayout(0,3));
         JButton createNewWadPackBtn = new JButton(CREATE_NEW_WAD_PACK);
-
+        //TODO create extra Class for each wad/iwad/pack CheckboxList
         allWads = new CheckboxList<>(wadQuery.getAll(), WADS, Map.of(ADD_WAD, addWad()),true);
         currentWads = new CheckboxList<>(List.of(), WADS_IN_PACK, Map.of( REMOVE_WAD, removeWad(), REMOVE_ALL_WADS, removeALlWads(),PERSIST_WAD_PACK, persistWadPack()),true);
         wadPacks = new CheckboxList<>(wadPackQuery.getAll(), WAD_PACKS, Map.of(EDIT, editWadPack(),DELETE_WAD_PACK, deleteWadPack()));

@@ -25,6 +25,7 @@ public class StartWadsTab extends JPanel {
     //TODO add Searchbar and Logic to Search for Wads by Name and Tag
     public StartWadsTab(WadQuery wadQuery, IWadQuery iWadQuery, WadPackQuery wadPackQuery, Game game) {
         setLayout(new GridLayout(0,3));
+        //TODO create extra Class for each wad/iwad/pack CheckboxList
         CheckboxList<IWad> iWads = new CheckboxList<>(iWadQuery.getAll(), I_WADS, Map.of( START_CONFIG, iWadsSelectedHandler(game)));
         CheckboxList<Wad> wads = new CheckboxList<>(wadQuery.getAll(), WADS, Map.of(START_CONFIG, wadSelectedHandler(game, iWads)),true);
         CheckboxList<WadPack> wadPacks = new CheckboxList<>(wadPackQuery.getAll(), WAD_PACKS, Map.of(START_CONFIG, wadPackSelectedHandler(game)));
