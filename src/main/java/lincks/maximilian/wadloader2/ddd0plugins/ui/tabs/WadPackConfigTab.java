@@ -95,6 +95,7 @@ public class WadPackConfigTab extends JPanel {
                 WadPack pack = currentPack.get();
                 pack.setWads(order);
                 wadPackFactory.persistWadPack(pack);
+                wadPacks.put(currentPack.get());
             } catch (InvalidWadPackConfigurationException e) {
                 JOptionPane.showConfirmDialog(null, e.getMessage());
             } catch (ExecutionException | InterruptedException | CancellationException e ) {
