@@ -1,6 +1,7 @@
 package lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.wadpackconfig;
 
 import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
+import lincks.maximilian.wadloader2.ddd4abstraction.PathUtil;
 import lombok.Getter;
 
 import javax.swing.*;
@@ -43,7 +44,10 @@ public class ChangeLoadOrderDialog extends JDialog {
                 Collectors.toMap(
                         Function.identity(),
                         ignore -> new JSpinner(new SpinnerNumberModel(0,0,wads.size() * 2,1))));
-        wadLoadOrderSpinners.forEach((wad, spinner)-> spinners.add(spinner));
+        wadLoadOrderSpinners.forEach((wad, spinner)-> {
+            spinners.add(new JLabel(PathUtil.getFileName(wad.getPath())));
+            spinners.add(spinner);
+        });
 
         saveLoadOrderBtn.addActionListener(e -> {
             HashMap<Integer, Wad> accOrder = new HashMap<>();
