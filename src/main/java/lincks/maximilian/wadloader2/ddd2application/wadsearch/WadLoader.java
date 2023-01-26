@@ -15,7 +15,6 @@ import java.util.List;
 public class WadLoader {
 
     private final WadFileFinder wadFinder;
-
     private final IWadRepo iWadRepo;
     private final WadRepo wadRepo;
 

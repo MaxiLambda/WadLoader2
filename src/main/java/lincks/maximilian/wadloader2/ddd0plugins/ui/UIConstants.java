@@ -34,4 +34,8 @@ public class UIConstants {
     public static final String ABORTED_SAVE_WAD_PACK = "Aborted saving Wad-Pack";
     public static final String NO_PACK_SELECTED_ERROR = "No Wad-Pack selected";
     public static final String EDIT = "Edit";
+    public static final String WAD_DIR = "Wad directory";
+    public static final String I_WAD_DIR = "IWad directory";
+    public static final String SET_WAD_DIR = "Set Wad directory";
+    public static final String SET_I_WAD_DIR = "Set IWad directory";
 }

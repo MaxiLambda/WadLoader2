@@ -17,13 +17,13 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 @Service
 public class Game {
-
+    public static final String GZDOOM_HOME = "GZDoom_Home";
     private final WadRepo wadRepo;
     private final IWadRepo iWadRepo;
     public void start(IWad iWad, Wad... wads){
         String[] command =  Stream.concat(
                 Stream.of(
-                        String.format("\"%s\\gzdoom.exe\"", System.getenv("GZDoom_Home")),
+                        String.format("\"%s\\gzdoom.exe\"", System.getenv(GZDOOM_HOME)),
                         "-iwad",
                         String.format("\"%s\"", iWad.getPath()),
                         "-file"
