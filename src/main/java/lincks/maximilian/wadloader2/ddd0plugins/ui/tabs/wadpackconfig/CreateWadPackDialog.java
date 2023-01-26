@@ -16,7 +16,7 @@ import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.SAVE_BTN;
 
 public class CreateWadPackDialog extends JDialog {
 
-    private final transient CompletableFuture<WadPackBase> wadPackFuture;
+    private final transient CompletableFuture<WadPackBase> wadPackRuleFuture;
     private CreateWadPackDialog(List<IWad> iWadList) {
         if(iWadList.isEmpty()) throw new NoIwadExistsException();
 
@@ -24,7 +24,7 @@ public class CreateWadPackDialog extends JDialog {
         setLayout(new GridLayout(0,1));
         setModal(true);
 
-        wadPackFuture = new CompletableFuture<>();
+        wadPackRuleFuture = new CompletableFuture<>();
         JTextField wadNameFieled = new JTextField();
         JComboBox<IWad> iWadJComboBox = new JComboBox<>(iWadList.toArray(new IWad[0]));
         JButton saveBtn = new JButton(SAVE_BTN);
@@ -34,7 +34,7 @@ public class CreateWadPackDialog extends JDialog {
         saveBtn.addActionListener(e -> {
             String name = wadNameFieled.getText();
             if( name != null && !name.isEmpty()){
-                wadPackFuture.complete(new WadPackBase(name, (IWad) iWadJComboBox.getSelectedItem()));
+                wadPackRuleFuture.complete(new WadPackBase(name, (IWad) iWadJComboBox.getSelectedItem()));
                 dispose();
             }
         });
@@ -42,7 +42,7 @@ public class CreateWadPackDialog extends JDialog {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent windowEvent) {
-                wadPackFuture.cancel(true);
+                wadPackRuleFuture.cancel(true);
             }
         });
 
@@ -57,6 +57,6 @@ public class CreateWadPackDialog extends JDialog {
     }
 
     public static CompletableFuture<WadPackBase> of(List<IWad> iWadList){
-        return new CreateWadPackDialog(iWadList).wadPackFuture;
+        return new CreateWadPackDialog(iWadList).wadPackRuleFuture;
     }
 }

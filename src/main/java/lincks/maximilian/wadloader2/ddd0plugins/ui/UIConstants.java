@@ -38,4 +38,7 @@ public class UIConstants {
     public static final String I_WAD_DIR = "IWad directory";
     public static final String SET_WAD_DIR = "Set Wad directory";
     public static final String SET_I_WAD_DIR = "Set IWad directory";
+    public static final String RULES = "Rules";
+    public static final String DELETE_RULES = "Delete rule(s)";
+    public static final String CREATE_NEW_RULE = "Create new Rule";
 }

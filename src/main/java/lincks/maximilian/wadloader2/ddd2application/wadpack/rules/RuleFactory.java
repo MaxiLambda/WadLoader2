@@ -1,13 +1,14 @@
 package lincks.maximilian.wadloader2.ddd2application.wadpack.rules;
 
-import lincks.maximilian.wadloader2.ddd3domain.repos.ContainsMaxTagRuleRepo;
-import lincks.maximilian.wadloader2.ddd3domain.repos.ContainsMinTagRuleRepo;
-import lincks.maximilian.wadloader2.ddd3domain.repos.ExclusiveTagRuleRepo;
-import lincks.maximilian.wadloader2.ddd3domain.repos.ExclusiveWadRuleRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.*;
 import lincks.maximilian.wadloader2.ddd3domain.rules.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -36,5 +37,17 @@ public class RuleFactory {
             case ExclusiveWadRule exclusiveWadRule -> exclusiveWadRuleRepo.save(exclusiveWadRule);
             default -> log.warning("Implement Handling for %s".formatted(rule.getClass().getName()));
         }
+    }
+
+    public List<WadPackRule> allRules(){
+        return Stream.of(
+                minTagRuleRepo,
+                maxTagRuleRepo,
+                exclusiveTagRuleRepo,
+                exclusiveWadRuleRepo)
+                .map(AbstractRepo::findAll)
+                .flatMap(List::stream)
+                .map(WadPackRule.class::cast)
+                .toList();
     }
 }
