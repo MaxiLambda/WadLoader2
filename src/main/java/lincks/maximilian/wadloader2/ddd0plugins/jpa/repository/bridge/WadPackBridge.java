@@ -1,10 +1,8 @@
 package lincks.maximilian.wadloader2.ddd0plugins.jpa.repository.bridge;
 
-import lincks.maximilian.wadloader2.ddd0plugins.jpa.repository.IWadSpringRepo;
 import lincks.maximilian.wadloader2.ddd0plugins.jpa.repository.WadPackSpringRepo;
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
-import lincks.maximilian.wadloader2.ddd3domain.wads.IWad;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
 import org.springframework.stereotype.Repository;
 

@@ -4,7 +4,6 @@ import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.DefaultTag;
 import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
 
-import java.util.List;
 import java.util.Set;
 
 public interface WadRepo extends AbstractRepo<Wad, String> {
