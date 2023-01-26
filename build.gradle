@@ -39,7 +39,7 @@ tasks.withType(Test).configureEach {
 }
 
 tasks.named('test') {
-//    useJUnitPlatform()
+    useJUnitPlatform()
 }
 
 hibernate {
