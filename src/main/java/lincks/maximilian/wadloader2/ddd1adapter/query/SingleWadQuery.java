@@ -17,7 +17,7 @@ public interface SingleWadQuery<T extends SingleWad> extends WadConfigQuery<T>{
     }
 
     Optional<T> getById(String id);
-
+    List<T> getByDefaultTag(String path);
     default List<T> getById(List<String> ids){
         return ids.stream().map(this::getById).filter(Optional::isPresent).map(Optional::get).toList();
     }

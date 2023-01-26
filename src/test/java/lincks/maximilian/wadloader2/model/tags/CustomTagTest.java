@@ -52,6 +52,7 @@ class CustomTagTest {
     void findByCustomTag(){
         Wad wad = addWadsSetup(wadService).get(0);
         wad.addCustomTag(customTagName);
+        wad.addCustomTag("asdf43r34fwe");
         wadService.save(wad);
 
         assertTrue(customTagService.exists(customTagName));
