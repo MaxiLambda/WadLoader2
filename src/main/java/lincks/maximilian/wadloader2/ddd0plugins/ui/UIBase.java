@@ -1,13 +1,12 @@
 package lincks.maximilian.wadloader2.ddd0plugins.ui;
 
-import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.RuleConfigTab;
-import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.SettingConfigTab;
-import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.StartWadsTab;
-import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.WadPackConfigTab;
+import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.*;
 
@@ -30,8 +29,13 @@ public class UIBase extends JFrame {
         pane.addTab(RULE_TAB, null, ruleTab, RULE_TAB_TIPS);
         pane.addTab(SETTINGS_TAB, null, settingsTab, SETTINGS_TAB_TIP);
 
-        add(pane);
+        pane.addChangeListener(e -> {
+            WadLoader2Tab tab = (WadLoader2Tab) pane.getSelectedComponent();
+            tab.updateData();
+        });
 
+        add(pane);
+        startTab.updateData();
         setSize(600,600);
         //put the panel in the center of the screen
         setLocationRelativeTo(null);
