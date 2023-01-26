@@ -44,6 +44,6 @@ public class ContainsMaxTagRule implements WadPackRule {
 
     @Override
     public String toString() {
-        return "ContainsMaxTagRule{\n filterTagId = \"%s\"\n maxCount = \"%s\"}".formatted(filterTagId,maxCount);
+        return "ContainsMaxTagRule{%n filterTagId = \"%s\"%n maxCount = \"%s\"}".formatted(filterTagId,maxCount);
     }
 }
