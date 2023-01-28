@@ -74,9 +74,11 @@ public class CheckboxList<T> extends JPanel {
                 .toList();
     }
 
-    public void put(T item){
+    /** Returns the item */
+    public T put(T item){
         putInternal(item);
         checkBoxPanel.repaint();
+        return item;
     }
 
     private void putInternal(T item){
