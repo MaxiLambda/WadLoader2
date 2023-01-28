@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class TagRuleDomainService {
+
+    private TagRuleDomainService(){}
     public static List<String> getWadTagIds(WadPack wadPack, WadRepo wadRepo){
         return wadPack.getWads()
                 .values()

@@ -74,7 +74,8 @@ class WadPackTest {
 
         pack.setWads(Map.of(Integer.MAX_VALUE, wads.get(0).getPath()));
 
-        assertThrows(WadPackAddException.class,() -> pack.addWad(wads.get(1)));
+        Wad wad = wads.get(1);
+        assertThrows(WadPackAddException.class,() -> pack.addWad(wad));
     }
 
     @Test
