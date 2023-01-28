@@ -5,10 +5,10 @@ import lincks.maximilian.wadloader2.ddd3domain.rules.WadPackRule;
 import javax.swing.*;
 import java.util.Optional;
 
-public class NewAmountTagRule extends JPanel implements RulePanel {
+public class NewAmountTagRulePanel extends RulePanel {
 
-    public NewAmountTagRule(Type type) {
-
+    public NewAmountTagRulePanel(Type type) {
+        add(new JLabel("Wadfsdfsdfdsf"));
     }
 
     @Override

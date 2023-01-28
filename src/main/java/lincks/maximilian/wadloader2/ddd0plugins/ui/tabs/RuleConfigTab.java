@@ -1,5 +1,6 @@
 package lincks.maximilian.wadloader2.ddd0plugins.ui.tabs;
 
+import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.ruleconfig.NewRuleDialog;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.CheckboxList;
 import lincks.maximilian.wadloader2.ddd2application.wadpack.rules.RuleFactory;
 import lincks.maximilian.wadloader2.ddd3domain.rules.WadPackRule;
@@ -11,8 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.DELETE_RULES;
-import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.RULES;
+import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.*;
 
 @Component
 public class RuleConfigTab extends JPanel implements WadLoader2Tab{
@@ -24,12 +24,18 @@ public class RuleConfigTab extends JPanel implements WadLoader2Tab{
     public RuleConfigTab(RuleFactory ruleFactory) {
         this.ruleFactory = ruleFactory;
 
+        JButton newRuleBtn = new JButton(CREATE_NEW_RULE);
+
         setLayout(new BorderLayout());
 
         rules = ruleFactory.allRules();
         rulesCheckboxList = new CheckboxList<>(rules,RULES, Map.of(DELETE_RULES, deleteRules()),true);
 
+        newRuleBtn.addActionListener(e -> NewRuleDialog.of()
+                .thenApply(rulesCheckboxList::put)
+                .thenAccept(ruleFactory::persistRule));
 
+        add(newRuleBtn, BorderLayout.NORTH);
         add(rulesCheckboxList, BorderLayout.CENTER);
     }
 
