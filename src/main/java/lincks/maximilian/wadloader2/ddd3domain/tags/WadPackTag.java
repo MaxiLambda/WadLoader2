@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import org.hibernate.Hibernate;
 import org.springframework.data.annotation.Immutable;
 
 import java.util.Objects;
@@ -41,13 +40,13 @@ public class WadPackTag implements Tag{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        WadPackTag that = (WadPackTag) o;
-        return name != null && Objects.equals(name, that.name);
+        if (o == null) return false;
+        Tag that = (Tag) o;
+        return Objects.equals(tagId(), that.tagId());
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(name,tagType());
     }
 }
