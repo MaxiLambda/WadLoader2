@@ -36,7 +36,7 @@ public class Wad implements SingleWad {
     @JoinColumn(name = "Default_Tag_Name", nullable = false)
     private DefaultTag defaultTag;
 
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
             name = "Wad_Custom_Tags",
             joinColumns = {@JoinColumn(name = "path")},
