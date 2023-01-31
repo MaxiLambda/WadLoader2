@@ -5,15 +5,14 @@ import lincks.maximilian.wadloader2.ddd4abstraction.StreamUtil;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class CheckboxList<T> extends JPanel {
 
-    private final transient Map<T, JCheckBox> itemsToCheckbox;
+    private final transient Map<T, JCheckBox> itemsToCheckbox = new HashMap<>();
     private final JLabel nameLbl = new JLabel();
     private final JPanel checkBoxPanel;
     private final boolean allowMultiSelection;
@@ -33,20 +32,7 @@ public class CheckboxList<T> extends JPanel {
         JPanel btnPanel = new JPanel(new GridLayout( callbacks.size(),0));
         btns.forEach(btnPanel::add);
 
-        itemsToCheckbox = items.stream().collect(Collectors.toMap(
-            Function.identity(),
-            item -> new JCheckBox(item.toString())));
-
-        itemsToCheckbox.values().forEach(checkBoxPanel::add);
-
-        if (!allowMultiSelection)
-            itemsToCheckbox.values()
-                    .forEach(item -> item.addActionListener(e ->
-                            itemsToCheckbox.values()
-                                    .stream()
-                                    .filter(JCheckBox::isSelected)
-                                    .filter(jCheckBox -> !jCheckBox.equals(item))
-                                    .forEach(jCheckBox -> jCheckBox.setSelected(false))));
+        addAll(items);
 
 
         setLayout(new BorderLayout());
@@ -84,12 +70,20 @@ public class CheckboxList<T> extends JPanel {
     private void putInternal(T item){
         itemsToCheckbox.computeIfAbsent(item, i ->{
             JCheckBox checkBox = new JCheckBox(item.toString());
-            if(!allowMultiSelection) checkBox.addActionListener(e ->
-                    itemsToCheckbox.values()
+            if(!allowMultiSelection) checkBox.addActionListener(e -> {
+                if(checkBox.isSelected()) {
+                    itemsToCheckbox.entrySet()
                             .stream()
-                            .filter(JCheckBox::isSelected)
-                            .filter(jCheckBox -> !jCheckBox.equals(item))
-                            .forEach(jCheckBox -> jCheckBox.setSelected(false)));
+                            .filter(StreamUtil.filter(
+                                    Map.Entry::getValue,
+                                    JCheckBox::isSelected))
+                            .filter(StreamUtil.filter(
+                                    Map.Entry::getKey,
+                                    key -> !item.equals(key)))
+                            .map(Map.Entry::getValue)
+                            .forEach(jCheckBox -> jCheckBox.setSelected(false));
+                }
+            });
             checkBoxPanel.add(checkBox);
             return checkBox;
         });
