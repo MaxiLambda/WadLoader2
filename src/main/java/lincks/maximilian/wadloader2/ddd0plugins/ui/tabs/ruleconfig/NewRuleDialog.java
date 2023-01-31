@@ -15,10 +15,8 @@ import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.CREATE_NEW
 public class NewRuleDialog extends JDialog {
 
     private final CompletableFuture<WadPackRule> ruleFuture;
-    private final TagQuery tagQuery;
-    private Optional<RulePanel> rulePanel;
+    private Optional<RulePanel> rulePanel = Optional.empty();
     private NewRuleDialog(TagQuery tagQuery) {
-        this.tagQuery = tagQuery;
         setTitle(CREATE_NEW_RULE);
         setLayout(new BorderLayout());
         setModal(true);
@@ -41,6 +39,7 @@ public class NewRuleDialog extends JDialog {
                 case ExclusiveWadRule -> Optional.empty();
             };
             rulePanel.ifPresent(optionsPanelWrapper::add);
+            pack();
             optionsPanelWrapper.repaint();
         });
 

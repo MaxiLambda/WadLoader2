@@ -41,4 +41,5 @@ public class UIConstants {
     public static final String RULES = "Rules";
     public static final String DELETE_RULES = "Delete rule(s)";
     public static final String CREATE_NEW_RULE = "Create new Rule";
+    public static final String AMOUNT_TAG_RULE_CREATION_TEXT = "How many Wads with the selected Tag should be in a WadPack at %s?";
 }

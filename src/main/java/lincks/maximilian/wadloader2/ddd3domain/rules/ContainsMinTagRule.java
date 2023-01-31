@@ -41,6 +41,6 @@ public class ContainsMinTagRule implements WadPackRule {
 
     @Override
     public String toString() {
-        return "ContainsMaxTagRule{%n filterTagId = \"%s\"%n minCount = \"%s\"}".formatted(filterTagId,minCount);
+        return "ContainsMinTagRule{%n filterTagId = \"%s\"%n minCount = \"%s\"}".formatted(filterTagId,minCount);
     }
 }

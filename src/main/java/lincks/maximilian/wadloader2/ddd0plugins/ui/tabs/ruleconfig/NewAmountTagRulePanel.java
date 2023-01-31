@@ -1,5 +1,6 @@
 package lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.ruleconfig;
 
+import com.jasongoodwin.monads.Try;
 import lincks.maximilian.wadloader2.ddd3domain.rules.ContainsMaxTagRule;
 import lincks.maximilian.wadloader2.ddd3domain.rules.ContainsMinTagRule;
 import lincks.maximilian.wadloader2.ddd3domain.rules.WadPackRule;
@@ -24,7 +25,7 @@ public class NewAmountTagRulePanel extends RulePanel {
 
         this.type = type;
 
-        JLabel ruleExplanation = new JLabel(AMOUNT_TAG_RULE_CREATION_TEXT);
+        JLabel ruleExplanation = new JLabel(AMOUNT_TAG_RULE_CREATION_TEXT.formatted(type.quantifier));
         amountSpinner = new JSpinner(new SpinnerNumberModel(1,0,Integer.MAX_VALUE,1));
         tagJComboBox = new JComboBox<>(availableTags.toArray(new Tag[0]));
 
@@ -35,13 +36,13 @@ public class NewAmountTagRulePanel extends RulePanel {
 
     @Override
     public Optional<WadPackRule> getRule() {
-        //maybe throw exception
         return Optional.ofNullable(tagJComboBox.getSelectedItem())
                 .map(Tag.class::cast)
-                .map(tag -> switch (type){
-                    case maxTag -> new ContainsMaxTagRule((long) amountSpinner.getValue(), tag);
-                    case minTag -> new ContainsMinTagRule((long) amountSpinner.getValue(), tag);
-                });
+                .map(tag -> Try.ofFailable(() -> switch (type){
+                    case maxTag -> new ContainsMaxTagRule((int) amountSpinner.getValue(), tag);
+                    case minTag -> new ContainsMinTagRule((int) amountSpinner.getValue(), tag);
+                }))
+                .flatMap(Try::toOptional);
     }
 
     @RequiredArgsConstructor
