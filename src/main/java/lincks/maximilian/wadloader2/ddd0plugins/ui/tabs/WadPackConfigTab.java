@@ -72,9 +72,9 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
 
     private Consumer<List<Wad>> addWad(){
         return wads -> {
+            allWads.unselectAll();
             if(currentPack.isEmpty()) return;
             currentWads.addAll(wads);
-            allWads.unselectAll();
         };
     }
 
