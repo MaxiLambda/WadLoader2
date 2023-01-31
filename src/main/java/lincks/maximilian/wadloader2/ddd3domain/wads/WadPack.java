@@ -1,7 +1,7 @@
 package lincks.maximilian.wadloader2.ddd3domain.wads;
 
 import jakarta.persistence.*;
-import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.WadPackTag;
@@ -19,7 +19,7 @@ public class WadPack implements WadConfig {
 
     protected WadPack(){}
 
-    public WadPack(String name, IWad iwad, WadPackRepo wadPackService) throws WadPackTagException {
+    public WadPack(String name, IWad iwad, WadPackReadWriteRepo wadPackService) throws WadPackTagException {
         this.name = name;
         this.iwad = iwad.getPath();
         wadPackTag = new WadPackTag(name);

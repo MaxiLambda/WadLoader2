@@ -28,18 +28,18 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class WadPackFactoryTest {
     @Mock
-    ContainsMinTagRuleRepo minTagRuleRepo;
+    ContainsMinTagRuleReadWriteRepo minTagRuleRepo;
     @Mock
-    ContainsMaxTagRuleRepo maxTagRuleRepo;
+    ContainsMaxTagRuleReadWriteRepo maxTagRuleRepo;
     @Mock
-    ExclusiveTagRuleRepo exclusiveTagRuleRepo;
+    ExclusiveTagRuleReadWriteRepo exclusiveTagRuleRepo;
     @Mock
-    ExclusiveWadRuleRepo exclusiveWadRuleRepo;
+    ExclusiveWadRuleReadWriteRepo exclusiveWadRuleRepo;
 
     @Mock
-    WadPackRepo wadPackRepo;
+    WadPackReadWriteRepo wadPackRepo;
     @Mock
-    WadRepo wadRepo;
+    WadReadWriteRepo wadRepo;
 
     @InjectMocks
     WadPackFactory wadPackFactory;

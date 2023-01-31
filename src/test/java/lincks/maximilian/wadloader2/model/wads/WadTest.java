@@ -1,7 +1,7 @@
 package lincks.maximilian.wadloader2.model.wads;
 
-import lincks.maximilian.wadloader2.ddd3domain.repos.CustomTagRepo;
-import lincks.maximilian.wadloader2.ddd3domain.repos.WadRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.CustomTagReadWriteRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,10 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class WadTest {
 
     @Autowired
-    WadRepo wadService;
+    WadReadWriteRepo wadService;
 
     @Autowired
-    CustomTagRepo customTagService;
+    CustomTagReadWriteRepo customTagService;
 
     @AfterEach
     @BeforeEach

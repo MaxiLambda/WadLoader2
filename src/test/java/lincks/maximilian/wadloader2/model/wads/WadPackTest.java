@@ -1,8 +1,8 @@
 package lincks.maximilian.wadloader2.model.wads;
 
-import lincks.maximilian.wadloader2.ddd3domain.repos.IWadRepo;
-import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackRepo;
-import lincks.maximilian.wadloader2.ddd3domain.repos.WadRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.IWadReadWriteRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackReadWriteRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.exception.WadPackTagException;
 import lincks.maximilian.wadloader2.ddd3domain.wads.IWad;
 import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
@@ -24,13 +24,13 @@ class WadPackTest {
     //TODO write Test to check custom rule enforcement
 
     @Autowired
-    WadPackRepo wadPackService;
+    WadPackReadWriteRepo wadPackService;
 
     @Autowired
-    WadRepo wadService;
+    WadReadWriteRepo wadService;
 
     @Autowired
-    IWadRepo iWadService;
+    IWadReadWriteRepo iWadService;
 
 //    @AfterEach
     @BeforeEach

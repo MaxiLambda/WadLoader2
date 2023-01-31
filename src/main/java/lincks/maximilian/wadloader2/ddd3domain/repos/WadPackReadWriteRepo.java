@@ -5,6 +5,6 @@ import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
 
 import java.util.Set;
 
-public interface WadPackRepo extends AbstractRepo<WadPack, String> {
+public interface WadPackReadWriteRepo extends AbstractReadWriteRepo<WadPack, String> {
     Set<WadPack> findByCustomTagsIn(Set<CustomTag> tags);
 }

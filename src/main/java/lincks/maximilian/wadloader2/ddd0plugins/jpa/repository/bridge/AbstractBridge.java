@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public abstract class AbstractBridge<T,ID> {
-    protected final JpaRepository<T,ID> repo;
+public abstract class  AbstractBridge<T,ID,R extends JpaRepository<T,ID>> {
+    protected final R repo;
 
     public List<T> findAll(){
         return repo.findAll();

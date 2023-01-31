@@ -3,7 +3,7 @@ package lincks.maximilian.wadloader2.ddd3domain.repos;
 import java.util.List;
 import java.util.Optional;
 
-public interface AbstractRepo<T,ID> {
+public interface AbstractReadWriteRepo<T,ID> extends ReadRepo<T, ID> {
 
     List<T> findAll();
 

@@ -1,7 +1,7 @@
 package lincks.maximilian.wadloader2.model.tags;
 
-import lincks.maximilian.wadloader2.ddd3domain.repos.CustomTagRepo;
-import lincks.maximilian.wadloader2.ddd3domain.repos.WadRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.CustomTagReadWriteRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
 import org.junit.jupiter.api.BeforeAll;
@@ -19,9 +19,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class CustomTagTest {
 
     @Autowired
-    WadRepo wadService;
+    WadReadWriteRepo wadService;
     @Autowired
-    CustomTagRepo customTagService;
+    CustomTagReadWriteRepo customTagService;
 
     String customTagName = "R2D2";
     @BeforeEach

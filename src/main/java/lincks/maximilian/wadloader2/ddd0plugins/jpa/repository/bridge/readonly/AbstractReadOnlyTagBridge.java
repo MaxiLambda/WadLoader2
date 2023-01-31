@@ -1,6 +1,6 @@
 package lincks.maximilian.wadloader2.ddd0plugins.jpa.repository.bridge.readonly;
 
-import lincks.maximilian.wadloader2.ddd0plugins.jpa.repository.readonly.JpaTagRepository;
+import lincks.maximilian.wadloader2.ddd0plugins.jpa.repository.interfaces.JpaTagRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -16,9 +16,5 @@ public abstract class AbstractReadOnlyTagBridge<T, ID>{
     }
     public Optional<T> findById(ID id){
         return repo.findById(id);
-    }
-
-    public List<T> findByNameContaining(ID name){
-        return repo.findByNameContaining(name);
     }
 }

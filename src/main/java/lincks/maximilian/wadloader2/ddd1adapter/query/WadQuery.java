@@ -1,6 +1,6 @@
 package lincks.maximilian.wadloader2.ddd1adapter.query;
 
-import lincks.maximilian.wadloader2.ddd3domain.repos.WadRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.DefaultTag;
 import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
@@ -18,7 +18,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class WadQuery implements SingleWadQuery<Wad> {
 
-    private final WadRepo wadRepo;
+    private final WadReadWriteRepo wadRepo;
 
     public List<Wad> getAll() {
         return wadRepo.findAll();

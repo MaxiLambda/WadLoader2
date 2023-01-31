@@ -1,16 +1,17 @@
 package lincks.maximilian.wadloader2.ddd0plugins.jpa.repository.bridge;
 
 import lincks.maximilian.wadloader2.ddd0plugins.jpa.repository.WadSpringRepo;
-import lincks.maximilian.wadloader2.ddd3domain.repos.WadRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.DefaultTag;
 import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Set;
 
 @Repository
-public class WadBridge extends AbstractBridge<Wad, String> implements WadRepo {
+public class WadBridge extends AbstractBridge<Wad, String, JpaRepository<Wad, String>> implements WadReadWriteRepo {
 
     public WadBridge(WadSpringRepo repo) {
         super(repo);

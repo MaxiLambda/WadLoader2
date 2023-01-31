@@ -1,6 +1,6 @@
 package lincks.maximilian.wadloader2.ddd1adapter.query;
 
-import lincks.maximilian.wadloader2.ddd3domain.repos.IWadRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.IWadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.DefaultTag;
 import lincks.maximilian.wadloader2.ddd3domain.wads.IWad;
@@ -16,7 +16,7 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 public class IWadQuery implements SingleWadQuery<IWad> {
-    private final IWadRepo iWadRepo;
+    private final IWadReadWriteRepo iWadRepo;
 
     public void delete(IWad iWad){
         delete(iWad);

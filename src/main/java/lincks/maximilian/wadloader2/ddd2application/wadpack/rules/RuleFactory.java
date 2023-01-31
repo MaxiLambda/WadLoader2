@@ -13,10 +13,10 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 @Log
 public class RuleFactory {
-    private final ContainsMinTagRuleRepo minTagRuleRepo;
-    private final ContainsMaxTagRuleRepo maxTagRuleRepo;
-    private final ExclusiveTagRuleRepo exclusiveTagRuleRepo;
-    private final ExclusiveWadRuleRepo exclusiveWadRuleRepo;
+    private final ContainsMinTagRuleReadWriteRepo minTagRuleRepo;
+    private final ContainsMaxTagRuleReadWriteRepo maxTagRuleRepo;
+    private final ExclusiveTagRuleReadWriteRepo exclusiveTagRuleRepo;
+    private final ExclusiveWadRuleReadWriteRepo exclusiveWadRuleRepo;
 
     public void deleteRule(WadPackRule rule){
         switch (rule) {
@@ -44,7 +44,7 @@ public class RuleFactory {
                 maxTagRuleRepo,
                 exclusiveTagRuleRepo,
                 exclusiveWadRuleRepo)
-                .map(AbstractRepo::findAll)
+                .map(AbstractReadWriteRepo::findAll)
                 .flatMap(List::stream)
                 .map(WadPackRule.class::cast)
                 .toList();

@@ -6,7 +6,7 @@ import lincks.maximilian.wadloader2.ddd3domain.wads.IWad;
 
 import java.util.Set;
 
-public interface IWadRepo extends AbstractRepo<IWad, String> {
+public interface IWadReadWriteRepo extends AbstractReadWriteRepo<IWad, String> {
     Set<IWad> findByCustomTagsIn(Set<CustomTag> tags);
     Set<IWad> findByDefaultTag(DefaultTag tag);
 }

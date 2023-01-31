@@ -2,8 +2,8 @@ package lincks.maximilian.wadloader2.ddd2application.tags;
 
 import lincks.maximilian.wadloader2.ddd2application.wadpack.InvalidWadPackConfigurationException;
 import lincks.maximilian.wadloader2.ddd2application.wadpack.WadPackFactory;
-import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackRepo;
-import lincks.maximilian.wadloader2.ddd3domain.repos.WadRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackReadWriteRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
 import lincks.maximilian.wadloader2.model.wads.TestUtil;
@@ -28,9 +28,9 @@ class CustomTagMarkerTest {
     @Mock
     WadPackFactory wadPackFactory;
     @Mock
-    WadRepo wadRepo;
+    WadReadWriteRepo wadRepo;
     @Mock
-    WadPackRepo wadPackRepo;
+    WadPackReadWriteRepo wadPackRepo;
     WadPack wadPack;
     String tagName = "Cat Coach";
     String otherTagName = "Ne, gerade nicht!";
