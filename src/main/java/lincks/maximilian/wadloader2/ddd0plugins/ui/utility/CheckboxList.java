@@ -63,6 +63,7 @@ public class CheckboxList<T> extends JPanel {
     /** Returns the item */
     public T put(T item){
         putInternal(item);
+        checkBoxPanel.revalidate();
         checkBoxPanel.repaint();
         return item;
     }
@@ -92,6 +93,7 @@ public class CheckboxList<T> extends JPanel {
     public void remove(T key){
         checkBoxPanel.remove(itemsToCheckbox.get(key));
         itemsToCheckbox.remove(key);
+        checkBoxPanel.revalidate();
         checkBoxPanel.repaint();
     }
 
@@ -100,11 +102,13 @@ public class CheckboxList<T> extends JPanel {
     public void clear(){
         itemsToCheckbox.values().forEach(checkBoxPanel::remove);
         itemsToCheckbox.clear();
+        checkBoxPanel.revalidate();
         checkBoxPanel.repaint();
     }
 
     public void addAll(Collection<T> items){
         items.forEach(this::putInternal);
+        checkBoxPanel.revalidate();
         checkBoxPanel.repaint();
     }
 

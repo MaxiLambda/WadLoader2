@@ -141,6 +141,7 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
                     .filter(Optional::isPresent)
                     .map(Optional::get)
                     .toList());
+            currentWads.revalidate();
             currentWads.repaint();
         };
     }
