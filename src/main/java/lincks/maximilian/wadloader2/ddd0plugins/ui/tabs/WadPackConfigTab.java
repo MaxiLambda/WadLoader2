@@ -97,11 +97,11 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
                 wadPackFactory.persistWadPack(pack);
                 wadPacks.put(currentPack.get());
             } catch (InvalidWadPackConfigurationException e) {
-                JOptionPane.showConfirmDialog(null, e.getMessage());
+                JOptionPane.showMessageDialog(null, e.getMessage());
             } catch (ExecutionException | InterruptedException | CancellationException e ) {
-                JOptionPane.showConfirmDialog(null, ABORTED_SAVE_WAD_PACK);
+                JOptionPane.showMessageDialog(null, ABORTED_SAVE_WAD_PACK);
             } catch (NoPackSelectedException e) {
-                JOptionPane.showConfirmDialog(null, NO_PACK_SELECTED_ERROR);
+                JOptionPane.showMessageDialog(null, NO_PACK_SELECTED_ERROR);
             }
         };
     }

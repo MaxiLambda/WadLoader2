@@ -16,6 +16,7 @@ public class NewRuleDialog extends JDialog {
 
     private final CompletableFuture<WadPackRule> ruleFuture;
     private Optional<RulePanel> rulePanel = Optional.empty();
+
     private NewRuleDialog(TagQuery tagQuery) {
         setTitle(CREATE_NEW_RULE);
         setLayout(new BorderLayout());
@@ -32,15 +33,17 @@ public class NewRuleDialog extends JDialog {
             optionsPanelWrapper.removeAll();
             rulePanel = switch (typeOfNewRule) {
                 case null -> Optional.empty();
-                case MinTagRule -> Optional.of(new NewAmountTagRulePanel(NewAmountTagRulePanel.Type.minTag, tagQuery.findAllNotUniqueRepos()));
-                case MaxTagRule -> Optional.of(new NewAmountTagRulePanel(NewAmountTagRulePanel.Type.maxTag, tagQuery.findAllUniqueRepos()));
+                case MinTagRule ->
+                        Optional.of(new NewAmountTagRulePanel(NewAmountTagRulePanel.Type.minTag, tagQuery.findAllNotUniqueRepos()));
+                case MaxTagRule ->
+                        Optional.of(new NewAmountTagRulePanel(NewAmountTagRulePanel.Type.maxTag, tagQuery.findAllUniqueRepos()));
                 //TODO
                 case ExclusiveTagRule -> Optional.empty();
                 case ExclusiveWadRule -> Optional.empty();
             };
             rulePanel.ifPresent(optionsPanelWrapper::add);
             pack();
-            optionsPanelWrapper.repaint();
+
         });
 
         add(ruleTypeBox, BorderLayout.NORTH);
@@ -62,16 +65,16 @@ public class NewRuleDialog extends JDialog {
         });
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(300,150);
+        setSize(300, 150);
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
-    public static CompletableFuture<WadPackRule> of(TagQuery tagQuery){
+    public static CompletableFuture<WadPackRule> of(TagQuery tagQuery) {
         return new NewRuleDialog(tagQuery).ruleFuture;
     }
 
-    private enum RuleType{
+    private enum RuleType {
         MinTagRule,
         MaxTagRule,
         ExclusiveTagRule,

@@ -50,7 +50,7 @@ public class StartWadsTab extends JPanel implements WadLoader2Tab{
     private Consumer<List<IWad>> iWadsSelectedHandler(Game game) {
         return iwads -> {
             if (iwads.isEmpty())
-                JOptionPane.showConfirmDialog(null, NO_I_WAD_SELECTED);
+                JOptionPane.showMessageDialog(null, NO_I_WAD_SELECTED);
             else if (iwads.size() > 1)
                 //should never be reached because the corresponding CheckboxList should only allow single selection
                 throw new TooManyIWadsException("Too many IWads selected!");
@@ -62,7 +62,7 @@ public class StartWadsTab extends JPanel implements WadLoader2Tab{
         return selectedWads -> {
             var selectedIWads = iWadsCheckboxList.getSelected();
             if (selectedIWads.isEmpty()){
-                JOptionPane.showConfirmDialog(null, NO_I_WAD_SELECTED);
+                JOptionPane.showMessageDialog(null, NO_I_WAD_SELECTED);
                 return;
             }
             else if (selectedIWads.size() > 1)
@@ -75,7 +75,7 @@ public class StartWadsTab extends JPanel implements WadLoader2Tab{
     private Consumer<List<WadPack>> wadPackSelectedHandler(Game game){
         return selectedWadPacks -> {
             if (selectedWadPacks.isEmpty())
-                JOptionPane.showConfirmDialog(null, NO_WAD_PACK_SELECTED);
+                JOptionPane.showMessageDialog(null, NO_WAD_PACK_SELECTED);
             else if (selectedWadPacks.size() > 1)
                 //should never be reached because the corresponding CheckboxList should only allow single selection
                 throw new TooManyWadPacksException("Too many Wad-Packs selected!");
