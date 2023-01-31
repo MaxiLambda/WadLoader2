@@ -74,6 +74,7 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
         return wads -> {
             if(currentPack.isEmpty()) return;
             currentWads.addAll(wads);
+            allWads.unselectAll();
         };
     }
 
@@ -132,6 +133,7 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
             assert selectedWadPacks.size() < 2;
             if(selectedWadPacks.isEmpty()) return;
             currentPack = Optional.of(selectedWadPacks.get(0));
+            wadPacks.unselectAll();
             currentWads.clear();
             currentWads.addAll(currentPack.get()
                     .getWads()
@@ -141,6 +143,7 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
                     .filter(Optional::isPresent)
                     .map(Optional::get)
                     .toList());
+            currentWads.setListName(currentPack.get().getName());
             currentWads.revalidate();
             currentWads.repaint();
         };

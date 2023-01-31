@@ -115,4 +115,8 @@ public class CheckboxList<T> extends JPanel {
     public void setListName(String name){
         nameLbl.setText(name);
     }
+
+    public void unselectAll(){
+        itemsToCheckbox.values().forEach(checkBox -> checkBox.setSelected(false));
+    }
 }
