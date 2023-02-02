@@ -42,4 +42,7 @@ public class UIConstants {
     public static final String DELETE_RULES = "Delete rule(s)";
     public static final String CREATE_NEW_RULE = "Create new Rule";
     public static final String AMOUNT_TAG_RULE_CREATION_TEXT = "How many Wads with the selected Tag should be in a WadPack at %s?";
+    public static final String NEW_EXCLUSIVE_RULE_LABEL = "Define two sets. Wad-Packs can't contain Tads from both sets (it's okay if a tag is in both).";
+    public static final String FIRST_SET = "First Set";
+    public static final String SECOND_SET = "Second Set";
 }

@@ -5,17 +5,18 @@ import lincks.maximilian.wadloader2.ddd3domain.rules.WadPackRule;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.CREATE_NEW_RULE;
 
 public class NewRuleDialog extends JDialog {
 
     private final CompletableFuture<WadPackRule> ruleFuture;
-    private Optional<RulePanel> rulePanel = Optional.empty();
+    private RulePanel rulePanel;
 
     private NewRuleDialog(TagQuery tagQuery) {
         setTitle(CREATE_NEW_RULE);
@@ -28,31 +29,37 @@ public class NewRuleDialog extends JDialog {
 
         //TODO Maybe use selection Listener instead
         // show the right panel depending on selection
-        ruleTypeBox.addActionListener(e -> {
+        Consumer<ActionEvent> handler = e -> {
             RuleType typeOfNewRule = (RuleType) ruleTypeBox.getSelectedItem();
             optionsPanelWrapper.removeAll();
             rulePanel = switch (typeOfNewRule) {
-                case null -> Optional.empty();
-                case MinTagRule ->
-                        Optional.of(new NewAmountTagRulePanel(NewAmountTagRulePanel.Type.minTag, tagQuery.findAllNotUniqueRepos()));
+                case MinTagRule, null ->
+                        new NewAmountTagRulePanel(NewAmountTagRulePanel.Type.minTag, tagQuery.findAllInRepos());
                 case MaxTagRule ->
-                        Optional.of(new NewAmountTagRulePanel(NewAmountTagRulePanel.Type.maxTag, tagQuery.findAllUniqueRepos()));
-                //TODO
-                case ExclusiveTagRule -> Optional.empty();
-                case ExclusiveWadRule -> Optional.empty();
+                                new NewAmountTagRulePanel(NewAmountTagRulePanel.Type.maxTag, tagQuery.findAllInRepos());
+                case ExclusiveTagRule ->
+                        new NewExclusiveRulePanel(
+                                NewExclusiveRulePanel.Type.exclusiveTags,
+                                tagQuery.findAllInRepos(),
+                                tagQuery.findAllInRepos());
+                case ExclusiveWadRule -> new NewExclusiveRulePanel(
+                        NewExclusiveRulePanel.Type.exclusiveWad,
+                        tagQuery.findAllInWadTagRepo(),
+                        tagQuery.findAllInRepos());
             };
-            rulePanel.ifPresent(optionsPanelWrapper::add);
+            optionsPanelWrapper.add(rulePanel);
             pack();
-
-        });
+        };
+        ruleTypeBox.addActionListener(handler::accept);
 
         add(ruleTypeBox, BorderLayout.NORTH);
         add(optionsPanelWrapper);
         add(createRuleBtn, BorderLayout.SOUTH);
 
+        ruleTypeBox.setSelectedIndex(0);
+
         createRuleBtn.addActionListener(e -> {
-            rulePanel
-                    .flatMap(RulePanel::getRule)
+            rulePanel.getRule()
                     .ifPresent(ruleFuture::complete);
             dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         });
@@ -65,7 +72,6 @@ public class NewRuleDialog extends JDialog {
         });
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(300, 150);
         setLocationRelativeTo(null);
         setVisible(true);
     }

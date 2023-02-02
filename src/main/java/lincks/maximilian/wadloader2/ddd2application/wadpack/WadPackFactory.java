@@ -20,7 +20,6 @@ public class WadPackFactory {
     private final ContainsMinTagRuleReadWriteRepo minTagRuleRepo;
     private final ContainsMaxTagRuleReadWriteRepo maxTagRuleRepo;
     private final ExclusiveTagRuleReadWriteRepo exclusiveTagRuleRepo;
-    private final ExclusiveWadRuleReadWriteRepo exclusiveWadRuleRepo;
 
     private final WadPackReadWriteRepo wadPackRepo;
     private final WadReadWriteRepo wadRepo;
@@ -28,8 +27,7 @@ public class WadPackFactory {
         List<WadPackRule> brokenRules = Stream.of(
                 minTagRuleRepo,
                 maxTagRuleRepo,
-                exclusiveTagRuleRepo,
-                exclusiveWadRuleRepo)
+                exclusiveTagRuleRepo)
                 .map(AbstractReadWriteRepo::findAll)
                 .<WadPackRule>flatMap(List::stream)
                 .filter(StreamUtil.filter(

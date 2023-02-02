@@ -16,14 +16,12 @@ public class RuleFactory {
     private final ContainsMinTagRuleReadWriteRepo minTagRuleRepo;
     private final ContainsMaxTagRuleReadWriteRepo maxTagRuleRepo;
     private final ExclusiveTagRuleReadWriteRepo exclusiveTagRuleRepo;
-    private final ExclusiveWadRuleReadWriteRepo exclusiveWadRuleRepo;
 
     public void deleteRule(WadPackRule rule){
         switch (rule) {
             case ContainsMinTagRule minRule -> minTagRuleRepo.delete(minRule);
             case ContainsMaxTagRule maxRule -> maxTagRuleRepo.delete(maxRule);
             case ExclusiveTagRule exclusiveTagRule -> exclusiveTagRuleRepo.delete(exclusiveTagRule);
-            case ExclusiveWadRule exclusiveWadRule -> exclusiveWadRuleRepo.delete(exclusiveWadRule);
             default -> log.warning("Implement Handling for %s".formatted(rule.getClass().getName()));
         }
     }
@@ -33,7 +31,6 @@ public class RuleFactory {
             case ContainsMinTagRule minRule -> minTagRuleRepo.save(minRule);
             case ContainsMaxTagRule maxRule -> maxTagRuleRepo.save(maxRule);
             case ExclusiveTagRule exclusiveTagRule -> exclusiveTagRuleRepo.save(exclusiveTagRule);
-            case ExclusiveWadRule exclusiveWadRule -> exclusiveWadRuleRepo.save(exclusiveWadRule);
             default -> log.warning("Implement Handling for %s".formatted(rule.getClass().getName()));
         }
     }
@@ -42,8 +39,7 @@ public class RuleFactory {
         return Stream.of(
                 minTagRuleRepo,
                 maxTagRuleRepo,
-                exclusiveTagRuleRepo,
-                exclusiveWadRuleRepo)
+                exclusiveTagRuleRepo)
                 .map(AbstractReadWriteRepo::findAll)
                 .flatMap(List::stream)
                 .map(WadPackRule.class::cast)
