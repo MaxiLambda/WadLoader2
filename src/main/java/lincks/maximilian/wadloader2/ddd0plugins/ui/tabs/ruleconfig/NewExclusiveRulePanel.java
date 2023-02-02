@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.*;
+
 public class NewExclusiveRulePanel extends RulePanel{
 
     private final CheckboxList<Tag> firstSet;
@@ -21,10 +23,10 @@ public class NewExclusiveRulePanel extends RulePanel{
         setLayout(new BorderLayout());
         JPanel innerPanel = new JPanel();
         innerPanel.setLayout(new GridLayout(0,2));
-        JLabel ruleExplanation = new JLabel("Soem Text");
+        JLabel ruleExplanation = new JLabel(NEW_EXCLUSIVE_RULE_LABEL);
 
-        firstSet = new CheckboxList<>(availableTags1,"name", Map.of(),type.multiAllowed);
-        secondSet = new CheckboxList<>(availableTags2,"nuiame", Map.of(), true);
+        firstSet = new CheckboxList<>(availableTags1,FIRST_SET, Map.of(),type.multiAllowed);
+        secondSet = new CheckboxList<>(availableTags2,SECOND_SET, Map.of(), true);
 
         add(ruleExplanation, BorderLayout.NORTH);
         add(innerPanel, BorderLayout.CENTER);
