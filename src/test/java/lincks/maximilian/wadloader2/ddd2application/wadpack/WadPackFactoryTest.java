@@ -131,6 +131,19 @@ class WadPackFactoryTest {
     }
 
     @Test
+    void wadInEachSetExclusiveRuleTest(){
+        when(minTagRuleRepo.findAll()).thenReturn(List.of());
+        when(maxTagRuleRepo.findAll()).thenReturn(List.of());
+        when(exclusiveTagRuleRepo.findAll()).thenReturn(List.of(new ExclusiveTagRule(
+                List.of(new CustomTag(customTagName)),
+                List.of(new CustomTag(customTagName))
+        )));
+
+        wad1.addCustomTag(customTagName);
+        assertDoesNotThrow(() -> wadPackFactory.persistWadPack(wadPack));
+    }
+
+    @Test
     void persistWadPackExclusiveTagRuleSatisfiedEmpty() {
         when(minTagRuleRepo.findAll()).thenReturn(List.of());
         when(maxTagRuleRepo.findAll()).thenReturn(List.of());
