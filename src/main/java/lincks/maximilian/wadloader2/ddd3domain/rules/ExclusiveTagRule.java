@@ -5,6 +5,7 @@ import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.Tag;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -24,7 +25,7 @@ public class ExclusiveTagRule implements WadPackRule {
     @ElementCollection
     private Set<String> secondSet;
 
-    public ExclusiveTagRule(Set<Tag> firstSet, Set<Tag> secondSet) {
+    public ExclusiveTagRule(List<Tag> firstSet, List<Tag> secondSet) {
         this.firstSet = firstSet.stream().map(Tag::tagId).collect(Collectors.toSet());
         this.secondSet = secondSet.stream().map(Tag::tagId).collect(Collectors.toSet());
     }
