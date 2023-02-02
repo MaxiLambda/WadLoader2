@@ -20,9 +20,10 @@ public class ExclusiveTagRule implements WadPackRule {
     private int id;
 
     //swapping firstSet and secondSet does not change the result
-    @ElementCollection
+
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> firstSet;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> secondSet;
 
     public ExclusiveTagRule(List<Tag> firstSet, List<Tag> secondSet) {
