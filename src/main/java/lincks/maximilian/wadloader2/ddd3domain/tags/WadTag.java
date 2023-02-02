@@ -47,4 +47,9 @@ public class WadTag implements Tag{
     public int hashCode() {
         return Objects.hash(name,tagType());
     }
+
+    @Override
+    public String toString() {
+        return "%s (%s)".formatted(name, tagType);
+    }
 }
