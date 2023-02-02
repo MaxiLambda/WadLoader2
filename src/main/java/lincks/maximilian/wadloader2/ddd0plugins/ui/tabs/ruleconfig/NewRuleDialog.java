@@ -5,10 +5,12 @@ import lincks.maximilian.wadloader2.ddd3domain.rules.WadPackRule;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.CREATE_NEW_RULE;
 
@@ -28,12 +30,11 @@ public class NewRuleDialog extends JDialog {
 
         //TODO Maybe use selection Listener instead
         // show the right panel depending on selection
-        ruleTypeBox.addActionListener(e -> {
+        Consumer<ActionEvent> handler = e -> {
             RuleType typeOfNewRule = (RuleType) ruleTypeBox.getSelectedItem();
             optionsPanelWrapper.removeAll();
             rulePanel = switch (typeOfNewRule) {
-                case null -> Optional.empty();
-                case MinTagRule ->
+                case MinTagRule, null ->
                         Optional.of(new NewAmountTagRulePanel(NewAmountTagRulePanel.Type.minTag, tagQuery.findAllNotUniqueRepos()));
                 case MaxTagRule ->
                         Optional.of(new NewAmountTagRulePanel(NewAmountTagRulePanel.Type.maxTag, tagQuery.findAllUniqueRepos()));
@@ -42,13 +43,16 @@ public class NewRuleDialog extends JDialog {
                 case ExclusiveWadRule -> Optional.empty();
             };
             rulePanel.ifPresent(optionsPanelWrapper::add);
-            pack();
 
-        });
+            pack();
+        };
+        ruleTypeBox.addActionListener(handler::accept);
 
         add(ruleTypeBox, BorderLayout.NORTH);
         add(optionsPanelWrapper);
         add(createRuleBtn, BorderLayout.SOUTH);
+
+        ruleTypeBox.setSelectedIndex(0);
 
         createRuleBtn.addActionListener(e -> {
             rulePanel
@@ -65,7 +69,7 @@ public class NewRuleDialog extends JDialog {
         });
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(300, 150);
+        setSize(440, 179);
         setLocationRelativeTo(null);
         setVisible(true);
     }
