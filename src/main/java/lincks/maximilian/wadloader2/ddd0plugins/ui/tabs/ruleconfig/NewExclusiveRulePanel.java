@@ -17,14 +17,14 @@ public class NewExclusiveRulePanel extends RulePanel{
     private final CheckboxList<Tag> firstSet;
     private final CheckboxList<Tag> secondSet;
 
-    public NewExclusiveRulePanel(List<Tag> availableTags1, List<Tag> availableTags2, Type type){
+    public NewExclusiveRulePanel(Type type, List<Tag> availableTags1, List<Tag> availableTags2){
         setLayout(new BorderLayout());
         JPanel innerPanel = new JPanel(new GridLayout(0,2));
         JLabel ruleExplanation = new JLabel("Soem Text");
         firstSet = new CheckboxList<>(availableTags1,"name", Map.of(),type.multiAllowed);
         secondSet = new CheckboxList<>(availableTags2,"name", Map.of(), true);
 
-        innerPanel.add(firstSet,secondSet);
+        innerPanel.add(new JScrollPane(firstSet),new JScrollPane(secondSet));
 
         add(ruleExplanation, BorderLayout.NORTH);
         add(innerPanel, BorderLayout.CENTER);

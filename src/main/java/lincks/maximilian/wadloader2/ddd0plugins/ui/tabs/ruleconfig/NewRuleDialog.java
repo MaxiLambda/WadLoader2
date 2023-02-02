@@ -17,7 +17,7 @@ import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.CREATE_NEW
 public class NewRuleDialog extends JDialog {
 
     private final CompletableFuture<WadPackRule> ruleFuture;
-    private Optional<RulePanel> rulePanel = Optional.empty();
+    private RulePanel rulePanel;
 
     private NewRuleDialog(TagQuery tagQuery) {
         setTitle(CREATE_NEW_RULE);
@@ -35,14 +35,21 @@ public class NewRuleDialog extends JDialog {
             optionsPanelWrapper.removeAll();
             rulePanel = switch (typeOfNewRule) {
                 case MinTagRule, null ->
-                        Optional.of(new NewAmountTagRulePanel(NewAmountTagRulePanel.Type.minTag, tagQuery.findAllNotUniqueRepos()));
+                        new NewAmountTagRulePanel(NewAmountTagRulePanel.Type.minTag, tagQuery.findAllInRepos());
                 case MaxTagRule ->
-                        Optional.of(new NewAmountTagRulePanel(NewAmountTagRulePanel.Type.maxTag, tagQuery.findAllUniqueRepos()));
-                //TODO
-                case ExclusiveTagRule -> Optional.empty();
-                case ExclusiveWadRule -> Optional.empty();
+                                new NewAmountTagRulePanel(NewAmountTagRulePanel.Type.maxTag, tagQuery.findAllInRepos());
+
+                case ExclusiveTagRule ->
+                        new NewExclusiveRulePanel(
+                                NewExclusiveRulePanel.Type.exclusiveTags,
+                                tagQuery.findAllInWadTagRepo(),
+                                tagQuery.findAllInRepos());
+                case ExclusiveWadRule -> new NewExclusiveRulePanel(
+                        NewExclusiveRulePanel.Type.exclusiveWad,
+                        tagQuery.findAllInRepos(),
+                        tagQuery.findAllInRepos());
             };
-            rulePanel.ifPresent(optionsPanelWrapper::add);
+            optionsPanelWrapper.add(rulePanel);
 
             pack();
         };
@@ -55,8 +62,7 @@ public class NewRuleDialog extends JDialog {
         ruleTypeBox.setSelectedIndex(0);
 
         createRuleBtn.addActionListener(e -> {
-            rulePanel
-                    .flatMap(RulePanel::getRule)
+            rulePanel.getRule()
                     .ifPresent(ruleFuture::complete);
             dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         });

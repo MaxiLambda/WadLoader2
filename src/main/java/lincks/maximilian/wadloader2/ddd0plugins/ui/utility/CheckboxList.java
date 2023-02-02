@@ -29,7 +29,7 @@ public class CheckboxList<T> extends JPanel {
                     btn.addActionListener(e -> entry.getValue().accept(getSelected()));
                     return btn;
                 }).toList();
-        JPanel btnPanel = new JPanel(new GridLayout( callbacks.size(),0));
+        JPanel btnPanel = new JPanel(new GridLayout( Math.max(callbacks.size(),1) ,0));
         btns.forEach(btnPanel::add);
 
         addAll(items);
