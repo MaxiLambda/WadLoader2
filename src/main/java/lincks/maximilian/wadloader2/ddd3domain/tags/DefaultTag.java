@@ -3,7 +3,6 @@ package lincks.maximilian.wadloader2.ddd3domain.tags;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import org.hibernate.Hibernate;
 import org.springframework.data.annotation.Immutable;
 
 import java.nio.file.Path;
@@ -41,13 +40,13 @@ public class DefaultTag implements Tag {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        DefaultTag that = (DefaultTag) o;
-        return name != null && Objects.equals(name, that.name);
+        if (o == null) return false;
+        Tag that = (Tag) o;
+        return Objects.equals(tagId(), that.tagId());
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(name,tagType());
     }
 }

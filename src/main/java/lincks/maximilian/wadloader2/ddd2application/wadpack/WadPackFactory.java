@@ -17,20 +17,20 @@ public class WadPackFactory {
 
     //Todo write Test for WadPack-creation with rules
     //Positive and negative case, test where Pack is created, deleted, a rule is added and the building process fails
-    private final ContainsMinTagRuleRepo minTagRuleRepo;
-    private final ContainsMaxTagRuleRepo maxTagRuleRepo;
-    private final ExclusiveTagRuleRepo exclusiveTagRuleRepo;
-    private final ExclusiveWadRuleRepo exclusiveWadRuleRepo;
+    private final ContainsMinTagRuleReadWriteRepo minTagRuleRepo;
+    private final ContainsMaxTagRuleReadWriteRepo maxTagRuleRepo;
+    private final ExclusiveTagRuleReadWriteRepo exclusiveTagRuleRepo;
+    private final ExclusiveWadRuleReadWriteRepo exclusiveWadRuleRepo;
 
-    private final WadPackRepo wadPackRepo;
-    private final WadRepo wadRepo;
+    private final WadPackReadWriteRepo wadPackRepo;
+    private final WadReadWriteRepo wadRepo;
     public void persistWadPack(WadPack wadPack) throws InvalidWadPackConfigurationException {
         List<WadPackRule> brokenRules = Stream.of(
                 minTagRuleRepo,
                 maxTagRuleRepo,
                 exclusiveTagRuleRepo,
                 exclusiveWadRuleRepo)
-                .map(AbstractRepo::findAll)
+                .map(AbstractReadWriteRepo::findAll)
                 .<WadPackRule>flatMap(List::stream)
                 .filter(StreamUtil.filter(
                         tagRule -> tagRule.getPredicate(wadRepo),
@@ -47,5 +47,9 @@ public class WadPackFactory {
 
     public void deleteWadPack(WadPack wadPack) {
         wadPackRepo.delete(wadPack);
+    }
+
+    public WadPack newPack(WadPackBase base){
+        return new WadPack(base.name(),base.iWad(),wadPackRepo);
     }
 }

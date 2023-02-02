@@ -3,6 +3,8 @@ A Doom/ Doom2 GZDoom WadLoader which can manage your Wad Collection.
 
 You can manage your Wads with Tags and custom Wad-Packs.
 
+You have to set the Environemt Variable %GZDoom_Home% to the directory where your gzdoom.exe file is located.
+
 ## Layers
 
 * 0 Plugins

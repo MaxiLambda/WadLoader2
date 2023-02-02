@@ -1,7 +1,7 @@
 package lincks.maximilian.wadloader2.ddd3domain.rules;
 
 import jakarta.persistence.*;
-import lincks.maximilian.wadloader2.ddd3domain.repos.WadRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.Tag;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
 
@@ -36,7 +36,7 @@ public class ExclusiveWadRule implements WadPackRule {
     }
 
     @Override
-    public Predicate<WadPack> getPredicate(WadRepo wadRepo) {
+    public Predicate<WadPack> getPredicate(WadReadWriteRepo wadRepo) {
         return (WadPack wadPack) -> {
             Optional<Predicate<String>> forbiddenPredicate = forbiddenTagIds.stream()
                     .<Predicate<String>>map(tagId -> tagId::equals)

@@ -1,7 +1,11 @@
 package lincks.maximilian.wadloader2.ddd3domain.wads;
 
 import jakarta.persistence.*;
-import lincks.maximilian.wadloader2.ddd3domain.tags.*;
+import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
+import lincks.maximilian.wadloader2.ddd3domain.tags.DefaultTag;
+import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
+import lincks.maximilian.wadloader2.ddd3domain.tags.WadTag;
+import lincks.maximilian.wadloader2.ddd4abstraction.PathUtil;
 import lombok.Getter;
 
 import java.nio.file.Path;
@@ -32,7 +36,7 @@ public class Wad implements SingleWad {
     @JoinColumn(name = "Default_Tag_Name", nullable = false)
     private DefaultTag defaultTag;
 
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
             name = "Wad_Custom_Tags",
             joinColumns = {@JoinColumn(name = "path")},
@@ -43,11 +47,6 @@ public class Wad implements SingleWad {
     @Override
     public List<String> allWadIds() {
         return List.of(path);
-    }
-
-    @Override
-    public List<SingleWad> allWads() {
-        return List.of(this);
     }
 
     @Override
@@ -76,5 +75,10 @@ public class Wad implements SingleWad {
     public boolean equals(Object obj) {
         if(Objects.isNull(obj) || !(obj instanceof Wad)) return false;
         else return path.equals(((Wad) obj).path);
+    }
+
+    @Override
+    public String toString() {
+        return PathUtil.getFileName(path);
     }
 }

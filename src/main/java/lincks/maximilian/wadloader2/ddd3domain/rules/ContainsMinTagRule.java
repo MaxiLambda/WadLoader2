@@ -1,7 +1,7 @@
 package lincks.maximilian.wadloader2.ddd3domain.rules;
 
 import jakarta.persistence.*;
-import lincks.maximilian.wadloader2.ddd3domain.repos.WadRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.Tag;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
 
@@ -29,7 +29,7 @@ public class ContainsMinTagRule implements WadPackRule {
     protected ContainsMinTagRule(){}
 
     @Override
-    public Predicate<WadPack> getPredicate(WadRepo wadRepo) {
+    public Predicate<WadPack> getPredicate(WadReadWriteRepo wadRepo) {
         return (WadPack wadPack) -> {
             long countFilteredWads = TagRuleDomainService.getWadTagIds(wadPack,wadRepo)
                     .stream()
@@ -41,6 +41,6 @@ public class ContainsMinTagRule implements WadPackRule {
 
     @Override
     public String toString() {
-        return "ContainsMaxTagRule{\n filterTagId = \"%s\"\n minCount = \"%s\"}".formatted(filterTagId,minCount);
+        return "ContainsMinTagRule{%n filterTagId = \"%s\"%n minCount = \"%s\"}".formatted(filterTagId,minCount);
     }
 }

@@ -2,7 +2,7 @@ package lincks.maximilian.wadloader2.ddd2application.tags;
 
 import lincks.maximilian.wadloader2.ddd2application.wadpack.InvalidWadPackConfigurationException;
 import lincks.maximilian.wadloader2.ddd2application.wadpack.WadPackFactory;
-import lincks.maximilian.wadloader2.ddd3domain.repos.WadRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.Tag;
 import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
@@ -18,7 +18,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class CustomTagMarker {
-    private final WadRepo wadRepo;
+    private final WadReadWriteRepo wadRepo;
     private final WadPackFactory wadPackFactory;
 
     public boolean removeAllCustomTags(WadConfig wadConfig) throws InvalidWadPackConfigurationException {

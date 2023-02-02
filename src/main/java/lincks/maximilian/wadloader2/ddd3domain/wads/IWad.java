@@ -1,7 +1,11 @@
 package lincks.maximilian.wadloader2.ddd3domain.wads;
 
 import jakarta.persistence.*;
-import lincks.maximilian.wadloader2.ddd3domain.tags.*;
+import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
+import lincks.maximilian.wadloader2.ddd3domain.tags.DefaultTag;
+import lincks.maximilian.wadloader2.ddd3domain.tags.IWadTag;
+import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
+import lincks.maximilian.wadloader2.ddd4abstraction.PathUtil;
 import lombok.Getter;
 
 import java.nio.file.Path;
@@ -50,10 +54,6 @@ public class IWad implements SingleWad {
     }
 
     @Override
-    public List<SingleWad> allWads() {
-        return List.of(this);
-    }
-    @Override
     public List<ImmutableTag> tags() {
         return Stream.of(
                     List.of(wadTag,defaultTag),
@@ -71,5 +71,10 @@ public class IWad implements SingleWad {
     @Override
     public boolean removeCustomTag(String name) {
         return customTags.removeIf(tag -> tag.tagName().equals(name));
+    }
+
+    @Override
+    public String toString() {
+        return PathUtil.getFileName(path);
     }
 }

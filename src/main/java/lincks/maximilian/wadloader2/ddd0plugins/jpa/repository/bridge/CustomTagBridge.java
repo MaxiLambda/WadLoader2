@@ -1,14 +1,21 @@
 package lincks.maximilian.wadloader2.ddd0plugins.jpa.repository.bridge;
 
-import lincks.maximilian.wadloader2.ddd0plugins.jpa.repository.CustomTagSpringRepo;
-import lincks.maximilian.wadloader2.ddd3domain.repos.CustomTagRepo;
+import lincks.maximilian.wadloader2.ddd0plugins.jpa.repository.interfaces.JpaTagRepository;
+import lincks.maximilian.wadloader2.ddd3domain.repos.CustomTagReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public class CustomTagBridge extends AbstractBridge<CustomTag, String> implements CustomTagRepo {
+import java.util.List;
 
-    public CustomTagBridge(CustomTagSpringRepo repo) {
+@Repository
+public class CustomTagBridge extends AbstractBridge<CustomTag, String, JpaTagRepository<CustomTag, String>> implements CustomTagReadWriteRepo {
+
+    public CustomTagBridge(JpaTagRepository<CustomTag,String> repo) {
         super(repo);
+    }
+
+    @Override
+    public List<CustomTag> findByNameContaining(String name) {
+        return repo.findByNameContaining(name);
     }
 }

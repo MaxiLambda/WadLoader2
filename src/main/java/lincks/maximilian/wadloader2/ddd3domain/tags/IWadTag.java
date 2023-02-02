@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lincks.maximilian.wadloader2.ddd4abstraction.PathUtil;
-import org.hibernate.Hibernate;
 import org.springframework.data.annotation.Immutable;
 
 import java.nio.file.Path;
@@ -39,13 +38,13 @@ public class IWadTag implements Tag{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        IWadTag wadTag = (IWadTag) o;
-        return name != null && Objects.equals(name, wadTag.name);
+        if (o == null) return false;
+        Tag that = (Tag) o;
+        return Objects.equals(tagId(), that.tagId());
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(name,tagType());
     }
 }

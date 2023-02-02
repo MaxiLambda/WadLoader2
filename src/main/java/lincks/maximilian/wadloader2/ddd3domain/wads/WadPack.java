@@ -1,7 +1,7 @@
 package lincks.maximilian.wadloader2.ddd3domain.wads;
 
 import jakarta.persistence.*;
-import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.WadPackTag;
@@ -19,7 +19,7 @@ public class WadPack implements WadConfig {
 
     protected WadPack(){}
 
-    public WadPack(String name, IWad iwad, WadPackRepo wadPackService) throws WadPackTagException {
+    public WadPack(String name, IWad iwad, WadPackReadWriteRepo wadPackService) throws WadPackTagException {
         this.name = name;
         this.iwad = iwad.getPath();
         wadPackTag = new WadPackTag(name);
@@ -55,7 +55,7 @@ public class WadPack implements WadConfig {
     private WadPackTag wadPackTag;
 
     @Setter
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "Loadorder_Wad_Id_Mapping",
             joinColumns = {@JoinColumn(name = "Wad_Pack_Name", referencedColumnName = "Name")})
     @MapKeyColumn(name = "load_order")
@@ -110,5 +110,10 @@ public class WadPack implements WadConfig {
     public boolean equals(Object o){
         if (Objects.isNull(o) || !(o instanceof WadPack)) return false;
         else return name.equals(((WadPack) o).name);
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
