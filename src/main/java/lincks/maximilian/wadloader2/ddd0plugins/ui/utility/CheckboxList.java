@@ -34,10 +34,12 @@ public class CheckboxList<T> extends JPanel {
 
         addAll(items);
 
+        var sc = new JScrollPane(checkBoxPanel);
+        sc.getViewport().setPreferredSize(new Dimension(300,300));
 
         setLayout(new BorderLayout());
         add(nameLbl,BorderLayout.NORTH);
-        add(new JScrollPane(checkBoxPanel), BorderLayout.CENTER);
+        add(sc, BorderLayout.CENTER);
         add(btnPanel, BorderLayout.SOUTH);
     }
 
