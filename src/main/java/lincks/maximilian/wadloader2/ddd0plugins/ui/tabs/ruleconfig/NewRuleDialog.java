@@ -8,7 +8,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
@@ -38,19 +37,17 @@ public class NewRuleDialog extends JDialog {
                         new NewAmountTagRulePanel(NewAmountTagRulePanel.Type.minTag, tagQuery.findAllInRepos());
                 case MaxTagRule ->
                                 new NewAmountTagRulePanel(NewAmountTagRulePanel.Type.maxTag, tagQuery.findAllInRepos());
-
                 case ExclusiveTagRule ->
                         new NewExclusiveRulePanel(
                                 NewExclusiveRulePanel.Type.exclusiveTags,
-                                tagQuery.findAllInWadTagRepo(),
+                                tagQuery.findAllInRepos(),
                                 tagQuery.findAllInRepos());
                 case ExclusiveWadRule -> new NewExclusiveRulePanel(
                         NewExclusiveRulePanel.Type.exclusiveWad,
-                        tagQuery.findAllInRepos(),
+                        tagQuery.findAllInWadTagRepo(),
                         tagQuery.findAllInRepos());
             };
             optionsPanelWrapper.add(rulePanel);
-
             pack();
         };
         ruleTypeBox.addActionListener(handler::accept);
@@ -75,7 +72,6 @@ public class NewRuleDialog extends JDialog {
         });
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(440, 179);
         setLocationRelativeTo(null);
         setVisible(true);
     }
