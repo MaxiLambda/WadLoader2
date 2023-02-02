@@ -16,11 +16,11 @@ import java.util.List;
 @Service
 public class TagQuery {
 
-
     private final List<NamedItemsRepo<? extends Tag, String>> tagRepos;
     private final List<NamedItemsRepo<? extends Tag, String>> notUniqueTagRepos;
-
+    private final WadTagRepo wadTagRepo;
     public TagQuery(CustomTagReadWriteRepo customTagRepo, DefaultTagRepo defaultTagRepo, WadPackTagRepo wadPackTagRepo, IWadTagRepo iWadTagRepo, WadTagRepo wadTagRepo) {
+        this.wadTagRepo  =wadTagRepo;
         tagRepos = List.of(
                 customTagRepo,
                 defaultTagRepo,
@@ -31,7 +31,7 @@ public class TagQuery {
         notUniqueTagRepos = List.of(customTagRepo,defaultTagRepo);
     }
 
-    public List<Tag> findByNameUniqueRepos(String name){
+    public List<Tag> findByNameInRepos(String name){
         return tagRepos.stream()
                 .map(repo -> repo.findByNameContaining(name))
                 .flatMap(List::stream)
@@ -40,7 +40,7 @@ public class TagQuery {
                 .toList();
     }
 
-    public List<Tag> findAllUniqueRepos(){
+    public List<Tag> findAllInRepos(){
         return tagRepos.stream()
                 .map(ReadRepo::findAll)
                 .flatMap(List::stream)
@@ -49,7 +49,7 @@ public class TagQuery {
                 .toList();
     }
 
-    public List<Tag> findByNameNotUniqueRepos(String name){
+    public List<Tag> findByNameInNotUniqueRepos(String name){
         return notUniqueTagRepos.stream()
                 .map(repo -> repo.findByNameContaining(name))
                 .flatMap(List::stream)
@@ -58,11 +58,18 @@ public class TagQuery {
                 .toList();
     }
 
-    public List<Tag> findAllNotUniqueRepos(){
+    public List<Tag> findAllInNotUniqueRepos(){
         return notUniqueTagRepos.stream()
                 .map(ReadRepo::findAll)
                 .flatMap(List::stream)
                 .map(ImmutableTag::new)
+                .map(Tag.class::cast)
+                .toList();
+    }
+
+    public List<Tag> findAllInWadTagRepo(){
+        return wadTagRepo.findAll()
+                .stream()
                 .map(Tag.class::cast)
                 .toList();
     }
