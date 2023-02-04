@@ -27,8 +27,6 @@ public class NewRuleDialog extends JDialog {
         JPanel optionsPanelWrapper = new JPanel();
         JComboBox<RuleType> ruleTypeBox = new JComboBox<>(RuleType.values());
 
-        //TODO Maybe use selection Listener instead
-        // show the right panel depending on selection
         Consumer<ActionEvent> handler = e -> {
             RuleType typeOfNewRule = (RuleType) ruleTypeBox.getSelectedItem();
             optionsPanelWrapper.removeAll();
