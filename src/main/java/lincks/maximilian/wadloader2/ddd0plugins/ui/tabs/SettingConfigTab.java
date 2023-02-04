@@ -68,7 +68,4 @@ public class SettingConfigTab extends JPanel implements WadLoader2Tab {
     public void updateData() {
         //do nothing because the UI doesn't depend on data mutated by other tabs
     }
-    //TODO UI
-    // * Load IWads from Directory
-    // * Load Wads from Directory
 }

@@ -1,7 +1,13 @@
 package lincks.maximilian.wadloader2.ddd2application.wadpack.rules;
 
-import lincks.maximilian.wadloader2.ddd3domain.repos.*;
-import lincks.maximilian.wadloader2.ddd3domain.rules.*;
+import lincks.maximilian.wadloader2.ddd3domain.repos.AbstractReadWriteRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.ContainsMaxTagRuleReadWriteRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.ContainsMinTagRuleReadWriteRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.ExclusiveTagRuleReadWriteRepo;
+import lincks.maximilian.wadloader2.ddd3domain.rules.ContainsMaxTagRule;
+import lincks.maximilian.wadloader2.ddd3domain.rules.ContainsMinTagRule;
+import lincks.maximilian.wadloader2.ddd3domain.rules.ExclusiveTagRule;
+import lincks.maximilian.wadloader2.ddd3domain.rules.WadPackRule;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;

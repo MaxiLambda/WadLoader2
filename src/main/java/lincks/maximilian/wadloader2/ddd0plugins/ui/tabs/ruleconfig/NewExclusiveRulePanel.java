@@ -34,7 +34,6 @@ public class NewExclusiveRulePanel extends RulePanel{
         innerPanel.add(secondSet);
     }
 
-    //TODO
     @Override
     Optional<WadPackRule> getRule() {
         if(firstSet.getSelected().isEmpty() || secondSet.getSelected().isEmpty()) return Optional.empty();

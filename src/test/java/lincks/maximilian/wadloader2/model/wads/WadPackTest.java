@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 class WadPackTest {
-    //TODO write Test to check custom rule enforcement
 
     @Autowired
     WadPackReadWriteRepo wadPackService;
