@@ -21,7 +21,8 @@ public class CheckboxList<T> extends JPanel {
         this.allowMultiSelection = allowMultiSelection;
         nameLbl.setText(name);
 
-        checkBoxPanel = new JPanel(new GridLayout(0,1));
+        checkBoxPanel = new JPanel();
+        checkBoxPanel.setLayout(new BoxLayout(checkBoxPanel,BoxLayout.Y_AXIS));
         List<JButton> btns = callbacks.entrySet()
                 .stream()
                 .map(entry -> {
