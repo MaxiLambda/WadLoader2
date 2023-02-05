@@ -17,7 +17,7 @@ public class CheckboxList<T> extends JPanel {
     private final JPanel checkBoxPanel;
     private final boolean allowMultiSelection;
 
-    public CheckboxList(List<T> items, String name, Map<String,Consumer<List<T>>> callbacks, boolean allowMultiSelection){
+    public CheckboxList(List<T> items, String name, Map<String,Consumer<List<T>>> callbacks, boolean allowMultiSelection,JComponent customComponent){
         this.allowMultiSelection = allowMultiSelection;
         nameLbl.setText(name);
 
@@ -37,14 +37,21 @@ public class CheckboxList<T> extends JPanel {
         var sc = new JScrollPane(checkBoxPanel);
         sc.getViewport().setPreferredSize(new Dimension(300,300));
 
+        JPanel headerPanel = new JPanel(new GridLayout(0,1));
+        headerPanel.add(nameLbl);
+        headerPanel.add(customComponent);
         setLayout(new BorderLayout());
-        add(nameLbl,BorderLayout.NORTH);
+        add(headerPanel,BorderLayout.NORTH);
         add(sc, BorderLayout.CENTER);
         add(btnPanel, BorderLayout.SOUTH);
     }
 
+    public CheckboxList(List<T> items, String name, Map<String,Consumer<List<T>>> callbacks, boolean allowMultiSelection){
+       this(items,name,callbacks,allowMultiSelection,new JPanel());
+    }
+
     public CheckboxList(List<T> items, String name, Map<String,Consumer<List<T>>> callbacks){
-       this(items,name,callbacks,false);
+        this(items,name,callbacks,false);
     }
 
     public List<T> getAll(){
