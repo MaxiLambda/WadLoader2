@@ -18,12 +18,15 @@ public class UIBase extends JFrame {
     private final RuleConfigTab ruleTab;
     private final SettingConfigTab settingsTab;
 
+    private final TagTab tagTab;
+
     public void initUI() {
         setTitle(APP_TITLE);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         pane.addTab(START_GAME_TAB, null, startTab, START_GAME_TAB_TIP);
         pane.addTab(WAD_PACKS_TAB, null, wadPackTab, WAD_PACKS_TAB_TIP);
+        pane.addTab(TAG_TAB,null,tagTab,TAG_TAB_TIP);
         pane.addTab(RULE_TAB, null, ruleTab, RULE_TAB_TIPS);
         pane.addTab(SETTINGS_TAB, null, settingsTab, SETTINGS_TAB_TIP);
 
