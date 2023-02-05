@@ -12,7 +12,7 @@ import java.util.function.Consumer;
 
 public class CheckboxList<T> extends JPanel {
 
-    private final transient Map<T, JCheckBox> itemsToCheckbox = new HashMap<>();
+    protected final transient Map<T, JCheckBox> itemsToCheckbox = new HashMap<>();
     private final JLabel nameLbl = new JLabel();
     private final JPanel checkBoxPanel;
     private final boolean allowMultiSelection;
@@ -21,7 +21,8 @@ public class CheckboxList<T> extends JPanel {
         this.allowMultiSelection = allowMultiSelection;
         nameLbl.setText(name);
 
-        checkBoxPanel = new JPanel(new GridLayout(0,1));
+        checkBoxPanel = new JPanel();
+        checkBoxPanel.setLayout(new BoxLayout(checkBoxPanel,BoxLayout.Y_AXIS));
         List<JButton> btns = callbacks.entrySet()
                 .stream()
                 .map(entry -> {

@@ -4,6 +4,7 @@ import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.wadpackconfig.ChangeLoad
 import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.wadpackconfig.CreateWadPackDialog;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.wadpackconfig.exceptions.NoPackSelectedException;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.CheckboxList;
+import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.WadConfigFilterCheckBoxList;
 import lincks.maximilian.wadloader2.ddd1adapter.query.IWadQuery;
 import lincks.maximilian.wadloader2.ddd1adapter.query.WadPackQuery;
 import lincks.maximilian.wadloader2.ddd1adapter.query.WadQuery;
@@ -48,10 +49,10 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
 
         JPanel panel = new JPanel(new GridLayout(0,3));
         JButton createNewWadPackBtn = new JButton(CREATE_NEW_WAD_PACK);
-        //TODO create extra Class for each wad/iwad/pack CheckboxList
-        allWads = new CheckboxList<>(List.of(), WADS, Map.of(ADD_WAD, addWad()),true);
-        currentWads = new CheckboxList<>(List.of(), WADS_IN_PACK, Map.of( REMOVE_WAD, removeWad(), REMOVE_ALL_WADS, removeALlWads(),PERSIST_WAD_PACK, persistWadPack()),true);
-        wadPacks = new CheckboxList<>(List.of(), WAD_PACKS, Map.of(EDIT, editWadPack(),DELETE_WAD_PACK, deleteWadPack()));
+
+        allWads = WadConfigFilterCheckBoxList.of(List.of(), WADS, Map.of(ADD_WAD, addWad()),true);
+        currentWads = WadConfigFilterCheckBoxList.of(List.of(), WADS_IN_PACK, Map.of( REMOVE_WAD, removeWad(), REMOVE_ALL_WADS, removeALlWads(),PERSIST_WAD_PACK, persistWadPack()),true);
+        wadPacks = WadConfigFilterCheckBoxList.of(List.of(), WAD_PACKS, Map.of(EDIT, editWadPack(),DELETE_WAD_PACK, deleteWadPack()));
 
         createNewWadPackBtn.addActionListener(e -> CreateWadPackDialog
                 .of(iWadQuery.getAll())

@@ -2,6 +2,7 @@ package lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.startwads.lists;
 
 import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.startwads.exceptions.TooManyIWadsException;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.CheckboxList;
+import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.WadConfigFilterCheckBoxList;
 import lincks.maximilian.wadloader2.ddd2application.game.Game;
 import lincks.maximilian.wadloader2.ddd3domain.wads.IWad;
 
@@ -16,7 +17,7 @@ public class IWadsCheckboxList {
 
     private IWadsCheckboxList(){}
     public static CheckboxList<IWad> of(Game game){
-        return new CheckboxList<>(List.of(), I_WADS, Map.of( START_CONFIG, gameStartHandler(game)));
+        return WadConfigFilterCheckBoxList.of(List.of(), I_WADS, Map.of( START_CONFIG, gameStartHandler(game)));
     }
 
     private static Consumer<List<IWad>> gameStartHandler(Game game) {
