@@ -18,7 +18,6 @@ import java.awt.*;
 
 @Component
 public class StartWadsTab extends JPanel implements WadLoader2Tab{
-    //TODO add Searchbar and Logic to Search for Wads by Name and Tag
 
     private final CheckboxList<IWad> iWads;
     private final CheckboxList<Wad> wads;
