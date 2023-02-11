@@ -4,6 +4,7 @@ import lincks.maximilian.wadloader2.ddd2application.wadpack.InvalidWadPackConfig
 import lincks.maximilian.wadloader2.ddd2application.wadpack.WadPackFactory;
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
+import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.Tag;
 import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadConfig;
@@ -22,28 +23,35 @@ public class CustomTagMarker {
     private final WadPackFactory wadPackFactory;
 
     public boolean removeAllCustomTags(WadConfig wadConfig) throws InvalidWadPackConfigurationException {
-        List<CustomTag> customTags = wadConfig.customTags();
+        List<ImmutableTag> customTags = wadConfig.customTags();
         boolean anyFailed = customTags.stream()
+                .map(Tag::tagName)
                 .map(wadConfig::removeCustomTag)
                 .reduce(Boolean::logicalAnd)
                 .orElse(true);
 
-        persistCustomTagRemoval(wadConfig, customTags);
+        persistCustomTagRemoval(wadConfig, customTags.stream()
+                .map(ImmutableTag::tagName)
+                .map(CustomTag::new)
+                .toList());
         return anyFailed;
     }
 
     public boolean removeCustomTag(WadConfig wadConfig, String name) throws InvalidWadPackConfigurationException {
         //there should be only one Tag (max) left
-        List<CustomTag> customTag = wadConfig
+        List<ImmutableTag> customTag = wadConfig
                 .customTags()
                 .stream()
                 .filter(StreamUtil.filter(Tag::tagName,name::equals))
                 .toList();
         Optional<Boolean> failed = customTag.stream()
+                .map(Tag::tagName)
                 .map(wadConfig::removeCustomTag)
                 .reduce(Boolean::logicalAnd);
 
-        persistCustomTagRemoval(wadConfig, customTag);
+        persistCustomTagRemoval(wadConfig, customTag.stream()
+                .map(ImmutableTag::tagName)
+                .map(CustomTag::new).toList());
 
         return failed.orElseThrow(
                 () -> new DoesNotHaveTagException("%s does not have a customTag called %s".formatted(wadConfig,name)));

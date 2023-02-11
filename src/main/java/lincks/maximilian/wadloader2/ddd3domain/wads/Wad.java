@@ -17,7 +17,6 @@ import java.util.stream.Stream;
 @Getter
 public class Wad implements SingleWad {
     protected Wad(){}
-    //TODO evaluate if an Exception should be raised in case of a path not Ending with an allowed Extension
     public Wad(Path wadPath) {
         path = wadPath.toAbsolutePath().toString();
         wadTag = new WadTag(wadPath);
@@ -32,7 +31,7 @@ public class Wad implements SingleWad {
     @JoinColumn(name = "Wad_Tag", referencedColumnName = "name")
     private WadTag wadTag;
 
-    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToOne(fetch = FetchType.EAGER,cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "Default_Tag_Name", nullable = false)
     private DefaultTag defaultTag;
 

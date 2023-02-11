@@ -49,4 +49,5 @@ public class UIConstants {
     public static final String SECOND_SET = "Second Set";
     public static final String REMOVE_TAGS = "Remove Tag(s)";
     public static final String ADD_TAGS = "Add Tag(s)";
+    public static final String NEW_CUSTOM_TAG = "Enter the name of the tag to add.";
 }

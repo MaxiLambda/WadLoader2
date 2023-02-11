@@ -17,7 +17,7 @@ import java.awt.*;
 import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.*;
 
 @Component
-public class TagTab extends JFrame implements WadLoader2Tab {
+public class TagTab extends JPanel implements WadLoader2Tab {
 
     private final CheckboxList<IWad> iWads;
     private final CheckboxList<Wad> wads;
@@ -32,8 +32,8 @@ public class TagTab extends JFrame implements WadLoader2Tab {
         this.wadPackQuery = wadPackQuery;
 
         setLayout(new GridLayout(0,3));
-        iWads = WadConfigCheckboxList.of(WADS,customTagMarker);
-        wads = WadConfigCheckboxList.of(I_WADS,customTagMarker);
+        iWads = WadConfigCheckboxList.of(I_WADS,customTagMarker);
+        wads = WadConfigCheckboxList.of(WADS,customTagMarker);
         wadPacks = WadConfigCheckboxList.of(WAD_PACKS,customTagMarker);
 
         add(iWads);
