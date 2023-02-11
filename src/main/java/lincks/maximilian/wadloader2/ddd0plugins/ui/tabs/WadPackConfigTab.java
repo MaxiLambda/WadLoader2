@@ -58,6 +58,7 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
                 .of(iWadQuery.getAll())
                 .thenApply(base -> {
                     currentWads.setListName(base.name());
+                    currentWads.clear();
                     return wadPackFactory.newPack(base);})
                 .thenAccept(pack -> currentPack = Optional.of(pack))
         );
