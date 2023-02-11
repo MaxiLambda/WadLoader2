@@ -15,18 +15,18 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.REMOVE_TAGS;
+import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.REMOVE_TAGS_INSTRUCTION;
 
 public class RemoveTagsDialog extends JDialog {
-    private final CheckboxList<ImmutableTag> tagCheckboxList;
     private final Map<ImmutableTag, List<WadConfig>> tags;
     private final CustomTagMarker marker;
     public RemoveTagsDialog(Map<ImmutableTag, List<WadConfig>> tags, CustomTagMarker marker) {
         this.tags = tags;
-        this.tagCheckboxList = new CheckboxList<>(
+        CheckboxList<ImmutableTag> tagCheckboxList = new CheckboxList<>(
                 tags.keySet().stream().toList(),
-                REMOVE_TAGS,
+                REMOVE_TAGS_INSTRUCTION,
                 Map.of(REMOVE_TAGS, remove())
-                ,true);
+                , true);
         this.marker = marker;
 
         setTitle(REMOVE_TAGS);
