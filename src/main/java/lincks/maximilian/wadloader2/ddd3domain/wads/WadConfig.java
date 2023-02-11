@@ -26,11 +26,10 @@ public interface WadConfig {
 
     boolean removeCustomTag(String name) ;
 
-    default List<CustomTag> customTags(){
+    default List<ImmutableTag> customTags(){
         return tags()
                 .stream()
                 .filter(StreamUtil.filter(Tag::tagType, TagType.CUSTOM_TAG::equals))
-                .map(CustomTag.class::cast)
                 .toList();
     }
 

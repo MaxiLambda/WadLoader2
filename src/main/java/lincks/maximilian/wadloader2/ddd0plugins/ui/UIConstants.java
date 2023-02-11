@@ -9,10 +9,12 @@ public class UIConstants {
     public static final String SETTINGS_TAB = "Settings";
     public static final String START_GAME_TAB = "Home";
     public static final String WAD_PACKS_TAB = "Wad-Packs";
+    public static final String TAG_TAB = "Tags";
     public static final String RULE_TAB = "Rules";
     public static final String SETTINGS_TAB_TIP = "Manage Settings";
     public static final String START_GAME_TAB_TIP = "Start Doom";
     public static final String WAD_PACKS_TAB_TIP = "Manage your Wad-Packs";
+    public static final String TAG_TAB_TIP = "Manage custom Tags";
     public static final String RULE_TAB_TIPS = "Write rules for your Wad-Packs";
     public static final String WADS = "Wads";
     public static final String I_WADS = "IWads";
@@ -45,4 +47,7 @@ public class UIConstants {
     public static final String NEW_EXCLUSIVE_RULE_LABEL = "Define two sets. Wad-Packs can't contain Tads from both sets (it's okay if a tag is in both).";
     public static final String FIRST_SET = "First Set";
     public static final String SECOND_SET = "Second Set";
+    public static final String REMOVE_TAGS = "Remove Tag(s)";
+    public static final String ADD_TAGS = "Add Tag(s)";
+    public static final String NEW_CUSTOM_TAG = "Enter the name of the tag to add.";
 }

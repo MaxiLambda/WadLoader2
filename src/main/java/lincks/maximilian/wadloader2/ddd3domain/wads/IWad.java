@@ -36,11 +36,11 @@ public class IWad implements SingleWad {
     @JoinColumn(name = "I_Wad_Tag", referencedColumnName = "name")
     private IWadTag wadTag;
 
-    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToOne(fetch = FetchType.EAGER,cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "Default_Tag_Name", nullable = false)
     private DefaultTag defaultTag;
 
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
             name = "I_Wad_Custom_Tags",
             joinColumns = {@JoinColumn(name = "path")},

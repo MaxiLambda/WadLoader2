@@ -42,7 +42,7 @@ public class WadPack implements WadConfig {
     @Column(name = "i_wad")
     private String iwad;
 
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
             name = "Wad_Pack_Custom_Tags",
             joinColumns = {@JoinColumn(name = "pack_Name")},
