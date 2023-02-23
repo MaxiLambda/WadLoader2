@@ -94,14 +94,19 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
             if(currentWads.getAll().isEmpty()) return;
             try {
                 if(currentPack.isEmpty()) throw new NoPackSelectedException();
-                Map<Integer, String> order = new ChangeLoadOrderDialog(currentWads.getAll()).getLoadOrder().get();
+                Map<Integer, String> order = new ChangeLoadOrderDialog(currentWads.getAll())
+                        .getLoadOrder()
+                        .get();
                 WadPack pack = currentPack.get();
                 pack.setWads(order);
                 wadPackFactory.persistWadPack(pack);
                 wadPacks.put(currentPack.get());
             } catch (InvalidWadPackConfigurationException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
-            } catch (ExecutionException | InterruptedException | CancellationException e ) {
+            } catch (ExecutionException | CancellationException e ) {
+                JOptionPane.showMessageDialog(null, ABORTED_SAVE_WAD_PACK);
+            } catch (InterruptedException e){
+                Thread.currentThread().interrupt();
                 JOptionPane.showMessageDialog(null, ABORTED_SAVE_WAD_PACK);
             } catch (NoPackSelectedException e) {
                 JOptionPane.showMessageDialog(null, NO_PACK_SELECTED_ERROR);
