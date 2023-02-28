@@ -1,6 +1,6 @@
 package lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.ruleconfig;
 
-import lincks.maximilian.wadloader2.ddd1adapter.query.TagQuery;
+import lincks.maximilian.wadloader2.ddd2application.query.TagQuery;
 import lincks.maximilian.wadloader2.ddd3domain.rules.WadPackRule;
 
 import javax.swing.*;

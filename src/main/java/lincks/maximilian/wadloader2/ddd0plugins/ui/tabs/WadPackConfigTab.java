@@ -5,9 +5,9 @@ import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.wadpackconfig.CreateWadP
 import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.wadpackconfig.exceptions.NoPackSelectedException;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.CheckboxList;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.WadConfigFilterCheckBoxList;
-import lincks.maximilian.wadloader2.ddd1adapter.query.IWadQuery;
-import lincks.maximilian.wadloader2.ddd1adapter.query.WadPackQuery;
-import lincks.maximilian.wadloader2.ddd1adapter.query.WadQuery;
+import lincks.maximilian.wadloader2.ddd2application.query.IWadQuery;
+import lincks.maximilian.wadloader2.ddd2application.query.WadPackQuery;
+import lincks.maximilian.wadloader2.ddd2application.query.WadQuery;
 import lincks.maximilian.wadloader2.ddd2application.wadpack.InvalidWadPackConfigurationException;
 import lincks.maximilian.wadloader2.ddd2application.wadpack.WadPackFactory;
 import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;

@@ -4,9 +4,9 @@ import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.startwads.lists.IWadsChe
 import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.startwads.lists.WadPacksCheckBoxList;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.startwads.lists.WadsCheckBoxList;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.CheckboxList;
-import lincks.maximilian.wadloader2.ddd1adapter.query.IWadQuery;
-import lincks.maximilian.wadloader2.ddd1adapter.query.WadPackQuery;
-import lincks.maximilian.wadloader2.ddd1adapter.query.WadQuery;
+import lincks.maximilian.wadloader2.ddd2application.query.IWadQuery;
+import lincks.maximilian.wadloader2.ddd2application.query.WadPackQuery;
+import lincks.maximilian.wadloader2.ddd2application.query.WadQuery;
 import lincks.maximilian.wadloader2.ddd2application.game.Game;
 import lincks.maximilian.wadloader2.ddd3domain.wads.IWad;
 import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;

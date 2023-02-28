@@ -1,4 +1,4 @@
-package lincks.maximilian.wadloader2.ddd1adapter.query;
+package lincks.maximilian.wadloader2.ddd2application.query;
 
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
