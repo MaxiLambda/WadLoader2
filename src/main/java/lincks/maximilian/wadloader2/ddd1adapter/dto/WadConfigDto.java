@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public interface WadConfigDto {
+public sealed interface WadConfigDto permits SingleWadDto, WadPackDto {
     List<String> allWadIds();
     List<ImmutableTag> tags();
     default Set<ImmutableTag> customTags(){

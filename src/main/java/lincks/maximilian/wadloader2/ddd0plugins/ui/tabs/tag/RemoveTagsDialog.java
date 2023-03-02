@@ -1,11 +1,12 @@
 package lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.tag;
 
 import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.CheckboxList;
+import lincks.maximilian.wadloader2.ddd1adapter.dto.WadConfigDto;
+import lincks.maximilian.wadloader2.ddd1adapter.mapper.WadConfigMapper;
 import lincks.maximilian.wadloader2.ddd2application.tags.CustomTagMarker;
 import lincks.maximilian.wadloader2.ddd2application.tags.DoesNotHaveTagException;
 import lincks.maximilian.wadloader2.ddd2application.wadpack.InvalidWadPackConfigurationException;
 import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
-import lincks.maximilian.wadloader2.ddd3domain.wads.WadConfig;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,14 +19,14 @@ import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.REMOVE_TAG
 import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.REMOVE_TAGS_INSTRUCTION;
 
 public class RemoveTagsDialog extends JDialog {
-    private final Map<ImmutableTag, List<WadConfig>> tags;
+    private final Map<ImmutableTag, List<WadConfigDto>> tags;
     private final CustomTagMarker marker;
-    public RemoveTagsDialog(Map<ImmutableTag, List<WadConfig>> tags, CustomTagMarker marker) {
+    public RemoveTagsDialog(Map<ImmutableTag, List<WadConfigDto>> tags, CustomTagMarker marker, WadConfigMapper wadConfigMapper) {
         this.tags = tags;
         CheckboxList<ImmutableTag> tagCheckboxList = new CheckboxList<>(
                 tags.keySet().stream().toList(),
                 REMOVE_TAGS_INSTRUCTION,
-                Map.of(REMOVE_TAGS, remove())
+                Map.of(REMOVE_TAGS, remove(wadConfigMapper))
                 , true);
         this.marker = marker;
 
@@ -41,14 +42,14 @@ public class RemoveTagsDialog extends JDialog {
         setVisible(true);
     }
 
-    private Consumer<List<ImmutableTag>> remove() {
+    private Consumer<List<ImmutableTag>> remove(WadConfigMapper wadConfigMapper) {
         List<String> exceptions = new ArrayList<>();
         return selectedTags -> {
             selectedTags.forEach(tag -> tags
                     .get(tag)
                     .forEach(wadConfig -> {
                         try {
-                            marker.removeCustomTag(wadConfig, tag.tagName());
+                            marker.removeCustomTag(wadConfigMapper.fromDto(wadConfig), tag.tagName());
                         } catch (InvalidWadPackConfigurationException | DoesNotHaveTagException e) {
                             exceptions.add(e.getMessage());
                         }

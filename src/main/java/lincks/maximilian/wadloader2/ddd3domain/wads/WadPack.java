@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 @Table(name = "Wad_Packs")
 @Entity
 @Getter
-public class WadPack implements WadConfig {
+public final class WadPack implements WadConfig {
 
     protected WadPack(){}
 

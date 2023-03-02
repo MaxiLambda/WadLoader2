@@ -1,17 +1,15 @@
 package lincks.maximilian.wadloader2.ddd1adapter.query;
 
-import lincks.maximilian.wadloader2.ddd1adapter.WadMapper;
 import lincks.maximilian.wadloader2.ddd1adapter.dto.WadDto;
+import lincks.maximilian.wadloader2.ddd1adapter.mapper.WadMapper;
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.DefaultTag;
-import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;

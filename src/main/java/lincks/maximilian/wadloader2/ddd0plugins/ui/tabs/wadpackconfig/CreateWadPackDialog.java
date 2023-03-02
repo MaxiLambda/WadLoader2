@@ -1,8 +1,8 @@
 package lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.wadpackconfig;
 
 import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.wadpackconfig.exceptions.NoIwadExistsException;
+import lincks.maximilian.wadloader2.ddd1adapter.dto.IWadDto;
 import lincks.maximilian.wadloader2.ddd2application.wadpack.WadPackBase;
-import lincks.maximilian.wadloader2.ddd3domain.wads.IWad;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +17,7 @@ import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.SAVE_BTN;
 public class CreateWadPackDialog extends JDialog {
 
     private final transient CompletableFuture<WadPackBase> wadPackRuleFuture;
-    private CreateWadPackDialog(List<IWad> iWadList) {
+    private CreateWadPackDialog(List<IWadDto> iWadList) {
         if(iWadList.isEmpty()) throw new NoIwadExistsException();
 
         setTitle(CREATE_NEW_WAD_PACK);
@@ -26,7 +26,7 @@ public class CreateWadPackDialog extends JDialog {
 
         wadPackRuleFuture = new CompletableFuture<>();
         JTextField wadNameFieled = new JTextField();
-        JComboBox<IWad> iWadJComboBox = new JComboBox<>(iWadList.toArray(new IWad[0]));
+        JComboBox<IWadDto> iWadJComboBox = new JComboBox<>(iWadList.toArray(new IWadDto[0]));
         JButton saveBtn = new JButton(SAVE_BTN);
 
         iWadJComboBox.setSelectedIndex(0);
@@ -34,7 +34,7 @@ public class CreateWadPackDialog extends JDialog {
         saveBtn.addActionListener(e -> {
             String name = wadNameFieled.getText();
             if( name != null && !name.isEmpty()){
-                wadPackRuleFuture.complete(new WadPackBase(name, (IWad) iWadJComboBox.getSelectedItem()));
+                wadPackRuleFuture.complete(new WadPackBase(name, (IWadDto) iWadJComboBox.getSelectedItem()));
                 dispose();
             }
         });
@@ -56,7 +56,7 @@ public class CreateWadPackDialog extends JDialog {
         setVisible(true);
     }
 
-    public static CompletableFuture<WadPackBase> of(List<IWad> iWadList){
+    public static CompletableFuture<WadPackBase> of(List<IWadDto> iWadList){
         return new CreateWadPackDialog(iWadList).wadPackRuleFuture;
     }
 }

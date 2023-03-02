@@ -1,5 +1,7 @@
 package lincks.maximilian.wadloader2.ddd2application.wadpack;
 
+import lincks.maximilian.wadloader2.ddd1adapter.dto.WadPackDto;
+import lincks.maximilian.wadloader2.ddd1adapter.mapper.WadPackMapper;
 import lincks.maximilian.wadloader2.ddd3domain.repos.*;
 import lincks.maximilian.wadloader2.ddd3domain.rules.WadPackRule;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
@@ -20,6 +22,7 @@ public class WadPackFactory {
     private final ContainsMaxTagRuleReadWriteRepo maxTagRuleRepo;
     private final ExclusiveTagRuleReadWriteRepo exclusiveTagRuleRepo;
 
+    private final IWadReadWriteRepo iWadRepo;
     private final WadPackReadWriteRepo wadPackRepo;
     private final WadReadWriteRepo wadRepo;
     public void persistWadPack(WadPack wadPack) throws InvalidWadPackConfigurationException {
@@ -46,7 +49,7 @@ public class WadPackFactory {
         wadPackRepo.delete(wadPack);
     }
 
-    public WadPack newPack(WadPackBase base){
-        return new WadPack(base.name(),base.iWad(),wadPackRepo);
+    public WadPackDto newPack(WadPackBase base){
+        return WadPackMapper.toDto(new WadPack(base.name(),iWadRepo.findById(base.iWad().path()).get(),wadPackRepo));
     }
 }

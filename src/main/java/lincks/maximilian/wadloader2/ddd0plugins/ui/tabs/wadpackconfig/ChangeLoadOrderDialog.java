@@ -1,6 +1,6 @@
 package lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.wadpackconfig;
 
-import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
+import lincks.maximilian.wadloader2.ddd1adapter.dto.WadDto;
 import lincks.maximilian.wadloader2.ddd4abstraction.PathUtil;
 import lombok.Getter;
 
@@ -25,7 +25,7 @@ public class ChangeLoadOrderDialog extends JDialog {
     @Getter
     private transient CompletableFuture<Map<Integer, String>> loadOrder = new CompletableFuture<>();
 
-    public ChangeLoadOrderDialog(List<Wad> wads) {
+    public ChangeLoadOrderDialog(List<WadDto> wads) {
         setTitle(CHANGE_LOAD_ORDER_DIALOG_TITLE);
         setLayout(new BorderLayout());
         setModal(true);
@@ -40,17 +40,17 @@ public class ChangeLoadOrderDialog extends JDialog {
         JPanel spinners = new JPanel(new GridLayout(0,1));
         JButton saveLoadOrderBtn = new JButton(SAVE_BTN);
 
-        Map<Wad, JSpinner> wadLoadOrderSpinners = wads.stream().collect(
+        Map<WadDto, JSpinner> wadLoadOrderSpinners = wads.stream().collect(
                 Collectors.toMap(
                         Function.identity(),
                         ignore -> new JSpinner(new SpinnerNumberModel(0,0,wads.size() * 2,1))));
         wadLoadOrderSpinners.forEach((wad, spinner)-> {
-            spinners.add(new JLabel(PathUtil.getFileName(wad.getPath())));
+            spinners.add(new JLabel(PathUtil.getFileName(wad.path())));
             spinners.add(spinner);
         });
 
         saveLoadOrderBtn.addActionListener(e -> {
-            HashMap<Integer, Wad> accOrder = new HashMap<>();
+            HashMap<Integer, WadDto> accOrder = new HashMap<>();
             wadLoadOrderSpinners.forEach((key, value) -> {
                 //multiply with size to avoid collisions of up to wads.size() items
                 int pos = ((int) value.getValue()) * wads.size();
@@ -64,7 +64,7 @@ public class ChangeLoadOrderDialog extends JDialog {
             accOrder.entrySet()
                     .stream()
                     .sorted(Comparator.comparingInt(Map.Entry::getKey))
-                    .forEachOrdered(entry -> returnMap.put(counter.getAndIncrement(),entry.getValue().getPath()));
+                    .forEachOrdered(entry -> returnMap.put(counter.getAndIncrement(),entry.getValue().path()));
             loadOrder.complete(returnMap);
             //close the window
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
