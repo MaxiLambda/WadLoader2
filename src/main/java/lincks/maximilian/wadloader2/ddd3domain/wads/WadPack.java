@@ -21,7 +21,7 @@ public class WadPack implements WadConfig {
 
     public WadPack(String name, IWad iwad, WadPackReadWriteRepo wadPackService) throws WadPackTagException {
         this.name = name;
-        this.iwad = iwad.getPath();
+        this.iWad = iwad.getPath();
         wadPackTag = new WadPackTag(name);
         customTags = new HashSet<>();
         wads = new HashMap<>();
@@ -40,7 +40,7 @@ public class WadPack implements WadConfig {
     private String name;
 
     @Column(name = "i_wad")
-    private String iwad;
+    private String iWad;
 
     @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
@@ -81,7 +81,7 @@ public class WadPack implements WadConfig {
         return Stream.concat(
                 wads.values()
                         .stream(),
-                Stream.of(iwad)
+                Stream.of(iWad)
         ).toList();
     }
 
