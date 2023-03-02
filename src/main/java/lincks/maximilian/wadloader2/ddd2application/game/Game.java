@@ -1,7 +1,7 @@
 package lincks.maximilian.wadloader2.ddd2application.game;
 
-import lincks.maximilian.wadloader2.ddd2application.query.IWadQuery;
-import lincks.maximilian.wadloader2.ddd2application.query.WadQuery;
+import lincks.maximilian.wadloader2.ddd3domain.repos.IWadReadWriteRepo;
+import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.wads.IWad;
 import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
@@ -18,8 +18,8 @@ import java.util.stream.Stream;
 @Service
 public class Game {
     public static final String GZDOOM_HOME = "GZDoom_Home";
-    private final WadQuery wadwadQuery;
-    private final IWadQuery iWadQuery;
+    private final WadReadWriteRepo wadRepo;
+    private final IWadReadWriteRepo iWadRepo;
     public void start(IWad iWad, Wad... wads){
         String[] command =  Stream.concat(
                 Stream.of(
@@ -42,12 +42,12 @@ public class Game {
     }
 
     public void start(WadPack wadPack){
-        IWad iWad = iWadQuery.getById(wadPack.getIwad()).get();
+        IWad iWad = iWadRepo.findById(wadPack.getIWad()).orElseThrow(() -> new RuntimeException("No IWad found for WadPack"));
 
         List<Map.Entry<Integer,String>> wadLoadorder = new ArrayList<>(wadPack.getWads().entrySet());
         Wad[] wads = wadLoadorder.stream()
                 .map(Map.Entry::getValue)
-                .map(wadwadQuery::getById)
+                .map(wadRepo::findById)
                 .map(Optional::get)
                 .toList()
                 .toArray(new Wad[]{});
