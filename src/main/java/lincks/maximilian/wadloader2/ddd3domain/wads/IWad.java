@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 @Entity
 @Table(name = "I_Wads")
 @Getter
-public class IWad implements SingleWad {
+public non-sealed class IWad implements SingleWad {
 
     protected IWad(){}
 

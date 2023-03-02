@@ -13,7 +13,7 @@ import java.util.List;
  * Everything that consists of Wad(s).
  * Has its unique Tag.
 */
-public interface WadConfig {
+public sealed interface WadConfig permits WadPack, SingleWad{
     List<String> allWadIds();
 
     List<ImmutableTag> tags();

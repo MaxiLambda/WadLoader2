@@ -5,12 +5,14 @@ import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.wadpackconfig.CreateWadP
 import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.wadpackconfig.exceptions.NoPackSelectedException;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.CheckboxList;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.WadConfigFilterCheckBoxList;
+import lincks.maximilian.wadloader2.ddd1adapter.dto.WadDto;
+import lincks.maximilian.wadloader2.ddd1adapter.dto.WadPackDto;
+import lincks.maximilian.wadloader2.ddd1adapter.mapper.WadPackMapper;
 import lincks.maximilian.wadloader2.ddd1adapter.query.IWadQuery;
 import lincks.maximilian.wadloader2.ddd1adapter.query.WadPackQuery;
 import lincks.maximilian.wadloader2.ddd1adapter.query.WadQuery;
 import lincks.maximilian.wadloader2.ddd2application.wadpack.InvalidWadPackConfigurationException;
 import lincks.maximilian.wadloader2.ddd2application.wadpack.WadPackFactory;
-import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -32,18 +34,19 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
     private final transient WadPackFactory wadPackFactory;
     private final transient WadPackQuery wadPackQuery;
     private final transient WadQuery wadQuery;
-
-    private final CheckboxList<Wad> currentWads;
-    private final CheckboxList<Wad> allWads;
-    private final CheckboxList<WadPack> wadPacks;
+    private final WadPackMapper wadPackMapper;
+    private final CheckboxList<WadDto> currentWads;
+    private final CheckboxList<WadDto> allWads;
+    private final CheckboxList<WadPackDto> wadPacks;
 
     @Getter(value = AccessLevel.PRIVATE)
-    private transient Optional<WadPack> currentPack = Optional.empty();
+    private transient Optional<WadPackDto> currentPack = Optional.empty();
 
-    public WadPackConfigTab(WadPackFactory wadPackFactory, WadPackQuery wadPackQuery, WadQuery wadQuery, IWadQuery iWadQuery) {
+    public WadPackConfigTab(WadPackFactory wadPackFactory, WadPackQuery wadPackQuery, WadQuery wadQuery, IWadQuery iWadQuery, WadPackMapper wadPackMapper) {
         this.wadPackFactory = wadPackFactory;
         this.wadPackQuery = wadPackQuery;
         this.wadQuery = wadQuery;
+        this.wadPackMapper = wadPackMapper;
 
         setLayout(new BorderLayout());
 
@@ -72,7 +75,7 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
     }
 
 
-    private Consumer<List<Wad>> addWad(){
+    private Consumer<List<WadDto>> addWad(){
         return wads -> {
             allWads.unselectAll();
             if(currentPack.isEmpty()) return;
@@ -80,28 +83,33 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
         };
     }
 
-    private Consumer<List<Wad>> removeWad(){
+    private Consumer<List<WadDto>> removeWad(){
         //should always be present, otherwise there should be no currentWads to select from
         return wads -> wads.forEach(currentWads::remove);
     }
 
-    private Consumer<List<Wad>> removeALlWads(){
+    private Consumer<List<WadDto>> removeALlWads(){
         return ignore -> currentWads.clear();
     }
 
-    private Consumer<List<Wad>> persistWadPack() {
+    private Consumer<List<WadDto>> persistWadPack() {
         return wads -> {
             if(currentWads.getAll().isEmpty()) return;
             try {
                 if(currentPack.isEmpty()) throw new NoPackSelectedException();
-                Map<Integer, String> order = new ChangeLoadOrderDialog(currentWads.getAll()).getLoadOrder().get();
-                WadPack pack = currentPack.get();
+                Map<Integer, String> order = new ChangeLoadOrderDialog(currentWads.getAll())
+                        .getLoadOrder()
+                        .get();
+                WadPack pack = wadPackMapper.fromDto(currentPack.get());
                 pack.setWads(order);
                 wadPackFactory.persistWadPack(pack);
                 wadPacks.put(currentPack.get());
             } catch (InvalidWadPackConfigurationException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
-            } catch (ExecutionException | InterruptedException | CancellationException e ) {
+            } catch (ExecutionException | CancellationException e ) {
+                JOptionPane.showMessageDialog(null, ABORTED_SAVE_WAD_PACK);
+            } catch (InterruptedException e){
+                Thread.currentThread().interrupt();
                 JOptionPane.showMessageDialog(null, ABORTED_SAVE_WAD_PACK);
             } catch (NoPackSelectedException e) {
                 JOptionPane.showMessageDialog(null, NO_PACK_SELECTED_ERROR);
@@ -109,7 +117,7 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
         };
     }
 
-    private Consumer<List<WadPack>> deleteWadPack() {
+    private Consumer<List<WadPackDto>> deleteWadPack() {
         //should only be called with a list containing exactly one parameter due to wadPacks being of type single selection
         return selectedWadPacks -> {
             assert selectedWadPacks.size() < 2;
@@ -129,7 +137,7 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
         };
     }
 
-    private Consumer<List<WadPack>> editWadPack(){
+    private Consumer<List<WadPackDto>> editWadPack(){
         //should only be called with a list containing exactly one parameter due to wadPacks being of type single selection
         return selectedWadPacks -> {
             assert selectedWadPacks.size() < 2;
@@ -138,14 +146,14 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
             wadPacks.unselectAll();
             currentWads.clear();
             currentWads.addAll(currentPack.get()
-                    .getWads()
+                    .wads()
                     .values()
                     .stream()
                     .map(wadQuery::getById)
                     .filter(Optional::isPresent)
                     .map(Optional::get)
                     .toList());
-            currentWads.setListName(currentPack.get().getName());
+            currentWads.setListName(currentPack.get().name());
             currentWads.revalidate();
             currentWads.repaint();
         };

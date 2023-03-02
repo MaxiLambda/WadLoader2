@@ -1,5 +1,6 @@
 package lincks.maximilian.wadloader2.ddd1adapter.query;
 
+import lincks.maximilian.wadloader2.ddd1adapter.dto.WadConfigDto;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.Tag;
@@ -8,7 +9,7 @@ import lincks.maximilian.wadloader2.ddd4abstraction.StreamUtil;
 
 import java.util.*;
 
-public interface WadConfigQuery<T extends WadConfig> {
+public interface WadConfigQuery<T extends WadConfigDto> {
     List<T> getAll();
     void delete(T item);
     Set<T> getByCustomTags(Set<CustomTag> tags);

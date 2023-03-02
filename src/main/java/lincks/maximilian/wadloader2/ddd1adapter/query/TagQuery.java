@@ -70,6 +70,7 @@ public class TagQuery {
     public List<Tag> findAllInWadTagRepo(){
         return wadTagRepo.findAll()
                 .stream()
+                .map(ImmutableTag::new)
                 .map(Tag.class::cast)
                 .toList();
     }
