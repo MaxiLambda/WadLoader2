@@ -1,7 +1,7 @@
-package lincks.maximilian.wadloader2.ddd1adapter.query;
+package lincks.maximilian.wadloader2.ddd2application.search.query;
 
-import lincks.maximilian.wadloader2.ddd1adapter.dto.WadPackDto;
-import lincks.maximilian.wadloader2.ddd1adapter.mapper.WadPackMapper;
+import lincks.maximilian.wadloader2.ddd2application.search.dto.WadPackDto;
+import lincks.maximilian.wadloader2.ddd2application.search.mapper.WadPackMapper;
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lombok.RequiredArgsConstructor;

@@ -1,10 +1,9 @@
-package lincks.maximilian.wadloader2.ddd1adapter.query;
+package lincks.maximilian.wadloader2.ddd2application.search.query;
 
-import lincks.maximilian.wadloader2.ddd1adapter.dto.WadConfigDto;
+import lincks.maximilian.wadloader2.ddd2application.search.dto.WadConfigDto;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.Tag;
-import lincks.maximilian.wadloader2.ddd3domain.wads.WadConfig;
 import lincks.maximilian.wadloader2.ddd4abstraction.StreamUtil;
 
 import java.util.*;

@@ -1,4 +1,4 @@
-package lincks.maximilian.wadloader2.ddd1adapter.query;
+package lincks.maximilian.wadloader2.ddd2application.search.query;
 
 import lincks.maximilian.wadloader2.ddd3domain.repos.CustomTagReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.repos.NamedItemsRepo;

@@ -1,9 +1,9 @@
-package lincks.maximilian.wadloader2.ddd1adapter.mapper;
+package lincks.maximilian.wadloader2.ddd2application.search.mapper;
 
-import lincks.maximilian.wadloader2.ddd1adapter.dto.IWadDto;
-import lincks.maximilian.wadloader2.ddd1adapter.dto.WadConfigDto;
-import lincks.maximilian.wadloader2.ddd1adapter.dto.WadDto;
-import lincks.maximilian.wadloader2.ddd1adapter.dto.WadPackDto;
+import lincks.maximilian.wadloader2.ddd2application.search.dto.IWadDto;
+import lincks.maximilian.wadloader2.ddd2application.search.dto.WadConfigDto;
+import lincks.maximilian.wadloader2.ddd2application.search.dto.WadDto;
+import lincks.maximilian.wadloader2.ddd2application.search.dto.WadPackDto;
 import lincks.maximilian.wadloader2.ddd3domain.wads.IWad;
 import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadConfig;

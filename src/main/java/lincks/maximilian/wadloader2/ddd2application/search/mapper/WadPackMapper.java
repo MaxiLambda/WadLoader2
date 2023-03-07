@@ -1,7 +1,7 @@
-package lincks.maximilian.wadloader2.ddd1adapter.mapper;
+package lincks.maximilian.wadloader2.ddd2application.search.mapper;
 
-import lincks.maximilian.wadloader2.ddd1adapter.dto.WadPackDto;
-import lincks.maximilian.wadloader2.ddd1adapter.mapper.exceptions.WadPackNotFoundException;
+import lincks.maximilian.wadloader2.ddd2application.search.dto.WadPackDto;
+import lincks.maximilian.wadloader2.ddd2application.search.mapper.exceptions.WadPackNotFoundException;
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;

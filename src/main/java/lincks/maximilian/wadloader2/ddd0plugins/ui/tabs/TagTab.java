@@ -2,13 +2,13 @@ package lincks.maximilian.wadloader2.ddd0plugins.ui.tabs;
 
 import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.tag.WadConfigCheckboxList;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.CheckboxList;
-import lincks.maximilian.wadloader2.ddd1adapter.dto.IWadDto;
-import lincks.maximilian.wadloader2.ddd1adapter.dto.WadDto;
-import lincks.maximilian.wadloader2.ddd1adapter.dto.WadPackDto;
-import lincks.maximilian.wadloader2.ddd1adapter.mapper.WadConfigMapper;
-import lincks.maximilian.wadloader2.ddd1adapter.query.IWadQuery;
-import lincks.maximilian.wadloader2.ddd1adapter.query.WadPackQuery;
-import lincks.maximilian.wadloader2.ddd1adapter.query.WadQuery;
+import lincks.maximilian.wadloader2.ddd2application.search.dto.IWadDto;
+import lincks.maximilian.wadloader2.ddd2application.search.dto.WadDto;
+import lincks.maximilian.wadloader2.ddd2application.search.dto.WadPackDto;
+import lincks.maximilian.wadloader2.ddd2application.search.mapper.WadConfigMapper;
+import lincks.maximilian.wadloader2.ddd2application.search.query.IWadQuery;
+import lincks.maximilian.wadloader2.ddd2application.search.query.WadPackQuery;
+import lincks.maximilian.wadloader2.ddd2application.search.query.WadQuery;
 import lincks.maximilian.wadloader2.ddd2application.tags.CustomTagMarker;
 import org.springframework.stereotype.Component;
 

@@ -4,15 +4,15 @@ import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.startwads.lists.IWadsChe
 import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.startwads.lists.WadPacksCheckBoxList;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.startwads.lists.WadsCheckBoxList;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.CheckboxList;
-import lincks.maximilian.wadloader2.ddd1adapter.dto.IWadDto;
-import lincks.maximilian.wadloader2.ddd1adapter.dto.WadDto;
-import lincks.maximilian.wadloader2.ddd1adapter.dto.WadPackDto;
-import lincks.maximilian.wadloader2.ddd1adapter.mapper.IWadMapper;
-import lincks.maximilian.wadloader2.ddd1adapter.mapper.WadMapper;
-import lincks.maximilian.wadloader2.ddd1adapter.mapper.WadPackMapper;
-import lincks.maximilian.wadloader2.ddd1adapter.query.IWadQuery;
-import lincks.maximilian.wadloader2.ddd1adapter.query.WadPackQuery;
-import lincks.maximilian.wadloader2.ddd1adapter.query.WadQuery;
+import lincks.maximilian.wadloader2.ddd2application.search.dto.IWadDto;
+import lincks.maximilian.wadloader2.ddd2application.search.dto.WadDto;
+import lincks.maximilian.wadloader2.ddd2application.search.dto.WadPackDto;
+import lincks.maximilian.wadloader2.ddd2application.search.mapper.IWadMapper;
+import lincks.maximilian.wadloader2.ddd2application.search.mapper.WadMapper;
+import lincks.maximilian.wadloader2.ddd2application.search.mapper.WadPackMapper;
+import lincks.maximilian.wadloader2.ddd2application.search.query.IWadQuery;
+import lincks.maximilian.wadloader2.ddd2application.search.query.WadPackQuery;
+import lincks.maximilian.wadloader2.ddd2application.search.query.WadQuery;
 import lincks.maximilian.wadloader2.ddd2application.game.Game;
 import org.springframework.stereotype.Component;
 

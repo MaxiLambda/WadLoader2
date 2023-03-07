@@ -1,6 +1,6 @@
 package lincks.maximilian.wadloader2.ddd0plugins.ui.utility;
 
-import lincks.maximilian.wadloader2.ddd1adapter.dto.WadConfigDto;
+import lincks.maximilian.wadloader2.ddd2application.search.dto.WadConfigDto;
 import lincks.maximilian.wadloader2.ddd3domain.tags.Tag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.TagType;
 import lincks.maximilian.wadloader2.ddd4abstraction.StreamUtil;

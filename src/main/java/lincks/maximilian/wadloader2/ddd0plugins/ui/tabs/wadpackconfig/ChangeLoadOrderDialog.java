@@ -1,6 +1,6 @@
 package lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.wadpackconfig;
 
-import lincks.maximilian.wadloader2.ddd1adapter.dto.WadDto;
+import lincks.maximilian.wadloader2.ddd2application.search.dto.WadDto;
 import lincks.maximilian.wadloader2.ddd4abstraction.PathUtil;
 import lombok.Getter;
 

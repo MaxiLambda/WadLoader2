@@ -1,7 +1,7 @@
-package lincks.maximilian.wadloader2.ddd1adapter.query;
+package lincks.maximilian.wadloader2.ddd2application.search.query;
 
-import lincks.maximilian.wadloader2.ddd1adapter.dto.IWadDto;
-import lincks.maximilian.wadloader2.ddd1adapter.mapper.IWadMapper;
+import lincks.maximilian.wadloader2.ddd2application.search.dto.IWadDto;
+import lincks.maximilian.wadloader2.ddd2application.search.mapper.IWadMapper;
 import lincks.maximilian.wadloader2.ddd3domain.repos.IWadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.DefaultTag;
