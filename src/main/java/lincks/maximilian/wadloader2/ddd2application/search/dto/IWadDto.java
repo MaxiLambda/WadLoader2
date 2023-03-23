@@ -1,16 +1,19 @@
-package lincks.maximilian.wadloader2.ddd1adapter.dto;
+package lincks.maximilian.wadloader2.ddd2application.search.dto;
 
 import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
+import lincks.maximilian.wadloader2.ddd4abstraction.PathUtil;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
-public record WadDto(String path,
-                     ImmutableTag wadTag,
-                     ImmutableTag defaultTag,
-                     Set<ImmutableTag> customTags) implements SingleWadDto{
+public record IWadDto  (
+        String path,
+        ImmutableTag wadTag,
+        ImmutableTag defaultTag,
+        Set<ImmutableTag> customTags) implements SingleWadDto {
+
     @Override
     public ImmutableTag getDefaultTag() {
         return defaultTag;
@@ -26,5 +29,10 @@ public record WadDto(String path,
         return Stream.of(List.of(defaultTag, wadTag),customTags)
                 .flatMap(Collection::stream)
                 .toList();
+    }
+
+    @Override
+    public String toString() {
+        return PathUtil.getFileName(path);
     }
 }

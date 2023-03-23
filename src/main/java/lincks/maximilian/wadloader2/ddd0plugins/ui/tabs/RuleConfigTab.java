@@ -2,7 +2,7 @@ package lincks.maximilian.wadloader2.ddd0plugins.ui.tabs;
 
 import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.ruleconfig.NewRuleDialog;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.CheckboxList;
-import lincks.maximilian.wadloader2.ddd1adapter.query.TagQuery;
+import lincks.maximilian.wadloader2.ddd2application.search.query.TagQuery;
 import lincks.maximilian.wadloader2.ddd2application.wadpack.rules.RuleFactory;
 import lincks.maximilian.wadloader2.ddd3domain.rules.WadPackRule;
 import org.springframework.stereotype.Component;

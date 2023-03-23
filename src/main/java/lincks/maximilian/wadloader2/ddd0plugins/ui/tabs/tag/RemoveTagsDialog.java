@@ -1,8 +1,8 @@
 package lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.tag;
 
 import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.CheckboxList;
-import lincks.maximilian.wadloader2.ddd1adapter.dto.WadConfigDto;
-import lincks.maximilian.wadloader2.ddd1adapter.mapper.WadConfigMapper;
+import lincks.maximilian.wadloader2.ddd2application.search.dto.WadConfigDto;
+import lincks.maximilian.wadloader2.ddd2application.search.mapper.WadConfigMapper;
 import lincks.maximilian.wadloader2.ddd2application.tags.CustomTagMarker;
 import lincks.maximilian.wadloader2.ddd2application.tags.DoesNotHaveTagException;
 import lincks.maximilian.wadloader2.ddd2application.wadpack.InvalidWadPackConfigurationException;

@@ -1,8 +1,7 @@
-package lincks.maximilian.wadloader2.ddd1adapter.query;
+package lincks.maximilian.wadloader2.ddd2application.search.query;
 
-import lincks.maximilian.wadloader2.ddd1adapter.dto.SingleWadDto;
+import lincks.maximilian.wadloader2.ddd2application.search.dto.SingleWadDto;
 import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
-import lincks.maximilian.wadloader2.ddd3domain.wads.SingleWad;
 
 import java.util.List;
 import java.util.Map;

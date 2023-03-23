@@ -1,7 +1,7 @@
 package lincks.maximilian.wadloader2.ddd2application.wadpack;
 
-import lincks.maximilian.wadloader2.ddd1adapter.dto.WadPackDto;
-import lincks.maximilian.wadloader2.ddd1adapter.mapper.WadPackMapper;
+import lincks.maximilian.wadloader2.ddd2application.search.dto.WadPackDto;
+import lincks.maximilian.wadloader2.ddd2application.search.mapper.WadPackMapper;
 import lincks.maximilian.wadloader2.ddd3domain.repos.*;
 import lincks.maximilian.wadloader2.ddd3domain.rules.WadPackRule;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
