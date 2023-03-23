@@ -4,6 +4,7 @@ import lincks.maximilian.wadloader2.ddd2application.search.dto.WadPackDto;
 import lincks.maximilian.wadloader2.ddd2application.search.mapper.WadPackMapper;
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
+import lincks.maximilian.wadloader2.ddd3domain.wads.WadPackName;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class WadPackQuery implements WadConfigQuery<WadPackDto> {
     private final WadPackReadWriteRepo wadPackRepo;
 
     public void delete(WadPackDto wadPack){
-        wadPackRepo.deleteById(wadPack.name());
+        wadPackRepo.deleteByName(new WadPackName(wadPack.name()));
     }
 
     @Override
