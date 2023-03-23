@@ -3,11 +3,11 @@ package lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.startwads.lists;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.startwads.exceptions.TooManyIWadsException;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.CheckboxList;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.WadConfigFilterCheckBoxList;
+import lincks.maximilian.wadloader2.ddd2application.game.Game;
 import lincks.maximilian.wadloader2.ddd2application.search.dto.IWadDto;
 import lincks.maximilian.wadloader2.ddd2application.search.dto.WadDto;
 import lincks.maximilian.wadloader2.ddd2application.search.mapper.IWadMapper;
 import lincks.maximilian.wadloader2.ddd2application.search.mapper.WadMapper;
-import lincks.maximilian.wadloader2.ddd2application.game.Game;
 import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
 
 import javax.swing.*;
