@@ -4,6 +4,7 @@ import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.startwads.lists.IWadsChe
 import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.startwads.lists.WadPacksCheckBoxList;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.startwads.lists.WadsCheckBoxList;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.CheckboxList;
+import lincks.maximilian.wadloader2.ddd2application.game.Game;
 import lincks.maximilian.wadloader2.ddd2application.search.dto.IWadDto;
 import lincks.maximilian.wadloader2.ddd2application.search.dto.WadDto;
 import lincks.maximilian.wadloader2.ddd2application.search.dto.WadPackDto;
@@ -13,7 +14,6 @@ import lincks.maximilian.wadloader2.ddd2application.search.mapper.WadPackMapper;
 import lincks.maximilian.wadloader2.ddd2application.search.query.IWadQuery;
 import lincks.maximilian.wadloader2.ddd2application.search.query.WadPackQuery;
 import lincks.maximilian.wadloader2.ddd2application.search.query.WadQuery;
-import lincks.maximilian.wadloader2.ddd2application.game.Game;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;

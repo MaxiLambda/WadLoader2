@@ -3,9 +3,9 @@ package lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.startwads.lists;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.startwads.exceptions.TooManyWadPacksException;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.CheckboxList;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.WadConfigFilterCheckBoxList;
+import lincks.maximilian.wadloader2.ddd2application.game.Game;
 import lincks.maximilian.wadloader2.ddd2application.search.dto.WadPackDto;
 import lincks.maximilian.wadloader2.ddd2application.search.mapper.WadPackMapper;
-import lincks.maximilian.wadloader2.ddd2application.game.Game;
 
 import javax.swing.*;
 import java.util.List;
