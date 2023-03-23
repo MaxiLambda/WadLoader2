@@ -25,4 +25,9 @@ public record WadPackDto(String name,
                 .flatMap(Collection::stream)
                 .toList();
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

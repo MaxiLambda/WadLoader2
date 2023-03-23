@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 @Entity
 @Table(name = "Wads")
 @Getter
-public non-sealed class Wad implements SingleWad {
+public final class Wad implements SingleWad {
     protected Wad(){}
     public Wad(Path wadPath) {
         path = wadPath.toAbsolutePath().toString();
