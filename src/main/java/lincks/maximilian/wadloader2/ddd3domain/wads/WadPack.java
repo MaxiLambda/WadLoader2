@@ -1,7 +1,6 @@
 package lincks.maximilian.wadloader2.ddd3domain.wads;
 
 import jakarta.persistence.*;
-import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.WadPackTag;
@@ -12,32 +11,27 @@ import lombok.Setter;
 import java.util.*;
 import java.util.stream.Stream;
 
-@Table(name = "Wad_Packs")
+@Table(name = "Wad_Packs",
+uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 @Entity
 @Getter
 public final class WadPack implements WadConfig {
 
     protected WadPack(){}
-
-    public WadPack(String name, IWad iwad, WadPackReadWriteRepo wadPackService) throws WadPackTagException {
-        this.name = name;
+    public WadPack(String name, IWad iwad) throws WadPackTagException {
+        this.name = new WadPackName(name);
         this.iWad = iwad.getPath();
         wadPackTag = new WadPackTag(name);
         customTags = new HashSet<>();
         wads = new HashMap<>();
-
-        //validate
-        boolean isValidName = wadPackService.findAll()
-                .stream()
-                .map(WadPack::getWadPackTag)
-                .map(WadPackTag::tagName)
-                .anyMatch(tagName -> tagName.equals(name));
-        if (isValidName)
-            throw new WadPackTagException("A WadPack with the name %s already exists!".formatted(name));
     }
-
     @Id
-    private String name;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    long id;
+
+    @Embedded
+    @Column(name = "name")
+    private WadPackName name;
 
     @Column(name = "i_wad")
     private String iWad;
@@ -114,6 +108,6 @@ public final class WadPack implements WadConfig {
 
     @Override
     public String toString() {
-        return name;
+        return name.getName();
     }
 }
