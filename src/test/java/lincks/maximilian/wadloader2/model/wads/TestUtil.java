@@ -1,5 +1,9 @@
 package lincks.maximilian.wadloader2.model.wads;
 
+import lincks.maximilian.wadloader2.ddd2application.search.mapper.IWadMapper;
+import lincks.maximilian.wadloader2.ddd2application.search.mapper.WadPackMapper;
+import lincks.maximilian.wadloader2.ddd2application.wadpack.WadPackBase;
+import lincks.maximilian.wadloader2.ddd2application.wadpack.WadPackFactory;
 import lincks.maximilian.wadloader2.ddd3domain.repos.IWadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
@@ -34,7 +38,8 @@ public class TestUtil {
     }
 
     public static String wadPackName = "TestPack";
-    public static WadPack getWadPack(WadPackReadWriteRepo wadPackRepo){
-        return new WadPack(wadPackName,new IWad(iWadPath),wadPackRepo);
+    public static WadPack getWadPack(WadPackFactory factory,WadPackMapper wadPackMapper){
+        return wadPackMapper.fromDto(factory.newPack(new WadPackBase(wadPackName, IWadMapper.toDto(new IWad(iWadPath)))));
+
     }
 }
