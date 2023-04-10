@@ -26,23 +26,30 @@ public class WadPackFactory {
     private final WadPackReadWriteRepo wadPackRepo;
     private final WadReadWriteRepo wadRepo;
     public void persistWadPack(WadPack wadPack) throws InvalidWadPackConfigurationException {
-        List<WadPackRule> brokenRules = Stream.of(
+        List<WadPackRule> rules = Stream.of(
                 minTagRuleRepo,
                 maxTagRuleRepo,
                 exclusiveTagRuleRepo)
                 .map(AbstractReadWriteRepo::findAll)
-                .<WadPackRule>flatMap(List::stream)
+                .<WadPackRule>flatMap(List::stream).toList();
+
+        List<WadPackRule> brokenRules = brokenRules(wadPack, rules);
+
+        if(brokenRules.isEmpty())
+            wadPackRepo.save(wadPack);
+        else
+            throw InvalidWadPackConfigurationException.withBrokenRules(brokenRules);
+    }
+
+    private List<WadPackRule> brokenRules(WadPack wadPack, List<WadPackRule> rules){
+        return rules.
+                stream()
                 .filter(StreamUtil.filter(
                         tagRule -> tagRule.getPredicate(wadRepo),
                         Predicate::not,
                         rulePredicate -> rulePredicate.test(wadPack)
                 ))
                 .toList();
-
-        if(brokenRules.isEmpty())
-            wadPackRepo.save(wadPack);
-        else
-            throw InvalidWadPackConfigurationException.withBrokenRules(brokenRules);
     }
 
     public void deleteWadPack(WadPack wadPack) {
