@@ -14,9 +14,11 @@ public class WadLoadOrderId implements Serializable {
 
     private final WadPackName wadPackName;
     private final int loadOrder;
+    private final WadPath wadPath;
 
     protected WadLoadOrderId() {
         wadPackName = null;
         loadOrder = -1;
+        wadPath = null;
     }
 }

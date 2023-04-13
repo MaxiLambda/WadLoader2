@@ -56,23 +56,21 @@ public final class WadPack implements WadConfig {
     @JoinColumn(name = "Wad_Pack_Tag", referencedColumnName = "name")
     private WadPackTag wadPackTag;
 
-    @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
+    @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL},orphanRemoval = true)
     @Setter(AccessLevel.PRIVATE)
     private List<WadLoadOrder> loadOrder;
 
     public Map<Integer,WadPath> getWads(){
-        return loadOrder.stream().collect(Collectors.toMap(
-                (WadLoadOrder order) -> order.getId().getLoadOrder(),
-                WadLoadOrder::getWadPath
+        return loadOrder.stream().map(WadLoadOrder::getId).collect(Collectors.toMap(
+                WadLoadOrderId::getLoadOrder,
+                WadLoadOrderId::getWadPath
         ));
     }
 
     public void setWads(Map<Integer,WadPath> wads){
         setLoadOrder(new ArrayList<>(wads.entrySet()
                 .stream()
-                .map(entry -> new WadLoadOrder(
-                        new WadLoadOrderId(getWadPackName(), entry.getKey()),
-                        entry.getValue()))
+                .map(entry -> new WadLoadOrder(new WadLoadOrderId(getWadPackName(), entry.getKey(),entry.getValue())))
                 .toList()));
     }
 
@@ -85,7 +83,7 @@ public final class WadPack implements WadConfig {
         if(maxPosition == Integer.MAX_VALUE) throw new WadPackAddException();
         //increase to write to new max position
         maxPosition++;
-        loadOrder.add(new WadLoadOrder(new WadLoadOrderId(wadPackName,maxPosition),wad.getPath()));
+        loadOrder.add(new WadLoadOrder(new WadLoadOrderId(wadPackName,maxPosition,wad.getPath())));
     }
 
     @Override
