@@ -24,7 +24,7 @@ import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.SAVE_BTN;
 public class ChangeLoadOrderDialog extends JDialog {
 
     @Getter
-    private transient CompletableFuture<Map<Integer, WadPath>> loadOrder = new CompletableFuture<>();
+    private final transient CompletableFuture<Map<Integer, WadPath>> loadOrder = new CompletableFuture<>();
 
     public ChangeLoadOrderDialog(List<WadDto> wads) {
         setTitle(CHANGE_LOAD_ORDER_DIALOG_TITLE);

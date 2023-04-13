@@ -1,6 +1,5 @@
 package lincks.maximilian.wadloader2.model.wads;
 
-import lincks.maximilian.wadloader2.ddd0plugins.ui.UIBase;
 import lincks.maximilian.wadloader2.ddd3domain.repos.IWadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
@@ -10,8 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
 
 import java.util.List;
 import java.util.Map;
