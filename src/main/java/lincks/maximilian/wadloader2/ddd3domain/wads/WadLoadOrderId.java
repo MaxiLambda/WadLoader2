@@ -10,8 +10,7 @@ import java.io.Serializable;
 @Embeddable
 @RequiredArgsConstructor
 @Getter
-public
-class WadLoadOrderId implements Serializable {
+public class WadLoadOrderId implements Serializable {
 
     private final WadPackName wadPackName;
     private final int loadOrder;

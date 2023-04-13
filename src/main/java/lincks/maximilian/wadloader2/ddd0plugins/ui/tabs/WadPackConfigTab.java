@@ -107,12 +107,21 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
                         .getLoadOrder()
                         .get();
 
-                WadPack pack = getCurrentWadPack(currentPack.get());
+                WadPackDto currentDto = currentPack.get();
+                WadPackDto changedDto = new WadPackDto(
+                        currentDto.wadPackName(),
+                        currentDto.iWad(),
+                        currentDto.customTags(),
+                        currentDto.wadPackTag(),
+                        order);
 
+                WadPack pack = getCurrentWadPack(changedDto);
+                //set order again, because if the pack was already persisted the changes were not applied
                 pack.setWads(order);
 
                 wadPackFactory.persistWadPack(pack);
-                wadPacks.put(currentPack.get());
+                currentPack = Optional.empty();
+                updateData();
             } catch (InvalidWadPackConfigurationException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
             } catch (ExecutionException | CancellationException e ) {
