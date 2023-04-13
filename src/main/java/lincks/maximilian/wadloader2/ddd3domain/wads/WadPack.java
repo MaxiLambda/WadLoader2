@@ -56,7 +56,7 @@ public final class WadPack implements WadConfig {
     @JoinColumn(name = "Wad_Pack_Tag", referencedColumnName = "name")
     private WadPackTag wadPackTag;
 
-    @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
     @Setter(AccessLevel.PRIVATE)
     private List<WadLoadOrder> loadOrder;
 

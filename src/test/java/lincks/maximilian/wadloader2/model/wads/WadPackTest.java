@@ -85,4 +85,39 @@ class WadPackTest {
 
         assertEquals(3, pack.allWadIds().size());
     }
+
+    @Test
+    void changeWads(){
+        List<Wad> wads1 = TestUtil.addWadsSetup(wadService);
+        List<Wad> wads2 = TestUtil.addWadsSetup2(wadService);
+//        IWad iWad = TestUtil.addIWadSetup(iWadService);
+        WadPath wad1a = wads1.get(0).getPath();
+        WadPath wad1b = wads1.get(1).getPath();
+        WadPath wad2a = wads2.get(0).getPath();
+        WadPath wad2b = wads2.get(1).getPath();
+
+        WadPack pack = TestUtil.getWadPack(wadPackService);
+
+        //empty pack
+        wadPackService.save(pack);
+        assertEquals(1, pack.allWadIds().size());
+
+        //add two wads
+        pack.setWads(Map.of(0,wad1a,1,wad1b));
+        wadPackService.save(pack);
+        assertEquals(3,pack.allWadIds().size());
+        assert pack.allWadIds().containsAll(List.of(wad1a.getPath(),wad1b.getPath()));
+
+        //remove one
+        pack.setWads(Map.of(0,wad1b));
+        wadPackService.save(pack);
+        assertEquals(2,pack.allWadIds().size());
+        assert pack.allWadIds().contains(wad1b.getPath());
+
+        //add two new ones
+        pack.setWads(Map.of(0,wad1b,1,wad2a,2,wad2b));
+        wadPackService.save(pack);
+        assertEquals(4, pack.allWadIds().size());
+        assert pack.allWadIds().containsAll(List.of(wad1b.getPath(), wad2a.getPath(),wad2b.getPath()));
+    }
 }
