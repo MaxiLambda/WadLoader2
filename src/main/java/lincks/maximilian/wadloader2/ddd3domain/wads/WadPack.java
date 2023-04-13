@@ -21,15 +21,15 @@ public final class WadPack implements WadConfig {
 
     protected WadPack(){}
 
-    public WadPack(WadPackName wadPackName, IWad iwad, WadPackReadWriteRepo wadPackService) throws WadPackTagException {
+    public WadPack(WadPackName wadPackName, IWadPath iwad, WadPackReadWriteRepo wadPackRepo) throws WadPackTagException {
         this.wadPackName = wadPackName;
-        this.iWad = iwad.getPath();
+        this.iWad = iwad;
         wadPackTag = new WadPackTag(wadPackName.name);
         customTags = new HashSet<>();
         loadOrder = new ArrayList<>();
 
         //validate
-        boolean isValidName = wadPackService.findAll()
+        boolean isValidName = wadPackRepo.findAll()
                 .stream()
                 .map(WadPack::getWadPackTag)
                 .map(WadPackTag::tagName)
@@ -42,7 +42,7 @@ public final class WadPack implements WadConfig {
     WadPackName wadPackName;
 
     @Column(name = "i_wad")
-    private String iWad;
+    private IWadPath iWad;
 
     @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
@@ -56,7 +56,7 @@ public final class WadPack implements WadConfig {
     @JoinColumn(name = "Wad_Pack_Tag", referencedColumnName = "name")
     private WadPackTag wadPackTag;
 
-    @OneToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @Setter(AccessLevel.PRIVATE)
     private List<WadLoadOrder> loadOrder;
 
@@ -95,6 +95,7 @@ public final class WadPack implements WadConfig {
                         .stream()
                         .map(WadPath::getPath),
                 Stream.of(iWad)
+                        .map(IWadPath::getPath)
         ).toList();
     }
 

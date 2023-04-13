@@ -5,6 +5,7 @@ import lincks.maximilian.wadloader2.ddd2application.search.mapper.IWadMapper;
 import lincks.maximilian.wadloader2.ddd3domain.repos.IWadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.DefaultTag;
+import lincks.maximilian.wadloader2.ddd3domain.wads.IWadPath;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +34,7 @@ public class IWadQuery implements SingleWadQuery<IWadDto> {
 
     @Override
     public Optional<IWadDto> getById(String id) {
-        return iWadRepo.findById(id).map(IWadMapper::toDto);
+        return iWadRepo.findById(new IWadPath(id)).map(IWadMapper::toDto);
     }
 
     @Override

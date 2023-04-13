@@ -8,11 +8,13 @@ import lincks.maximilian.wadloader2.ddd0plugins.ui.utility.WadConfigFilterCheckB
 import lincks.maximilian.wadloader2.ddd2application.search.dto.WadDto;
 import lincks.maximilian.wadloader2.ddd2application.search.dto.WadPackDto;
 import lincks.maximilian.wadloader2.ddd2application.search.mapper.WadPackMapper;
+import lincks.maximilian.wadloader2.ddd2application.search.mapper.exceptions.WadPackNotFoundException;
 import lincks.maximilian.wadloader2.ddd2application.search.query.IWadQuery;
 import lincks.maximilian.wadloader2.ddd2application.search.query.WadPackQuery;
 import lincks.maximilian.wadloader2.ddd2application.search.query.WadQuery;
 import lincks.maximilian.wadloader2.ddd2application.wadpack.InvalidWadPackConfigurationException;
 import lincks.maximilian.wadloader2.ddd2application.wadpack.WadPackFactory;
+import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPath;
 import lombok.AccessLevel;
@@ -35,19 +37,22 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
     private final transient WadPackFactory wadPackFactory;
     private final transient WadPackQuery wadPackQuery;
     private final transient WadQuery wadQuery;
-    private final WadPackMapper wadPackMapper;
+    private final transient WadPackMapper wadPackMapper;
     private final CheckboxList<WadDto> currentWads;
     private final CheckboxList<WadDto> allWads;
     private final CheckboxList<WadPackDto> wadPacks;
+    private final transient WadPackReadWriteRepo wadPackRepo;
 
     @Getter(value = AccessLevel.PRIVATE)
     private transient Optional<WadPackDto> currentPack = Optional.empty();
 
-    public WadPackConfigTab(WadPackFactory wadPackFactory, WadPackQuery wadPackQuery, WadQuery wadQuery, IWadQuery iWadQuery, WadPackMapper wadPackMapper) {
+
+    public WadPackConfigTab(WadPackFactory wadPackFactory, WadPackQuery wadPackQuery, WadQuery wadQuery, IWadQuery iWadQuery, WadPackMapper wadPackMapper, WadPackReadWriteRepo wadPackRepo) {
         this.wadPackFactory = wadPackFactory;
         this.wadPackQuery = wadPackQuery;
         this.wadQuery = wadQuery;
         this.wadPackMapper = wadPackMapper;
+        this.wadPackRepo = wadPackRepo;
 
         setLayout(new BorderLayout());
 
@@ -101,7 +106,8 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
                 Map<Integer, WadPath> order = new ChangeLoadOrderDialog(currentWads.getAll())
                         .getLoadOrder()
                         .get();
-                WadPack pack = wadPackMapper.fromDto(currentPack.get());
+
+                WadPack pack = getCurrentWadPack(currentPack.get());
 
                 pack.setWads(order);
 
@@ -118,6 +124,16 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
                 JOptionPane.showMessageDialog(null, NO_PACK_SELECTED_ERROR);
             }
         };
+    }
+
+    private WadPack getCurrentWadPack(WadPackDto packDto){
+        try{
+            //fails if the pack does not exist
+            return wadPackMapper.fromDto(packDto);
+        }catch (WadPackNotFoundException e){
+            //create the pack directly
+            return new WadPack(packDto.wadPackName(),packDto.iWad(),wadPackRepo);
+        }
     }
 
     private Consumer<List<WadPackDto>> deleteWadPack() {

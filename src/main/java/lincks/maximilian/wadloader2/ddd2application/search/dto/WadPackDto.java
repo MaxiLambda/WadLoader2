@@ -1,6 +1,7 @@
 package lincks.maximilian.wadloader2.ddd2application.search.dto;
 
 import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
+import lincks.maximilian.wadloader2.ddd3domain.wads.IWadPath;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPackName;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPath;
 
@@ -11,7 +12,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 public record WadPackDto(WadPackName wadPackName,
-                         String iWad,
+                         IWadPath iWad,
                          Set<ImmutableTag> customTags,
                          ImmutableTag wadPackTag,
                          Map<Integer, WadPath> wads

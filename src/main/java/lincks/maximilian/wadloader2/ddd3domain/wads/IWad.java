@@ -23,14 +23,14 @@ public final class IWad implements SingleWad {
     protected IWad(){}
 
     public IWad(Path wadPath){
-        path = wadPath.toAbsolutePath().toString();
+        path = new IWadPath(wadPath.toAbsolutePath().toString());
         wadTag = new IWadTag(wadPath);
         defaultTag = new DefaultTag(wadPath);
         customTags = new HashSet<>();
     }
 
-    @Id
-    private String path;
+    @EmbeddedId
+    private IWadPath path;
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "I_Wad_Tag", referencedColumnName = "name")
@@ -50,7 +50,7 @@ public final class IWad implements SingleWad {
 
     @Override
     public List<String> allWadIds() {
-        return List.of(path);
+        return List.of(path.getPath());
     }
 
     @Override
@@ -75,6 +75,6 @@ public final class IWad implements SingleWad {
 
     @Override
     public String toString() {
-        return PathUtil.getFileName(path);
+        return PathUtil.getFileName(path.getPath());
     }
 }

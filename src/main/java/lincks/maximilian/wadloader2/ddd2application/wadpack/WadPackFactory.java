@@ -51,6 +51,6 @@ public class WadPackFactory {
     }
 
     public WadPackDto newPack(WadPackBase base){
-        return WadPackMapper.toDto(new WadPack(new WadPackName(base.name()),iWadRepo.findById(base.iWad().path()).get(),wadPackRepo));
+        return WadPackMapper.toDto(new WadPack(new WadPackName(base.name()),base.iWad().path(),wadPackRepo));
     }
 }

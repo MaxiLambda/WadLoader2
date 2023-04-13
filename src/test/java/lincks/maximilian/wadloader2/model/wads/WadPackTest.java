@@ -41,7 +41,7 @@ class WadPackTest {
     @Test
     void createWadPack(){
         IWad iWad = TestUtil.addIWadSetup(iWadService);
-        WadPack pack = new WadPack(wadPackName,iWad, wadPackService);
+        WadPack pack = new WadPack(wadPackName,iWad.getPath(), wadPackService);
 
         TestUtil.addWadsSetup(wadService)
                 .forEach(pack::addWad);
@@ -64,7 +64,7 @@ class WadPackTest {
     @Test
     void addWadToPackWithMaxInt(){
         IWad iWad = TestUtil.addIWadSetup(iWadService);
-        WadPack pack = new WadPack(wadPackName,iWad, wadPackService);
+        WadPack pack = new WadPack(wadPackName,iWad.getPath(), wadPackService);
         List<Wad> wads = TestUtil.addWadsSetup(wadService);
 
 
@@ -77,7 +77,7 @@ class WadPackTest {
     @Test
     void addWadToPack(){
         IWad iWad = TestUtil.addIWadSetup(iWadService);
-        WadPack pack = new WadPack(wadPackName,iWad, wadPackService);
+        WadPack pack = new WadPack(wadPackName,iWad.getPath(), wadPackService);
         List<Wad> wads = TestUtil.addWadsSetup(wadService);
 
         pack.setWads(Map.of(1, wads.get(0).getPath()));

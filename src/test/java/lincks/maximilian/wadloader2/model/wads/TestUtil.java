@@ -3,10 +3,7 @@ package lincks.maximilian.wadloader2.model.wads;
 import lincks.maximilian.wadloader2.ddd3domain.repos.IWadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
-import lincks.maximilian.wadloader2.ddd3domain.wads.IWad;
-import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
-import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
-import lincks.maximilian.wadloader2.ddd3domain.wads.WadPackName;
+import lincks.maximilian.wadloader2.ddd3domain.wads.*;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -36,6 +33,6 @@ public class TestUtil {
 
     public static WadPackName wadPackName = new WadPackName("TestPack");
     public static WadPack getWadPack(WadPackReadWriteRepo wadPackRepo){
-        return new WadPack(wadPackName,new IWad(iWadPath),wadPackRepo);
+        return new WadPack(wadPackName,new IWadPath(iWadPath.toString()),wadPackRepo);
     }
 }
