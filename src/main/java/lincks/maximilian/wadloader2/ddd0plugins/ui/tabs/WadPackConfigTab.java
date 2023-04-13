@@ -13,6 +13,8 @@ import lincks.maximilian.wadloader2.ddd2application.search.query.WadPackQuery;
 import lincks.maximilian.wadloader2.ddd2application.search.query.WadQuery;
 import lincks.maximilian.wadloader2.ddd2application.wadpack.InvalidWadPackConfigurationException;
 import lincks.maximilian.wadloader2.ddd2application.wadpack.WadPackFactory;
+import lincks.maximilian.wadloader2.ddd3domain.wads.WadLoadOrder;
+import lincks.maximilian.wadloader2.ddd3domain.wads.WadLoadOrderId;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -101,7 +103,9 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
                         .getLoadOrder()
                         .get();
                 WadPack pack = wadPackMapper.fromDto(currentPack.get());
+
                 pack.setWads(order);
+
                 wadPackFactory.persistWadPack(pack);
                 wadPacks.put(currentPack.get());
             } catch (InvalidWadPackConfigurationException e) {
@@ -153,7 +157,7 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
                     .filter(Optional::isPresent)
                     .map(Optional::get)
                     .toList());
-            currentWads.setListName(currentPack.get().name());
+            currentWads.setListName(currentPack.get().wadPackName().name);
             currentWads.revalidate();
             currentWads.repaint();
         };

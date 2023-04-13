@@ -17,7 +17,7 @@ public class WadPackQuery implements WadConfigQuery<WadPackDto> {
     private final WadPackReadWriteRepo wadPackRepo;
 
     public void delete(WadPackDto wadPack){
-        wadPackRepo.deleteById(wadPack.name());
+        wadPackRepo.deleteById(wadPack.wadPackName());
     }
 
     @Override

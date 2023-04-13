@@ -1,17 +1,17 @@
 package lincks.maximilian.wadloader2.model.wads;
 
+import lincks.maximilian.wadloader2.ddd0plugins.ui.UIBase;
 import lincks.maximilian.wadloader2.ddd3domain.repos.IWadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadPackReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.exception.WadPackTagException;
-import lincks.maximilian.wadloader2.ddd3domain.wads.IWad;
-import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
-import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
-import lincks.maximilian.wadloader2.ddd3domain.wads.WadPackAddException;
+import lincks.maximilian.wadloader2.ddd3domain.wads.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 
 import java.util.List;
 import java.util.Map;
@@ -19,7 +19,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@SpringBootTest
+@SpringBootTest(useMainMethod = SpringBootTest.UseMainMethod.ALWAYS)
 class WadPackTest {
 
     @Autowired
@@ -39,7 +39,7 @@ class WadPackTest {
         iWadService.deleteAll();
     }
 
-    String wadPackName = "BestPackEver <3";
+    WadPackName wadPackName = new WadPackName("BestPackEver <3");
 
     @Test
     void createWadPack(){

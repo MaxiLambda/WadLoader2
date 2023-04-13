@@ -6,10 +6,12 @@ import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.WadPackTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.exception.WadPackTagException;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Table(name = "Wad_Packs")
@@ -19,25 +21,25 @@ public final class WadPack implements WadConfig {
 
     protected WadPack(){}
 
-    public WadPack(String name, IWad iwad, WadPackReadWriteRepo wadPackService) throws WadPackTagException {
-        this.name = name;
+    public WadPack(WadPackName wadPackName, IWad iwad, WadPackReadWriteRepo wadPackService) throws WadPackTagException {
+        this.wadPackName = wadPackName;
         this.iWad = iwad.getPath();
-        wadPackTag = new WadPackTag(name);
+        wadPackTag = new WadPackTag(wadPackName.name);
         customTags = new HashSet<>();
-        wads = new HashMap<>();
+        loadOrder = new ArrayList<>();
 
         //validate
         boolean isValidName = wadPackService.findAll()
                 .stream()
                 .map(WadPack::getWadPackTag)
                 .map(WadPackTag::tagName)
-                .anyMatch(tagName -> tagName.equals(name));
+                .anyMatch(tagName -> tagName.equals(wadPackName.name));
         if (isValidName)
-            throw new WadPackTagException("A WadPack with the name %s already exists!".formatted(name));
+            throw new WadPackTagException("A WadPack with the wadPackName %s already exists!".formatted(wadPackName));
     }
 
-    @Id
-    private String name;
+    @EmbeddedId
+    WadPackName wadPackName;
 
     @Column(name = "i_wad")
     private String iWad;
@@ -54,16 +56,28 @@ public final class WadPack implements WadConfig {
     @JoinColumn(name = "Wad_Pack_Tag", referencedColumnName = "name")
     private WadPackTag wadPackTag;
 
-    @Setter
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "Loadorder_Wad_Id_Mapping",
-            joinColumns = {@JoinColumn(name = "Wad_Pack_Name", referencedColumnName = "Name")})
-    @MapKeyColumn(name = "load_order")
-    @Column(name = "Wad_Id")
-    private Map<Integer,String> wads;
+    @OneToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @Setter(AccessLevel.PRIVATE)
+    private List<WadLoadOrder> loadOrder;
+
+    public Map<Integer,String> getWads(){
+        return loadOrder.stream().collect(Collectors.toMap(
+                (WadLoadOrder order) -> order.getId().getLoadOrder(),
+                WadLoadOrder::getWadPath
+        ));
+    }
+
+    public void setWads(Map<Integer,String> wads){
+        setLoadOrder(new ArrayList<>(wads.entrySet()
+                .stream()
+                .map(entry -> new WadLoadOrder(
+                        new WadLoadOrderId(getWadPackName(), entry.getKey()),
+                        entry.getValue()))
+                .toList()));
+    }
 
     public void addWad(Wad wad){
-        int maxPosition = wads.keySet()
+        int maxPosition = getWads().keySet()
                 .stream()
                 .mapToInt(i -> i)
                 //if the map is empty return -1 so when 1 is added we input at 0
@@ -71,15 +85,13 @@ public final class WadPack implements WadConfig {
         if(maxPosition == Integer.MAX_VALUE) throw new WadPackAddException();
         //increase to write to new max position
         maxPosition++;
-        Map<Integer, String> newWads = new HashMap<>(wads);
-        newWads.put(maxPosition,wad.getPath());
-        wads = newWads;
+        loadOrder.add(new WadLoadOrder(new WadLoadOrderId(wadPackName,maxPosition),wad.getPath()));
     }
 
     @Override
     public List<String> allWadIds() {
         return Stream.concat(
-                wads.values()
+                getWads().values()
                         .stream(),
                 Stream.of(iWad)
         ).toList();
@@ -109,11 +121,11 @@ public final class WadPack implements WadConfig {
     @Override
     public boolean equals(Object o){
         if (Objects.isNull(o) || !(o instanceof WadPack)) return false;
-        else return name.equals(((WadPack) o).name);
+        else return wadPackName.equals(((WadPack) o).wadPackName);
     }
 
     @Override
     public String toString() {
-        return name;
+        return wadPackName.name;
     }
 }

@@ -5,6 +5,7 @@ import lincks.maximilian.wadloader2.ddd2application.search.mapper.WadPackMapper;
 import lincks.maximilian.wadloader2.ddd3domain.repos.*;
 import lincks.maximilian.wadloader2.ddd3domain.rules.WadPackRule;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
+import lincks.maximilian.wadloader2.ddd3domain.wads.WadPackName;
 import lincks.maximilian.wadloader2.ddd4abstraction.StreamUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,6 @@ public class WadPackFactory {
     }
 
     public WadPackDto newPack(WadPackBase base){
-        return WadPackMapper.toDto(new WadPack(base.name(),iWadRepo.findById(base.iWad().path()).get(),wadPackRepo));
+        return WadPackMapper.toDto(new WadPack(new WadPackName(base.name()),iWadRepo.findById(base.iWad().path()).get(),wadPackRepo));
     }
 }

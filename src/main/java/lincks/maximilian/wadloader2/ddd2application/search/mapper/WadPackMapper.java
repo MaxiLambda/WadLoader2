@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class WadPackMapper {
     private final WadPackReadWriteRepo wadPackRepo;
     public static WadPackDto toDto(WadPack wadPack){
-        return new WadPackDto(wadPack.getName(),
+        return new WadPackDto(wadPack.getWadPackName(),
                 wadPack.getIWad(),
                 wadPack.getCustomTags().stream().map(ImmutableTag::new).collect(Collectors.toUnmodifiableSet()),
                 new ImmutableTag(wadPack.getWadPackTag()),
@@ -24,6 +24,6 @@ public class WadPackMapper {
     }
 
     public WadPack fromDto(WadPackDto dto){
-        return wadPackRepo.findById(dto.iWad()).orElseThrow(WadPackNotFoundException::new);
+        return wadPackRepo.findById(dto.wadPackName()).orElseThrow(WadPackNotFoundException::new);
     }
 }
