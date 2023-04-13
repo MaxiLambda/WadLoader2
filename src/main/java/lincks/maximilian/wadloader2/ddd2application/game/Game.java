@@ -26,12 +26,13 @@ public class Game {
                 Stream.of(
                         String.format("\"%s\\gzdoom.exe\"", System.getenv(GZDOOM_HOME)),
                         "-iwad",
-                        String.format("\"%s\"", iWad.getPath()),
+                        String.format("\"%s\"", iWad.getPath().getPath()),
                         "-file"
                 ),
                 Arrays.stream(wads)
                         .sequential()
                         .map(Wad::getPath)
+                        .map(WadPath::getPath)
                         .map("\"%s\""::formatted)
         ).toList().toArray(new String[0]);
         try {
@@ -45,10 +46,11 @@ public class Game {
     public void start(WadPack wadPack){
         IWad iWad = iWadRepo.findById(wadPack.getIWad()).orElseThrow(() -> new RuntimeException("No IWad found for WadPack"));
 
-        List<Map.Entry<Integer, WadPath>> wadLoadorder = new ArrayList<>(wadPack.getWads().entrySet());
-        Wad[] wads = wadLoadorder.stream()
+        List<Map.Entry<Integer, WadPath>> wadLoader = new ArrayList<>(wadPack.getWads().entrySet());
+        Wad[] wads = wadLoader.stream()
                 .map(Map.Entry::getValue)
                 .map(wadRepo::findById)
+                .filter(Optional::isPresent)
                 .map(Optional::get)
                 .toList()
                 .toArray(new Wad[]{});
