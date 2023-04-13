@@ -21,6 +21,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -63,8 +64,8 @@ class WadPackFactoryTest {
         wadPack.addWad(wad1);
         wadPack.addWad(wad2);
 
-        when(wadRepo.findById(Mockito.contains(wad1.getPath()))).thenReturn(Optional.of(wad1));
-        when(wadRepo.findById(Mockito.contains(wad2.getPath()))).thenReturn(Optional.of(wad2));
+        when(wadRepo.findById(wad1.getPath())).thenReturn(Optional.of(wad1));
+        when(wadRepo.findById(wad2.getPath())).thenReturn(Optional.of(wad2));
      }
 
     @Test

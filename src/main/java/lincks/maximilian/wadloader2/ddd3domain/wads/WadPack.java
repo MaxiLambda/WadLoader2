@@ -60,14 +60,14 @@ public final class WadPack implements WadConfig {
     @Setter(AccessLevel.PRIVATE)
     private List<WadLoadOrder> loadOrder;
 
-    public Map<Integer,String> getWads(){
+    public Map<Integer,WadPath> getWads(){
         return loadOrder.stream().collect(Collectors.toMap(
                 (WadLoadOrder order) -> order.getId().getLoadOrder(),
                 WadLoadOrder::getWadPath
         ));
     }
 
-    public void setWads(Map<Integer,String> wads){
+    public void setWads(Map<Integer,WadPath> wads){
         setLoadOrder(new ArrayList<>(wads.entrySet()
                 .stream()
                 .map(entry -> new WadLoadOrder(
@@ -92,7 +92,8 @@ public final class WadPack implements WadConfig {
     public List<String> allWadIds() {
         return Stream.concat(
                 getWads().values()
-                        .stream(),
+                        .stream()
+                        .map(WadPath::getPath),
                 Stream.of(iWad)
         ).toList();
     }

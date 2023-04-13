@@ -13,9 +13,8 @@ import lincks.maximilian.wadloader2.ddd2application.search.query.WadPackQuery;
 import lincks.maximilian.wadloader2.ddd2application.search.query.WadQuery;
 import lincks.maximilian.wadloader2.ddd2application.wadpack.InvalidWadPackConfigurationException;
 import lincks.maximilian.wadloader2.ddd2application.wadpack.WadPackFactory;
-import lincks.maximilian.wadloader2.ddd3domain.wads.WadLoadOrder;
-import lincks.maximilian.wadloader2.ddd3domain.wads.WadLoadOrderId;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
+import lincks.maximilian.wadloader2.ddd3domain.wads.WadPath;
 import lombok.AccessLevel;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
@@ -99,7 +98,7 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
             if(currentWads.getAll().isEmpty()) return;
             try {
                 if(currentPack.isEmpty()) throw new NoPackSelectedException();
-                Map<Integer, String> order = new ChangeLoadOrderDialog(currentWads.getAll())
+                Map<Integer, WadPath> order = new ChangeLoadOrderDialog(currentWads.getAll())
                         .getLoadOrder()
                         .get();
                 WadPack pack = wadPackMapper.fromDto(currentPack.get());
@@ -153,6 +152,7 @@ public class WadPackConfigTab extends JPanel implements WadLoader2Tab{
                     .wads()
                     .values()
                     .stream()
+                    .map(WadPath::getPath)
                     .map(wadQuery::getById)
                     .filter(Optional::isPresent)
                     .map(Optional::get)

@@ -18,14 +18,14 @@ import java.util.stream.Stream;
 public final class Wad implements SingleWad {
     protected Wad(){}
     public Wad(Path wadPath) {
-        path = wadPath.toAbsolutePath().toString();
+        path = new WadPath(wadPath.toAbsolutePath().toString());
         wadTag = new WadTag(wadPath);
         defaultTag = new DefaultTag(wadPath);
         customTags = new HashSet<>();
     }
 
-    @Id
-    private String path;
+    @EmbeddedId
+    private WadPath path;
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "Wad_Tag", referencedColumnName = "name")
@@ -45,7 +45,7 @@ public final class Wad implements SingleWad {
 
     @Override
     public List<String> allWadIds() {
-        return List.of(path);
+        return List.of(path.getPath());
     }
 
     @Override
@@ -73,11 +73,11 @@ public final class Wad implements SingleWad {
     @Override
     public boolean equals(Object obj) {
         if(Objects.isNull(obj) || !(obj instanceof Wad)) return false;
-        else return path.equals(((Wad) obj).path);
+        else return path.equals(((Wad) obj).getPath());
     }
 
     @Override
     public String toString() {
-        return PathUtil.getFileName(path);
+        return PathUtil.getFileName(path.getPath());
     }
 }

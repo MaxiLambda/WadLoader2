@@ -1,6 +1,7 @@
 package lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.wadpackconfig;
 
 import lincks.maximilian.wadloader2.ddd2application.search.dto.WadDto;
+import lincks.maximilian.wadloader2.ddd3domain.wads.WadPath;
 import lincks.maximilian.wadloader2.ddd4abstraction.PathUtil;
 import lombok.Getter;
 
@@ -23,7 +24,7 @@ import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.SAVE_BTN;
 public class ChangeLoadOrderDialog extends JDialog {
 
     @Getter
-    private transient CompletableFuture<Map<Integer, String>> loadOrder = new CompletableFuture<>();
+    private transient CompletableFuture<Map<Integer, WadPath>> loadOrder = new CompletableFuture<>();
 
     public ChangeLoadOrderDialog(List<WadDto> wads) {
         setTitle(CHANGE_LOAD_ORDER_DIALOG_TITLE);
@@ -45,7 +46,7 @@ public class ChangeLoadOrderDialog extends JDialog {
                         Function.identity(),
                         ignore -> new JSpinner(new SpinnerNumberModel(0,0,wads.size() * 2,1))));
         wadLoadOrderSpinners.forEach((wad, spinner)-> {
-            spinners.add(new JLabel(PathUtil.getFileName(wad.path())));
+            spinners.add(new JLabel(PathUtil.getFileName(wad.path().getPath())));
             spinners.add(spinner);
         });
 
@@ -60,11 +61,11 @@ public class ChangeLoadOrderDialog extends JDialog {
                 accOrder.put(pos,key);
             });
             AtomicInteger counter = new AtomicInteger(0);
-            HashMap<Integer, String> returnMap = new HashMap<>();
+            HashMap<Integer, WadPath> returnMap = new HashMap<>();
             accOrder.entrySet()
                     .stream()
                     .sorted(Comparator.comparingInt(Map.Entry::getKey))
-                    .forEachOrdered(entry -> returnMap.put(counter.getAndIncrement(),entry.getValue().path()));
+                    .forEachOrdered(entry -> returnMap.put(counter.getAndIncrement(),new WadPath(entry.getValue().path().getPath())));
             loadOrder.complete(returnMap);
             //close the window
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));

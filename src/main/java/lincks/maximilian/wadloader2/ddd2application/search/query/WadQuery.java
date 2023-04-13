@@ -6,6 +6,7 @@ import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.CustomTag;
 import lincks.maximilian.wadloader2.ddd3domain.tags.DefaultTag;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
+import lincks.maximilian.wadloader2.ddd3domain.wads.WadPath;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ public class WadQuery implements SingleWadQuery<WadDto> {
 
     @Override
     public Optional<WadDto> getById(String id) {
-        return wadRepo.findById(id)
+        return wadRepo.findById(new WadPath(id))
                 .map(WadMapper::toDto);
     }
 

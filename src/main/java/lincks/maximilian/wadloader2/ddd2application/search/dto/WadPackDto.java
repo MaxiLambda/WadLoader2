@@ -2,6 +2,7 @@ package lincks.maximilian.wadloader2.ddd2application.search.dto;
 
 import lincks.maximilian.wadloader2.ddd3domain.tags.ImmutableTag;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPackName;
+import lincks.maximilian.wadloader2.ddd3domain.wads.WadPath;
 
 import java.util.Collection;
 import java.util.List;
@@ -13,11 +14,11 @@ public record WadPackDto(WadPackName wadPackName,
                          String iWad,
                          Set<ImmutableTag> customTags,
                          ImmutableTag wadPackTag,
-                         Map<Integer, String> wads
+                         Map<Integer, WadPath> wads
                          ) implements WadConfigDto {
     @Override
     public List<String> allWadIds() {
-        return wads.values().stream().toList();
+        return wads.values().stream().map(WadPath::getPath).toList();
     }
 
     @Override

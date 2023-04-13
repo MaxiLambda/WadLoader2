@@ -5,6 +5,7 @@ import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.wads.IWad;
 import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
+import lincks.maximilian.wadloader2.ddd3domain.wads.WadPath;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,7 @@ public class Game {
     public void start(WadPack wadPack){
         IWad iWad = iWadRepo.findById(wadPack.getIWad()).orElseThrow(() -> new RuntimeException("No IWad found for WadPack"));
 
-        List<Map.Entry<Integer,String>> wadLoadorder = new ArrayList<>(wadPack.getWads().entrySet());
+        List<Map.Entry<Integer, WadPath>> wadLoadorder = new ArrayList<>(wadPack.getWads().entrySet());
         Wad[] wads = wadLoadorder.stream()
                 .map(Map.Entry::getValue)
                 .map(wadRepo::findById)

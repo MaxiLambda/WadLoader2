@@ -17,7 +17,7 @@ public class WadLoadOrder implements Serializable {
     @EmbeddedId
     private final WadLoadOrderId id;
 
-    private final String wadPath;
+    private final WadPath wadPath;
 
     protected WadLoadOrder(){
         id = null;

@@ -2,6 +2,7 @@ package lincks.maximilian.wadloader2.model.wads;
 
 import lincks.maximilian.wadloader2.ddd3domain.repos.CustomTagReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
+import lincks.maximilian.wadloader2.ddd3domain.wads.WadPath;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ import static lincks.maximilian.wadloader2.model.wads.TestUtil.addWadsSetup;
 import static lincks.maximilian.wadloader2.model.wads.TestUtil.wadPaths;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
+@SpringBootTest(useMainMethod = SpringBootTest.UseMainMethod.ALWAYS)
 class WadTest {
 
     @Autowired
@@ -35,8 +36,8 @@ class WadTest {
         assertEquals(wadService.findAll().size(),wadPaths.size());
         //check if paths match
         assertEquals(
-                wadService.findById(wadPaths.get(0).toString()).get().getPath()
-                ,wadPaths.get(0).toString()
+                wadService.findById(new WadPath(wadPaths.get(0).toString())).get().getPath()
+                ,new WadPath(wadPaths.get(0).toString())
         );
     }
 
