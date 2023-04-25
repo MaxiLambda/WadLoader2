@@ -17,7 +17,6 @@ import java.util.List;
 public class TagQuery {
 
     private final List<NamedItemsRepo<? extends Tag, String>> tagRepos;
-    private final List<NamedItemsRepo<? extends Tag, String>> notUniqueTagRepos;
     private final WadTagRepo wadTagRepo;
     public TagQuery(CustomTagReadWriteRepo customTagRepo, DefaultTagRepo defaultTagRepo, WadPackTagRepo wadPackTagRepo, IWadTagRepo iWadTagRepo, WadTagRepo wadTagRepo) {
         this.wadTagRepo  =wadTagRepo;
@@ -27,39 +26,10 @@ public class TagQuery {
                 wadTagRepo,
                 wadPackTagRepo,
                 iWadTagRepo);
-
-        notUniqueTagRepos = List.of(customTagRepo,defaultTagRepo);
-    }
-
-    public List<Tag> findByNameInRepos(String name){
-        return tagRepos.stream()
-                .map(repo -> repo.findByNameContaining(name))
-                .flatMap(List::stream)
-                .map(ImmutableTag::new)
-                .map(Tag.class::cast)
-                .toList();
     }
 
     public List<Tag> findAllInRepos(){
         return tagRepos.stream()
-                .map(ReadRepo::findAll)
-                .flatMap(List::stream)
-                .map(ImmutableTag::new)
-                .map(Tag.class::cast)
-                .toList();
-    }
-
-    public List<Tag> findByNameInNotUniqueRepos(String name){
-        return notUniqueTagRepos.stream()
-                .map(repo -> repo.findByNameContaining(name))
-                .flatMap(List::stream)
-                .map(ImmutableTag::new)
-                .map(Tag.class::cast)
-                .toList();
-    }
-
-    public List<Tag> findAllInNotUniqueRepos(){
-        return notUniqueTagRepos.stream()
                 .map(ReadRepo::findAll)
                 .flatMap(List::stream)
                 .map(ImmutableTag::new)
