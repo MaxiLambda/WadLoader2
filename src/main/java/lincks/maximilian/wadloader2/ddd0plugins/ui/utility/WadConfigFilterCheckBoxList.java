@@ -31,8 +31,11 @@ public class WadConfigFilterCheckBoxList {
         else if (searchText.startsWith("d:"))
             return textToDefaultTagFilter(searchText.substring(2));
         else
-            //save cast
-            return (Predicate<T>) textToNameFilter(searchText).or(textToCustomTagFilter(searchText)).or(textToDefaultTagFilter(searchText));
+            //fully qualified name with T is necessary, otherwise a cast is needed
+            return WadConfigFilterCheckBoxList
+                    .<T>textToNameFilter(searchText)
+                    .or(textToCustomTagFilter(searchText))
+                    .or(textToDefaultTagFilter(searchText));
     }
     private static <T extends WadConfigDto> Predicate<T> textToCustomTagFilter(String text) {
         final String searchText = text.toLowerCase(Locale.ROOT);
