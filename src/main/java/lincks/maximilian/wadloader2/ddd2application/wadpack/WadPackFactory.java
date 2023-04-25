@@ -23,7 +23,6 @@ public class WadPackFactory {
     private final ContainsMaxTagRuleReadWriteRepo maxTagRuleRepo;
     private final ExclusiveTagRuleReadWriteRepo exclusiveTagRuleRepo;
 
-    private final IWadReadWriteRepo iWadRepo;
     private final WadPackReadWriteRepo wadPackRepo;
     private final WadReadWriteRepo wadRepo;
     public void persistWadPack(WadPack wadPack) throws InvalidWadPackConfigurationException {
@@ -44,10 +43,6 @@ public class WadPackFactory {
             wadPackRepo.save(wadPack);
         else
             throw InvalidWadPackConfigurationException.withBrokenRules(brokenRules);
-    }
-
-    public void deleteWadPack(WadPack wadPack) {
-        wadPackRepo.delete(wadPack);
     }
 
     public WadPackDto newPack(WadPackBase base){
