@@ -16,13 +16,6 @@ import java.util.stream.Stream;
 @Table(name = "Wads")
 @Getter
 public final class Wad implements SingleWad {
-    protected Wad(){}
-    public Wad(Path wadPath) {
-        path = new WadPath(wadPath.toAbsolutePath().toString());
-        wadTag = new WadTag(wadPath);
-        defaultTag = new DefaultTag(wadPath);
-        customTags = new HashSet<>();
-    }
 
     @EmbeddedId
     private WadPath path;
@@ -42,6 +35,14 @@ public final class Wad implements SingleWad {
             inverseJoinColumns = {@JoinColumn(name = "name")}
     )
     private Set<CustomTag> customTags;
+
+    protected Wad(){}
+    public Wad(Path wadPath) {
+        path = new WadPath(wadPath.toAbsolutePath().toString());
+        wadTag = new WadTag(wadPath);
+        defaultTag = new DefaultTag(wadPath);
+        customTags = new HashSet<>();
+    }
 
     @Override
     public List<String> allWadIds() {

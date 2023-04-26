@@ -19,25 +19,6 @@ import java.util.stream.Stream;
 @Getter
 public final class WadPack implements WadConfig {
 
-    protected WadPack(){}
-
-    public WadPack(WadPackName wadPackName, IWadPath iwad, WadPackReadWriteRepo wadPackRepo) throws WadPackTagException {
-        this.wadPackName = wadPackName;
-        this.iWad = iwad;
-        wadPackTag = new WadPackTag(wadPackName.name);
-        customTags = new HashSet<>();
-        loadOrder = new ArrayList<>();
-
-        //validate
-        boolean isValidName = wadPackRepo.findAll()
-                .stream()
-                .map(WadPack::getWadPackTag)
-                .map(WadPackTag::tagName)
-                .anyMatch(tagName -> tagName.equals(wadPackName.name));
-        if (isValidName)
-            throw new WadPackTagException("A WadPack with the wadPackName %s already exists!".formatted(wadPackName));
-    }
-
     @EmbeddedId
     WadPackName wadPackName;
 
@@ -59,6 +40,25 @@ public final class WadPack implements WadConfig {
     @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL},orphanRemoval = true)
     @Setter(AccessLevel.PRIVATE)
     private List<WadLoadOrder> loadOrder;
+
+    protected WadPack(){}
+
+    public WadPack(WadPackName wadPackName, IWadPath iwad, WadPackReadWriteRepo wadPackRepo) throws WadPackTagException {
+        this.wadPackName = wadPackName;
+        this.iWad = iwad;
+        wadPackTag = new WadPackTag(wadPackName.name);
+        customTags = new HashSet<>();
+        loadOrder = new ArrayList<>();
+
+        //validate
+        boolean isValidName = wadPackRepo.findAll()
+                .stream()
+                .map(WadPack::getWadPackTag)
+                .map(WadPackTag::tagName)
+                .anyMatch(tagName -> tagName.equals(wadPackName.name));
+        if (isValidName)
+            throw new WadPackTagException("A WadPack with the wadPackName %s already exists!".formatted(wadPackName));
+    }
 
     public Map<Integer,WadPath> getWads(){
         return loadOrder.stream().map(WadLoadOrder::getId).collect(Collectors.toMap(

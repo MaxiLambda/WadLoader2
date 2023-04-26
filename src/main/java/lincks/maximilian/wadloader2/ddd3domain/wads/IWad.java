@@ -20,15 +20,6 @@ import java.util.stream.Stream;
 @Getter
 public final class IWad implements SingleWad {
 
-    protected IWad(){}
-
-    public IWad(Path wadPath){
-        path = new IWadPath(wadPath.toAbsolutePath().toString());
-        wadTag = new IWadTag(wadPath);
-        defaultTag = new DefaultTag(wadPath);
-        customTags = new HashSet<>();
-    }
-
     @EmbeddedId
     private IWadPath path;
 
@@ -47,6 +38,15 @@ public final class IWad implements SingleWad {
             inverseJoinColumns = {@JoinColumn(name = "name")}
     )
     private Set<CustomTag> customTags;
+
+    protected IWad(){}
+
+    public IWad(Path wadPath){
+        path = new IWadPath(wadPath.toAbsolutePath().toString());
+        wadTag = new IWadTag(wadPath);
+        defaultTag = new DefaultTag(wadPath);
+        customTags = new HashSet<>();
+    }
 
     @Override
     public List<String> allWadIds() {
