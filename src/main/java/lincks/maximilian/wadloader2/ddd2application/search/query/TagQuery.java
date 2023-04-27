@@ -1,7 +1,6 @@
 package lincks.maximilian.wadloader2.ddd2application.search.query;
 
 import lincks.maximilian.wadloader2.ddd3domain.repos.CustomTagReadWriteRepo;
-import lincks.maximilian.wadloader2.ddd3domain.repos.NamedItemsRepo;
 import lincks.maximilian.wadloader2.ddd3domain.repos.ReadRepo;
 import lincks.maximilian.wadloader2.ddd3domain.repos.readonly.DefaultTagRepo;
 import lincks.maximilian.wadloader2.ddd3domain.repos.readonly.IWadTagRepo;
@@ -16,7 +15,7 @@ import java.util.List;
 @Service
 public class TagQuery {
 
-    private final List<NamedItemsRepo<? extends Tag, String>> tagRepos;
+    private final List<ReadRepo<? extends Tag, String>> tagRepos;
     private final WadTagRepo wadTagRepo;
     public TagQuery(CustomTagReadWriteRepo customTagRepo, DefaultTagRepo defaultTagRepo, WadPackTagRepo wadPackTagRepo, IWadTagRepo iWadTagRepo, WadTagRepo wadTagRepo) {
         this.wadTagRepo  =wadTagRepo;
