@@ -10,4 +10,5 @@ import java.util.Set;
 
 public interface WadSpringRepo extends JpaRepository<Wad, WadPath> {
     Set<Wad> findByCustomTagsIn(Set<CustomTag> tags);
+    Set<Wad> findByDefaultTag(DefaultTag tag);
 }

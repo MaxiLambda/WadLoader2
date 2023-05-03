@@ -15,15 +15,6 @@ public record IWadDto  (
         ImmutableTag defaultTag,
         Set<ImmutableTag> customTags) implements SingleWadDto {
 
-    @Override
-    public ImmutableTag getDefaultTag() {
-        return defaultTag;
-    }
-
-    @Override
-    public List<String> allWadIds() {
-        return List.of(path.getPath());
-    }
 
     @Override
     public List<ImmutableTag> tags() {

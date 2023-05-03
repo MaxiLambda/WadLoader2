@@ -32,4 +32,8 @@ public sealed interface WadConfig permits WadPack, SingleWad{
                 .filter(StreamUtil.filter(Tag::tagType, TagType.CUSTOM_TAG::equals))
                 .toList();
     }
+
+    default boolean removeCustomTag(CustomTag customTag){
+        return removeCustomTag(customTag.tagName());
+    }
 }

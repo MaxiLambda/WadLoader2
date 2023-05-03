@@ -6,5 +6,5 @@ import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
 import java.util.function.Predicate;
 
 public interface WadPackRule {
-    Predicate<WadPack> getPredicate(WadReadWriteRepo wadRepo);
+    public Predicate<WadPack> getPredicate(WadReadWriteRepo wadRepo);
 }

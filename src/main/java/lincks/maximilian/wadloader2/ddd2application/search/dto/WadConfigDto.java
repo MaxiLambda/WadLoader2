@@ -10,7 +10,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public sealed interface WadConfigDto permits SingleWadDto, WadPackDto {
-
     List<ImmutableTag> tags();
     default Set<ImmutableTag> customTags(){
         return tags()
