@@ -18,13 +18,4 @@ public class IWadBridge extends AbstractBridge<IWad, IWadPath, JpaRepository<IWa
         super(repo);
     }
 
-    @Override
-    public Set<IWad> findByCustomTagsIn(Set<CustomTag> tags) {
-        return ((IWadSpringRepo) repo).findByCustomTagsIn(tags);
-    }
-
-    @Override
-    public Set<IWad> findByDefaultTag(DefaultTag tag) {
-        return ((IWadSpringRepo) repo).findByDefaultTag(tag);
-    }
 }

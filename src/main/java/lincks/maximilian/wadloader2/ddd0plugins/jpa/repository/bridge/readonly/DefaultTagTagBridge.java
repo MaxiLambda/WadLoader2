@@ -13,8 +13,4 @@ public class DefaultTagTagBridge extends AbstractReadOnlyTagBridge<DefaultTag, S
     public DefaultTagTagBridge(JpaTagRepository<DefaultTag, String> repo) {
         super(repo);
     }
-
-    public List<DefaultTag> findByNameContaining(String name){
-        return repo.findByNameContaining(name);
-    }
 }

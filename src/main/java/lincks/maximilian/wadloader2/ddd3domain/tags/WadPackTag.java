@@ -18,9 +18,7 @@ import java.util.Objects;
 @Immutable
 public class WadPackTag implements Tag{
 
-    protected WadPackTag() {
-
-    }
+    protected WadPackTag() {}
 
     private static final TagType tagType = TagType.WAD_PACK_TAG;
 

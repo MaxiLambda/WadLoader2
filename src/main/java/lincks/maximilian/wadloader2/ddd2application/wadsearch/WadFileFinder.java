@@ -39,10 +39,6 @@ public class WadFileFinder {
         return findWadElements(paths, IWad::new);
     }
 
-    public List<IWad> findIWads(Path path){
-        return findWadElements(path, IWad::new);
-    }
-
     private <T extends SingleWad> List<T> findWadElements(Collection<Path> paths, Function<Path,T> mapper){
         return paths.stream()
                 .map(path -> findWadElements(path,mapper))

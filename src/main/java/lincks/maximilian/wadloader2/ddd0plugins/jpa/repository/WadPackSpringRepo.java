@@ -8,5 +8,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Set;
 
 public interface WadPackSpringRepo extends JpaRepository<WadPack, WadPackName> {
-    Set<WadPack> findByCustomTagsIn(Set<CustomTag> tags);
 }

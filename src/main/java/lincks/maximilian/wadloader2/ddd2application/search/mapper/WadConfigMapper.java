@@ -18,14 +18,6 @@ public class WadConfigMapper {
     private final WadPackMapper wadPackMapper;
     private final WadMapper wadMapper;
 
-    public static WadConfigDto toDto(WadConfig wadConfig){
-        return switch (wadConfig){
-            case IWad iwad -> IWadMapper.toDto(iwad);
-            case WadPack wadPack -> WadPackMapper.toDto(wadPack);
-            case Wad wad -> WadMapper.toDto(wad);
-        };
-    }
-
     public WadConfig fromDto(WadConfigDto dto){
         return switch (dto){
             case IWadDto iwadDto -> iWadMapper.fromDto(iwadDto);

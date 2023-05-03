@@ -17,10 +17,6 @@ public record WadPackDto(WadPackName wadPackName,
                          ImmutableTag wadPackTag,
                          Map<Integer, WadPath> wads
                          ) implements WadConfigDto {
-    @Override
-    public List<String> allWadIds() {
-        return wads.values().stream().map(WadPath::getPath).toList();
-    }
 
     @Override
     public List<ImmutableTag> tags() {

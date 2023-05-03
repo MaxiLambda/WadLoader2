@@ -70,7 +70,6 @@ public final class Wad implements SingleWad {
         return customTags.removeIf(tag -> tag.tagName().equals(name));
     }
 
-    //TODO maybe add HashCode
     @Override
     public boolean equals(Object obj) {
         if(Objects.isNull(obj) || !(obj instanceof Wad)) return false;

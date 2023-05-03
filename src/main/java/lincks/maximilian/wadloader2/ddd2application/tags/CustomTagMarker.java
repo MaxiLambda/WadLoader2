@@ -22,21 +22,6 @@ public class CustomTagMarker {
     private final WadReadWriteRepo wadRepo;
     private final WadPackFactory wadPackFactory;
 
-    public boolean removeAllCustomTags(WadConfig wadConfig) throws InvalidWadPackConfigurationException {
-        List<ImmutableTag> customTags = wadConfig.customTags();
-        boolean anyFailed = customTags.stream()
-                .map(Tag::tagName)
-                .map(wadConfig::removeCustomTag)
-                .reduce(Boolean::logicalAnd)
-                .orElse(true);
-
-        persistCustomTagRemoval(wadConfig, customTags.stream()
-                .map(ImmutableTag::tagName)
-                .map(CustomTag::new)
-                .toList());
-        return anyFailed;
-    }
-
     public boolean removeCustomTag(WadConfig wadConfig, String name) throws InvalidWadPackConfigurationException {
         //there should be only one Tag (max) left
         List<ImmutableTag> customTag = wadConfig
