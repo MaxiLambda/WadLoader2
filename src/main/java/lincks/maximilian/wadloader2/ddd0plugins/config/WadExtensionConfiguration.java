@@ -1,5 +1,6 @@
-package lincks.maximilian.wadloader2.ddd4abstraction.config;
+package lincks.maximilian.wadloader2.ddd0plugins.config;
 
+import lincks.maximilian.wadloader2.ddd2application.wadsearch.AllowedWadExtensions;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -13,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @ConfigurationProperties("wads.extensions")
-public class WadExtensionConfiguration {
+public class WadExtensionConfiguration implements AllowedWadExtensions {
 
     private List<String> allowed;
 }

@@ -5,7 +5,7 @@ import lincks.maximilian.wadloader2.ddd3domain.wads.SingleWad;
 import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
 import lincks.maximilian.wadloader2.ddd4abstraction.PathUtil;
 import lincks.maximilian.wadloader2.ddd4abstraction.StreamUtil;
-import lincks.maximilian.wadloader2.ddd4abstraction.config.WadExtensionConfiguration;
+import lincks.maximilian.wadloader2.ddd0plugins.config.WadExtensionConfiguration;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ import java.util.function.Function;
 @Log
 public class WadFileFinder {
 
-    private final WadExtensionConfiguration wadExtCfg;
+    private final AllowedWadExtensions wadExtCfg;
 
     public List<Wad> findWads(Collection<Path> paths){
         return findWadElements(paths, Wad::new);
@@ -37,10 +37,6 @@ public class WadFileFinder {
 
     public List<IWad> findIWads(Collection<Path> paths){
         return findWadElements(paths, IWad::new);
-    }
-
-    public List<IWad> findIWads(Path path){
-        return findWadElements(path, IWad::new);
     }
 
     private <T extends SingleWad> List<T> findWadElements(Collection<Path> paths, Function<Path,T> mapper){
