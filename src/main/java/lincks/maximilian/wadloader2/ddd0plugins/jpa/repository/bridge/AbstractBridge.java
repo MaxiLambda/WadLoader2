@@ -33,10 +33,6 @@ public abstract class  AbstractBridge<T,ID,R extends JpaRepository<T,ID>> {
         return repo.save(toAdd);
     }
 
-    public List<T> saveAll(Iterable<T> toSave){
-        return repo.saveAll(toSave);
-    }
-
     public boolean exists(ID id){
         return repo.existsById(id);
     }

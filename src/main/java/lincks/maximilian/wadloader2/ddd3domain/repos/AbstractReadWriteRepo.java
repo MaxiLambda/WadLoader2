@@ -17,7 +17,5 @@ public interface AbstractReadWriteRepo<T,ID> extends ReadRepo<T, ID> {
 
     T save(T toAdd);
 
-    List<T> saveAll(Iterable<T> toSave);
-
     boolean exists(ID id);
 }

@@ -4,10 +4,7 @@ import lincks.maximilian.wadloader2.ddd2application.search.dto.IWadDto;
 import lincks.maximilian.wadloader2.ddd2application.search.dto.WadConfigDto;
 import lincks.maximilian.wadloader2.ddd2application.search.dto.WadDto;
 import lincks.maximilian.wadloader2.ddd2application.search.dto.WadPackDto;
-import lincks.maximilian.wadloader2.ddd3domain.wads.IWad;
-import lincks.maximilian.wadloader2.ddd3domain.wads.Wad;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadConfig;
-import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +14,6 @@ public class WadConfigMapper {
     private final IWadMapper iWadMapper;
     private final WadPackMapper wadPackMapper;
     private final WadMapper wadMapper;
-
-    public static WadConfigDto toDto(WadConfig wadConfig){
-        return switch (wadConfig){
-            case IWad iwad -> IWadMapper.toDto(iwad);
-            case WadPack wadPack -> WadPackMapper.toDto(wadPack);
-            case Wad wad -> WadMapper.toDto(wad);
-        };
-    }
 
     public WadConfig fromDto(WadConfigDto dto){
         return switch (dto){
