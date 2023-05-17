@@ -37,7 +37,8 @@ public class WadsCheckBoxList {
             game.start(
                     iWadMapper.fromDto(selectedIWads.get(0)),
                     selectedWads.stream()
-                            .map(wadMapper::fromDto).toArray(wads -> new Wad[0]));
+                            .map(wadMapper::fromDto).toList()
+                            .toArray(new Wad[0]));
         };
     }
 }
