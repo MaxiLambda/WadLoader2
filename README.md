@@ -3,7 +3,24 @@ A Doom/ Doom2 GZDoom WadLoader which can manage your Wad Collection.
 
 You can manage your Wads with Tags and custom Wad-Packs.
 
-You have to set the Environemt Variable %GZDoom_Home% to the directory where your gzdoom.exe file is located.
+
+
+## Setup
+You have to set the Environment Variable %GZDoom_Home% to the directory where your gzdoom.exe file is located.
+You have to load your IWad/Wad files into the WadLoader by selecting the folders which contain your files.
+You have to use separate folders for your Wads and IWads. It is advised to use a common root folder for your Wads,
+that way it is easier to select all folders which contain Wads (selecting the root folder is enough).
+### IWads
+You need IWads to play, you can buy the game or use some free alternatives. 
+Free and legal IWads Replacements for Doom 1/2 can be found [here](https://github.com/freedoom/freedoom/releases/download/v0.12.1/freedoom-0.12.1.zip).
+
+### Wads
+If you want to spice up things you can start to experiment with some Wads.
+A great place to start are the (Cacoaward-winners)[https://www.doomworld.com/cacowards/]
+### Example WadPack
+An example WadPack using doom1/freedom1 could use the following wads:
+* [PHOBOS: ANOMALY REBORN](https://www.doomworld.com/idgames/levels/doom/Ports/p-r/par-lutz)
+* [Trailblazer](https://forum.zdoom.org/viewtopic.php?t=47494) 
 
 ## Layers
 
@@ -39,7 +56,6 @@ You have to set the Environemt Variable %GZDoom_Home% to the directory where you
 * ContainsMinTag
 * ContainsMaxTag
 * ExclusiveTagRule
-* ExclusiveWadRule
 
 ## Wad/ IWad/ Wad-Pack (WadConfig) search
 * enter search string to filter the WadConfigs with
