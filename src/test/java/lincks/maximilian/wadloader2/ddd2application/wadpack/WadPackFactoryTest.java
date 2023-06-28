@@ -10,6 +10,7 @@ import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
 import lincks.maximilian.wadloader2.model.wads.TestUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledInNativeImage;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -23,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
+@DisabledInNativeImage
 class WadPackFactoryTest {
     @Mock
     ContainsMinTagRuleReadWriteRepo minTagRuleRepo;
