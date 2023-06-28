@@ -1,8 +1,9 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.0.1'
+    id 'org.springframework.boot' version '3.0.7'
     id 'io.spring.dependency-management' version '1.1.0'
     id 'org.hibernate.orm' version '6.1.6.Final'
+    id 'org.graalvm.buildtools.native' version '0.9.23'
 }
 
 group = 'lincks.maximilian'
@@ -15,6 +16,17 @@ configurations {
     }
 }
 
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+graalvmNative {
+    toolchainDetection = true
+}
+
 repositories {
     mavenCentral()
 }
@@ -22,7 +34,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 //	can change to runtimeOnly depending on configuration?
     runtimeOnly 'com.h2database:h2'
     annotationProcessor 'org.projectlombok:lombok'
