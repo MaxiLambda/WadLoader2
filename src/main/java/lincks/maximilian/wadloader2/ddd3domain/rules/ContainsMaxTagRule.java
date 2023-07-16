@@ -5,7 +5,10 @@ import lincks.maximilian.wadloader2.ddd3domain.repos.WadReadWriteRepo;
 import lincks.maximilian.wadloader2.ddd3domain.tags.Tag;
 import lincks.maximilian.wadloader2.ddd3domain.wads.WadPack;
 
+import java.util.List;
 import java.util.function.Predicate;
+
+/** If a Wadpack contains a certain Tag, it has to contain at max <maxCount> Wads with <filterTagId> */
 
 @Table(name = "Contains_Max_Tag_Rule")
 @Entity
@@ -19,12 +22,16 @@ public class ContainsMaxTagRule implements WadPackRule {
     @Column(name = "max_count")
     private long maxCount;
 
+    @Column(name="rule_trigger_tag_id")
+    private String ruleTriggerTagId;
+
     @Column(name = "filter_tag_id")
     private String filterTagId;
 
-    public ContainsMaxTagRule(long maxCount, Tag filterTag) {
+    public ContainsMaxTagRule(long maxCount, Tag filterTag, Tag ruleTriggerTag) {
         this.maxCount = maxCount;
         this.filterTagId = filterTag.tagId();
+        this.ruleTriggerTagId = ruleTriggerTag.tagId();
     }
 
     protected ContainsMaxTagRule() {
@@ -34,7 +41,9 @@ public class ContainsMaxTagRule implements WadPackRule {
     @Override
     public Predicate<WadPack> getPredicate(WadReadWriteRepo wadRepo) {
         return (WadPack wadPack) -> {
-            long countFilteredWads = TagRuleDomainService.getWadTagIds(wadPack,wadRepo)
+            List<String> repoTags = TagRuleDomainService.getWadTagIds(wadPack,wadRepo);
+            if(!repoTags.contains(ruleTriggerTagId)) return true;
+            long countFilteredWads = repoTags
                     .stream()
                     .filter(filterTagId::equals)
                     .count();

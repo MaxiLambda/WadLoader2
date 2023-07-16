@@ -48,8 +48,8 @@ class WadPackFactoryTest {
 
     String customTagName = "Jamie's Tag";
     String otherCustomTagName = "You turn my Software into Hardware";
-    ContainsMinTagRule minTagRule = new ContainsMinTagRule(2,new CustomTag(customTagName));
-    ContainsMaxTagRule maxTagRule = new ContainsMaxTagRule(1,new CustomTag(customTagName));
+    ContainsMinTagRule minTagRule = new ContainsMinTagRule(2,new CustomTag(customTagName), new CustomTag(customTagName));
+    ContainsMaxTagRule maxTagRule = new ContainsMaxTagRule(1,new CustomTag(customTagName), new CustomTag(customTagName));
 
 
     @BeforeEach
