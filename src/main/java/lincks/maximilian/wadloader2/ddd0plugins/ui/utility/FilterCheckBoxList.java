@@ -14,21 +14,11 @@ import java.util.stream.Collectors;
 
 public class FilterCheckBoxList<T> extends CheckboxList<T>{
 
-    private FilterCheckBoxList(List<T> items, String name, Map<String, Consumer<List<T>>> callbacks,
+    public FilterCheckBoxList(List<T> items, String name, Map<String, Consumer<List<T>>> callbacks,
                                boolean allowMultiSelection, JTextField textField, Function<String, Predicate<T>> textToFilter) {
         super(items,name,callbacks,allowMultiSelection,textField);
         //the DocumentListener fires on each input change on textField
         textField.getDocument().addDocumentListener(createListener(textField, itemsToCheckbox, textToFilter));
-    }
-
-    public static <T> FilterCheckBoxList<T> of(List<T> items, String name, Map<String, Consumer<List<T>>> callbacks,
-                                               boolean allowMultiSelection, Function<String, Predicate<T>> textToFilter){
-        JTextField searchBar = new JTextField();
-        return new FilterCheckBoxList<>(items,name, callbacks, allowMultiSelection, searchBar, textToFilter);
-    }
-
-    public static <T> FilterCheckBoxList<T> of(List<T> items, String name, Map<String, Consumer<List<T>>> callbacks, Function<String, Predicate<T>> textToFilter){
-        return of(items,name,callbacks,false, textToFilter);
     }
 
     private DocumentListener createListener(JTextField textField, Map<T,JCheckBox> itemsToCheckBox, Function<String, Predicate<T>> textToFilter){

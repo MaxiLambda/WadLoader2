@@ -19,14 +19,14 @@ public class NewExclusiveRulePanel extends RulePanel{
     private final CheckboxList<Tag> firstSet;
     private final CheckboxList<Tag> secondSet;
 
-    public NewExclusiveRulePanel(Type type, List<Tag> availableTags1, List<Tag> availableTags2){
+    public NewExclusiveRulePanel(Type type, List<Tag> availableTags){
         setLayout(new BorderLayout());
         JPanel innerPanel = new JPanel();
         innerPanel.setLayout(new GridLayout(0,2));
         JLabel ruleExplanation = new JLabel(NEW_EXCLUSIVE_RULE_LABEL);
 
-        firstSet = new CheckboxList<>(availableTags1,FIRST_SET, Map.of(),type.multiAllowed);
-        secondSet = new CheckboxList<>(availableTags2,SECOND_SET, Map.of(), true);
+        firstSet = new CheckboxList<>(availableTags,FIRST_SET, Map.of(),type.multiAllowed);
+        secondSet = new CheckboxList<>(availableTags,SECOND_SET, Map.of(), true);
 
         add(ruleExplanation, BorderLayout.NORTH);
         add(innerPanel, BorderLayout.CENTER);
