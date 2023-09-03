@@ -8,7 +8,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.0.7</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
 
     <groupId>lincks.maximilian</groupId>
@@ -67,13 +67,6 @@
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
             <version>2.6</version>
-        </dependency>
-
-        <!-- Better Monads -->
-        <dependency>
-            <groupId>com.jason-goodwin</groupId>
-            <artifactId>better-monads</artifactId>
-            <version>0.4.0</version>
         </dependency>
     </dependencies>
 
