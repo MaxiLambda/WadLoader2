@@ -25,14 +25,14 @@ public class CreateWadPackDialog extends JDialog {
         setModal(true);
 
         wadPackRuleFuture = new CompletableFuture<>();
-        JTextField wadNameFieled = new JTextField();
+        JTextField wadNameField = new JTextField();
         JComboBox<IWadDto> iWadJComboBox = new JComboBox<>(iWadList.toArray(new IWadDto[0]));
         JButton saveBtn = new JButton(SAVE_BTN);
 
         iWadJComboBox.setSelectedIndex(0);
 
         saveBtn.addActionListener(e -> {
-            String name = wadNameFieled.getText();
+            String name = wadNameField.getText();
             if( name != null && !name.isEmpty()){
                 wadPackRuleFuture.complete(new WadPackBase(name, (IWadDto) iWadJComboBox.getSelectedItem()));
                 dispose();
@@ -46,7 +46,7 @@ public class CreateWadPackDialog extends JDialog {
             }
         });
 
-        add(wadNameFieled);
+        add(wadNameField);
         add(iWadJComboBox);
         add(saveBtn);
 
