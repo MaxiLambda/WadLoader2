@@ -38,14 +38,12 @@ public class NewRuleDialog extends JDialog {
             } else if (typeOfNewRule == ExclusiveTagRule) {
                 rulePanel = new NewExclusiveRulePanel(
                         NewExclusiveRulePanel.Type.exclusiveTags,
-                        tagQuery.findAllInRepos(),
                         tagQuery.findAllInRepos()
                 );
             } else if (typeOfNewRule == ExclusiveWadRule) {
                 rulePanel = new NewExclusiveRulePanel(
                         NewExclusiveRulePanel.Type.exclusiveWad,
-                        tagQuery.findAllInWadTagRepo(),
-                        tagQuery.findAllInRepos()
+                        tagQuery.findAllInWadTagRepo()
                 );
             }
             optionsPanelWrapper.add(rulePanel);
