@@ -29,7 +29,9 @@ public class NewAmountTagRulePanel extends RulePanel {
         JLabel ruleExplanation = new JLabel(AMOUNT_TAG_RULE_CREATION_TEXT.formatted(type.quantifier));
         amountSpinner = new JSpinner(new SpinnerNumberModel(1, 0, Integer.MAX_VALUE, 1));
         tagJComboBox = new JComboBox<>(availableTags.toArray(new Tag[0]));
+        tagJComboBox.setToolTipText("Which Tag is the rule about?");
         triggerTagJComboBox = new JComboBox<>(availableTags.toArray(new Tag[0]));
+        triggerTagJComboBox.setToolTipText("Which Tag should trigger the rule?");
 
         add(ruleExplanation);
         add(amountSpinner);
@@ -39,17 +41,17 @@ public class NewAmountTagRulePanel extends RulePanel {
 
     @Override
     public Optional<WadPackRule> getRule() {
-        return Optional.ofNullable(tagJComboBox.getSelectedItem())
-                .map(Tag.class::cast)
-                .flatMap(tag ->
-                        Optional.ofNullable(tagJComboBox.getSelectedItem())
-                                .map(Tag.class::cast)
-                                .map(triggerTag ->
-                                        switch (type) {
-                                            case maxTag -> new ContainsMaxTagRule((int) amountSpinner.getValue(), tag, triggerTag);
-                                            case minTag -> new ContainsMinTagRule((int) amountSpinner.getValue(), tag, triggerTag);
-                                        }
-                                ));
+        Optional<Tag> ruleTag = Optional.ofNullable(tagJComboBox.getSelectedItem()).map(Tag.class::cast);
+        Optional<Tag> triggerTag = Optional.ofNullable(triggerTagJComboBox.getSelectedItem()).map(Tag.class::cast);
+
+        if (ruleTag.isEmpty() || triggerTag.isEmpty())
+            return Optional.empty();
+        else if(type.equals(Type.maxTag))
+            return Optional.of(new ContainsMaxTagRule((int) amountSpinner.getValue(), ruleTag.get(), triggerTag.get()));
+        else if(type.equals(Type.minTag))
+            return Optional.of(new ContainsMinTagRule((int) amountSpinner.getValue(), ruleTag.get(), triggerTag.get()));
+
+        return Optional.empty();
     }
 
     @RequiredArgsConstructor
