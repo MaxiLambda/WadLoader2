@@ -12,6 +12,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.CREATE_NEW_RULE;
+import static lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.ruleconfig.NewRuleDialog.RuleType.*;
 
 public class NewRuleDialog extends JDialog {
 
@@ -30,21 +31,23 @@ public class NewRuleDialog extends JDialog {
         Consumer<ActionEvent> handler = e -> {
             RuleType typeOfNewRule = (RuleType) ruleTypeBox.getSelectedItem();
             optionsPanelWrapper.removeAll();
-            rulePanel = switch (typeOfNewRule) {
-                case MinTagRule, null ->
-                        new NewAmountTagRulePanel(NewAmountTagRulePanel.Type.minTag, tagQuery.findAllInRepos());
-                case MaxTagRule ->
-                                new NewAmountTagRulePanel(NewAmountTagRulePanel.Type.maxTag, tagQuery.findAllInRepos());
-                case ExclusiveTagRule ->
-                        new NewExclusiveRulePanel(
-                                NewExclusiveRulePanel.Type.exclusiveTags,
-                                tagQuery.findAllInRepos(),
-                                tagQuery.findAllInRepos());
-                case ExclusiveWadRule -> new NewExclusiveRulePanel(
+            if (typeOfNewRule == null || typeOfNewRule == MinTagRule) {
+                rulePanel = new NewAmountTagRulePanel(NewAmountTagRulePanel.Type.minTag, tagQuery.findAllInRepos());
+            } else if (typeOfNewRule == MaxTagRule) {
+                rulePanel = new NewAmountTagRulePanel(NewAmountTagRulePanel.Type.maxTag, tagQuery.findAllInRepos());
+            } else if (typeOfNewRule == ExclusiveTagRule) {
+                rulePanel = new NewExclusiveRulePanel(
+                        NewExclusiveRulePanel.Type.exclusiveTags,
+                        tagQuery.findAllInRepos(),
+                        tagQuery.findAllInRepos()
+                );
+            } else if (typeOfNewRule == ExclusiveWadRule) {
+                rulePanel = new NewExclusiveRulePanel(
                         NewExclusiveRulePanel.Type.exclusiveWad,
                         tagQuery.findAllInWadTagRepo(),
-                        tagQuery.findAllInRepos());
-            };
+                        tagQuery.findAllInRepos()
+                );
+            }
             optionsPanelWrapper.add(rulePanel);
             pack();
         };
@@ -78,7 +81,7 @@ public class NewRuleDialog extends JDialog {
         return new NewRuleDialog(tagQuery).ruleFuture;
     }
 
-    private enum RuleType {
+    protected enum RuleType {
         MinTagRule,
         MaxTagRule,
         ExclusiveTagRule,

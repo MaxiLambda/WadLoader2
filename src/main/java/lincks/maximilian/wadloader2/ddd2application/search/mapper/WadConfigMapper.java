@@ -16,10 +16,12 @@ public class WadConfigMapper {
     private final WadMapper wadMapper;
 
     public WadConfig fromDto(WadConfigDto dto){
-        return switch (dto){
-            case IWadDto iwadDto -> iWadMapper.fromDto(iwadDto);
-            case WadPackDto wadPackDto -> wadPackMapper.fromDto(wadPackDto);
-            case WadDto wadDto -> wadMapper.fromDto(wadDto);
-        };
+        if(dto instanceof IWadDto iwadDto)
+            return iWadMapper.fromDto(iwadDto);
+        else if(dto instanceof WadPackDto wadPackDto)
+            return wadPackMapper.fromDto(wadPackDto);
+        else if (dto instanceof  WadDto wadDto)
+            return wadMapper.fromDto(wadDto);
+        throw new IllegalStateException();
     }
 }
