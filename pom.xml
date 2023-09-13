@@ -88,7 +88,7 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>process-aot</goal>
+<!--                            <goal>process-aot</goal>-->
                             <goal>repackage</goal>
                         </goals>
                     </execution>

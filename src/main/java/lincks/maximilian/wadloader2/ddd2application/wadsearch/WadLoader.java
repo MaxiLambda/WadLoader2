@@ -19,6 +19,7 @@ public class WadLoader {
     private final WadReadWriteRepo wadRepo;
 
     public List<Wad> loadWads(List<Path> path){
+        wadRepo.deleteAll();
         return wadFinder.findWads(path)
                 .stream()
                 .map(wadRepo::save)
@@ -26,6 +27,7 @@ public class WadLoader {
     }
 
     public List<IWad> loadIWads(List<Path> path){
+        iWadRepo.deleteAll();
         return wadFinder.findIWads(path)
                 .stream()
                 .map(iWadRepo::save)
