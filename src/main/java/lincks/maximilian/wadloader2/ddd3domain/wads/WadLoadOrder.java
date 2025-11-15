@@ -11,7 +11,6 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 @Getter
 @Entity
-@Embeddable
 public class WadLoadOrder implements Serializable {
 
     @EmbeddedId

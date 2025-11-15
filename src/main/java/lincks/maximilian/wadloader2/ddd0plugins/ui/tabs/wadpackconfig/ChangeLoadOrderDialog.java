@@ -38,34 +38,34 @@ public class ChangeLoadOrderDialog extends JDialog {
             }
         });
 
-        JPanel spinners = new JPanel(new GridLayout(0,1));
+        JPanel spinners = new JPanel(new GridLayout(0, 1));
         JButton saveLoadOrderBtn = new JButton(SAVE_BTN);
 
         Map<WadDto, JSpinner> wadLoadOrderSpinners = wads.stream().collect(
                 Collectors.toMap(
                         Function.identity(),
-                        ignore -> new JSpinner(new SpinnerNumberModel(0,0,wads.size() * 2,1))));
-        wadLoadOrderSpinners.forEach((wad, spinner)-> {
+                        ignore -> new JSpinner(new SpinnerNumberModel(0, 0, wads.size() * 2, 1))));
+        wadLoadOrderSpinners.forEach((wad, spinner) -> {
             spinners.add(new JLabel(PathUtil.getFileName(wad.path().getPath())));
             spinners.add(spinner);
         });
 
-        saveLoadOrderBtn.addActionListener(e -> {
+        saveLoadOrderBtn.addActionListener(_ -> {
             HashMap<Integer, WadDto> accOrder = new HashMap<>();
-            wadLoadOrderSpinners.forEach((key, value) -> {
+            wadLoadOrderSpinners.forEach((key, val) -> {
                 //multiply with size to avoid collisions of up to wads.size() items
-                int pos = ((int) value.getValue()) * wads.size();
+                int pos = ((int) val.getValue()) * wads.size();
                 while (accOrder.containsKey(pos)) {
                     pos++;
                 }
-                accOrder.put(pos,key);
+                accOrder.put(pos, key);
             });
             AtomicInteger counter = new AtomicInteger(0);
             HashMap<Integer, WadPath> returnMap = new HashMap<>();
             accOrder.entrySet()
                     .stream()
                     .sorted(Comparator.comparingInt(Map.Entry::getKey))
-                    .forEachOrdered(entry -> returnMap.put(counter.getAndIncrement(),new WadPath(entry.getValue().path().getPath())));
+                    .forEachOrdered(entry -> returnMap.put(counter.getAndIncrement(), new WadPath(entry.getValue().path().getPath())));
             loadOrder.complete(returnMap);
             //close the window
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
@@ -76,7 +76,7 @@ public class ChangeLoadOrderDialog extends JDialog {
         add(saveLoadOrderBtn, BorderLayout.SOUTH);
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(300,100 + 30 * wads.size());
+        setSize(300, 100 + 30 * wads.size());
         setLocationRelativeTo(null);
         setVisible(true);
     }

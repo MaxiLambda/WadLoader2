@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.*;
 
 @Component
-public class RuleConfigTab extends JPanel implements WadLoader2Tab{
+public class RuleConfigTab extends JPanel implements WadLoader2Tab {
 
     private final RuleFactory ruleFactory;
     private final List<WadPackRule> rules;

@@ -1,10 +1,12 @@
 package lincks.maximilian.wadloader2.ddd0plugins.ui;
 
+import lincks.maximilian.wadloader2.ddd0plugins.ui.plugin.Plugin;
 import lincks.maximilian.wadloader2.ddd0plugins.ui.tabs.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
+import java.util.List;
 
 import static lincks.maximilian.wadloader2.ddd0plugins.ui.UIConstants.*;
 
@@ -17,6 +19,7 @@ public class UIBase extends JFrame {
     private final WadPackConfigTab wadPackTab;
     private final RuleConfigTab ruleTab;
     private final SettingConfigTab settingsTab;
+    private final List<Plugin<?>> tabPlugins;
 
     private final TagTab tagTab;
 
@@ -26,9 +29,16 @@ public class UIBase extends JFrame {
 
         pane.addTab(START_GAME_TAB, null, startTab, START_GAME_TAB_TIP);
         pane.addTab(WAD_PACKS_TAB, null, wadPackTab, WAD_PACKS_TAB_TIP);
-        pane.addTab(TAG_TAB,null,tagTab,TAG_TAB_TIP);
+        pane.addTab(TAG_TAB, null, tagTab, TAG_TAB_TIP);
         pane.addTab(RULE_TAB, null, ruleTab, RULE_TAB_TIPS);
         pane.addTab(SETTINGS_TAB, null, settingsTab, SETTINGS_TAB_TIP);
+
+        //register all plugins
+        tabPlugins.forEach(pluginTab ->
+                pane.addTab(pluginTab.getTitle(),
+                        pluginTab.getIcon(),
+                        pluginTab.getWadLoader2Tab(),
+                        pluginTab.getToolTip()));
 
         pane.addChangeListener(e -> {
             WadLoader2Tab tab = (WadLoader2Tab) pane.getSelectedComponent();
@@ -37,7 +47,7 @@ public class UIBase extends JFrame {
 
         add(pane);
         startTab.updateData();
-        setSize(600,600);
+        setSize(600, 600);
         //put the panel in the center of the screen
         setLocationRelativeTo(null);
         setVisible(true);

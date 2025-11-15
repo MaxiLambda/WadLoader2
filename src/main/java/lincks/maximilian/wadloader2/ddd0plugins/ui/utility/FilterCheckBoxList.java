@@ -22,20 +22,9 @@ public class FilterCheckBoxList<T> extends CheckboxList<T>{
     }
 
     private DocumentListener createListener(JTextField textField, Map<T,JCheckBox> itemsToCheckBox, Function<String, Predicate<T>> textToFilter){
-        return new DocumentListener() {
+        return new OneActionDocumentListener() {
             @Override
-            public void insertUpdate(DocumentEvent e) {
-                filter();
-            }
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                filter();
-            }
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                filter();
-            }
-            private void filter(){
+            void action(DocumentEvent e){
                 String search = textField.getText();
 
                 Map<Boolean, List<Map.Entry<T, JCheckBox>>> itemsHitBySearch = itemsToCheckBox

@@ -17,7 +17,10 @@ import java.awt.*;
 @SpringBootApplication
 @RequiredArgsConstructor
 @Log
-public class WadLoader2Application{
+public class WadLoader2Application {
+
+    final UIBase uiBase;
+
     public static void main(String[] args) {
         FlatDarculaLaf.setup();
         new SpringApplicationBuilder(WadLoader2Application.class)
@@ -26,11 +29,9 @@ public class WadLoader2Application{
                 .bannerMode(Banner.Mode.OFF)
                 .run(args);
     }
-    
-    final UIBase uiBase;
-    @EventListener(ApplicationReadyEvent.class)
-    public void appStartup(){
 
+    @EventListener(ApplicationReadyEvent.class)
+    public void appStartup() {
         EventQueue.invokeLater(uiBase::initUI);
     }
 }
