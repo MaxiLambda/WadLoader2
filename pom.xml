@@ -31,7 +31,6 @@
         </dependency>
 
 
-
         <!-- Spring Boot Starter Data JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -95,6 +94,7 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
-            </plugin>        </plugins>
+            </plugin>
+        </plugins>
     </build>
 </project>
